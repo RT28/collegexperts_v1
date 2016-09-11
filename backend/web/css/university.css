@@ -1,0 +1,10 @@
+#google-map-container
+{
+	min-height: 400px;
+}
+
+.cover-photo
+{
+	max-width: 100%;
+	margin-bottom: 20px;
+}
