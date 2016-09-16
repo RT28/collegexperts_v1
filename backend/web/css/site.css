@@ -109,3 +109,9 @@ a.desc:after {
 .nav > li > form > button:hover {
     text-decoration: none;
 }
+
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6
+{
+    margin-top: 0px;
+    line-height: 1em;
+}
