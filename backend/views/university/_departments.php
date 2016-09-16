@@ -23,7 +23,7 @@ use wbraganca\dynamicform\DynamicFormWidget;
                 'formId' => 'university-active-form',
                 'formFields' => [
                     'name',
-                    'student_intake',
+                    'email',
                     'no_of_faculty',
                     'website_link',
                     'description',
@@ -51,7 +51,7 @@ use wbraganca\dynamicform\DynamicFormWidget;
                         <?= $form->field($departments, "[{$i}]name")->textInput(['maxlength' => true]) ?>
                         <div class="row">
                             <div class="col-sm-4">
-                                <?= $form->field($departments, "[{$i}]student_intake")->textInput(['maxlength' => true]) ?>
+                                <?= $form->field($departments, "[{$i}]email")->textInput(['maxlength' => true]) ?>
                             </div>
                             <div class="col-sm-4">
                                 <?= $form->field($departments, "[{$i}]no_of_faculty")->textInput(['maxlength' => true]) ?>

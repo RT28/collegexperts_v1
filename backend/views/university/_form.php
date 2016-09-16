@@ -7,6 +7,7 @@ use kartik\depdrop\DepDrop;
 use yii\helpers\Url;
 use yii\helpers\FileHelper;
 use kartik\file\FileInput;
+use dosamigos\ckeditor\CKEditor;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\University */
@@ -98,8 +99,11 @@ use kartik\file\FileInput;
     <?= $form->field($model, 'email')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'website')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'description')->textarea(['rows' => 6]) ?>
+    
+    <?= $form->field($model, 'description')->widget(CKEditor::className(), [
+        'options' => ['rows' => 6],
+        'preset' => 'basic'
+    ]) ?>
 
     <?= $form->field($model, 'fax')->textInput(['maxlength' => true]) ?>
 
@@ -132,6 +136,8 @@ use kartik\file\FileInput;
 
     <?= $form->field($model, 'no_faculties')->textInput() ?>
 
+    <?= $form->field($model, 'no_of_international_faculty')->textInput() ?>
+
     <?= $form->field($model, 'cost_of_living')->textInput() ?>
 
     <?= $form->field($model, 'accomodation_available')->checkbox() ?>
@@ -142,11 +148,20 @@ use kartik\file\FileInput;
 
     <?= $form->field($model, 'ranking_sources')->textarea(['rows' => 6]) ?>
 
-    <?= $form->field($model, 'video')->textarea(['rows' => 6]) ?>
+    <?= $form->field($model, 'video')->textInput() ?>
 
-    <?= $form->field($model, 'virtual_tour')->textarea(['rows' => 6]) ?>
+    <?= $form->field($model, 'virtual_tour')->textInput() ?>
 
     <?= $form->field($model, 'avg_rating')->textInput() ?>
+
+    <?= $form->field($model, 'standard_tests_required')->checkbox() ?>
+
+    <?= $form->field($model, 'standard_test_list')->textInput() ?>
+
+    <?= $form->field($model, 'achievements')->widget(CKEditor::className(), [
+        'options' => ['rows' => 6],
+        'preset' => 'basic'
+    ]) ?>
 
     <?= $form->field($model, 'comments')->textarea(['rows' => 6]) ?>   
 
