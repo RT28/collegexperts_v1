@@ -9,63 +9,63 @@ use yii\bootstrap\Tabs;
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="university-form">    
-    <?php $form = ActiveForm::begin(['id' => 'university-active-form', 'options' => ['enctype' => 'multipart/form-data']]); ?>
+<div class="university-form">   
     <?= Tabs::widget([
         'items' => [
                 [
                     'label' => 'Profile',
                     'content' => $this->render('_profile', [
-                        'model' => $model,
-                        'form' => $form,
+                        'model' => $model,                        
                         'upload' => $upload,
                         'countries' => $countries
                     ]),
-                    'active' => true,
+                    'active' => $currentTab === 'Profile' ? true : false,
                     'options' => ['id' => 'profile'],                     
                 ],
                 [
                     'label' => 'Departments',
                     'content' => $this->render('_departments', [
-                        'model' => $model,
-                        'form' => $form,
-                        'departments' => $departments
-                    ]),
-                    'options' => ['id' => 'university-departments'],
-                ],
-                [
-                    'label' => 'Courses',
-                    'content' => $this->render('_courses', [
-                        'model'=>$model,
-                        'courses' => $courses,
-                        'form' => $form,        
+                        'model' => $model,                        
+                        'courses' => $courses,                              
                         'degree' => $degree,
                         'majors' => $majors,
                         'departments' => $departments
                     ]),
-                    'options' => ['id' => 'courses'],
+                    'active' => $currentTab === 'Departments' ? true : false,
+                    'headerOptions' => [                        
+                        'class' => array_search('Departments', $tabs) ? 'enabled-tab' : 'disabled-tab' 
+                    ],
+                    'options' => [
+                        'id' => 'university-departments',
+                    ],
+                ],                
+                [
+                    'label' => 'Gallery',
+                    'content' => $this->render('_gallery', [
+                        'model'=>$model,                        
+                        'upload' => $upload,
+                    ]),
+                    'headerOptions' => [                        
+                        'class' => array_search('Gallery', $tabs) ? 'enabled-tab' : 'disabled-tab'
+                    ],
+                    'options' => ['id' => 'gallery'],
                 ],
                 [
                     'label' => 'Admissions',
                     'content' => $this->render('_university_admission_form', [
                         'model'=>$model,
-                        'univerityAdmisssions' => $univerityAdmisssions,
-                        'form' => $form,        
+                        'univerityAdmisssions' => $univerityAdmisssions,                                
                         'degree' => $degree,
                         'majors' => $majors,
                         'departments' => $departments,
                         'courses' => $courses,
-                    ]),                
+                    ]),
+                    'headerOptions' => [                        
+                        'class' => array_search('Admissions', $tabs) ? 'enabled-tab' : 'disabled-tab'
+                    ],                
                     'options' => ['id' => 'admissions'],
                 ]
             ]
         ]);
-    ?>               
-
-    <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
-    </div>    
-
-    <?php ActiveForm::end(); ?>
-
+    ?>
 </div>

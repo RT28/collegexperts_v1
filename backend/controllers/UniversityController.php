@@ -98,58 +98,63 @@ class UniversityController extends Controller
      * @return mixed
      */
     public function actionCreate()
-    {        
+    {
         $model = new University();
         $departments = new UniversityDepartments();
         $upload = new FileUpload();
         $departments = [new UniversityDepartments];        
         $courses = [new UniversityCourseList];    
-        $univerityAdmisssions = $model->universityAdmissions;    
+        $univerityAdmisssions = $model->universityAdmissions;
+
         $model->created_by = Yii::$app->user->identity->id;
         $model->created_at = gmdate('Y-m-d H:i:s');
         $model->updated_by = Yii::$app->user->identity->id;
         $model->updated_at = gmdate('Y-m-d H:i:s');
         $model->status = 10;
-        if ($model->load(Yii::$app->request->post()) && $model->validate()) {                        
-            $this->setSpatialPoints($model, Yii::$app->request->post()['University']['location']);            
-            if ($model->save()) {                
-                $this->saveCoverPhoto($upload, $model);                
-                $this->updateDepartments($departments, $model);                
-                $this->updateCourses($courses, $model);
-                $this->updateAdmissions($univerityAdmisssions, $model);
-            } else {
-                $countries = ArrayHelper::map(Country::getAllCountries(), 'id', 'name');
-                return $this->render('create', [
-                    'model' => $model,
-                    'upload' => $upload,
-                    'countries' => $countries,
-                    'degree' => $this->getDegreeList(),
-                    'majors' => $this->getMajorsList(),
-                    'departments' => (empty($departments)) ? [new UniversityDepartments] : $departments,
-                    'courses' => (empty($courses)) ? [new UniversityCourseList] : $courses,                    
-                    'univerityAdmisssions' => (empty($univerityAdmisssions)) ? [new UniversityAdmission] : $univerityAdmisssions,
-                ]);    
-            }               
-        } else {            
-            $countries = ArrayHelper::map(Country::getAllCountries(), 'id', 'name');            
-            return $this->render('create', [
-                'model' => $model,
-                'upload' => $upload,
-                'countries' => $countries,
-                'degree' => $this->getDegreeList(),
-                'majors' => $this->getMajorsList(),
-                'departments' => (empty($departments)) ? [new UniversityDepartments] : $departments,
-                'courses' => (empty($courses)) ? [new UniversityCourseList] : $courses,
-                'univerityAdmisssions' => (empty($univerityAdmisssions)) ? [new UniversityAdmission] : $univerityAdmisssions,
-            ]);
+
+        $currentTab = 'Profile';
+        $tabs = ['Profile'];
+
+        $countries = ArrayHelper::map(Country::getAllCountries(), 'id', 'name');
+
+        if (Yii::$app->request->post('University') !== null && isset(Yii::$app->request->post('University')['name']) && $model->load(Yii::$app->request->post()) && $model->validate()) {
+            $this->setSpatialPoints($model, Yii::$app->request->post()['University']['location']);
+            if ($model->save()) {               
+                $currentTab = 'Departments';
+                $tabs = ['Profile', 'Departments', 'Gallery'];
+            }
         }
+
+        elseif(Yii::$app->request->post('UniversityDepartments') !== null) {
+            $model = $this->findModel(Yii::$app->request->post('University')['id']);            
+            if ($this->updateDepartments($departments, $model)) {
+                $currentTab = 'Admissions';
+                $tabs = ['Profile', 'Departments', 'Gallery', 'Admissions'];
+            }            
+        }
+        
+        elseif(Yii::$app->request->post('UniversityDepartments') !== null) {
+        }
+
+        return $this->render('create', [
+            'model' => $model,
+            'upload' => $upload,
+            'currentTab' => $currentTab,
+            'tabs' => $tabs,
+            'countries' => $countries,
+            'degree' => $this->getDegreeList(),
+            'majors' => $this->getMajorsList(),
+            'departments' => (empty($departments)) ? [new UniversityDepartments] : $departments,
+            'courses' => (empty($courses)) ? [new UniversityCourseList] : $courses,
+            'univerityAdmisssions' => (empty($univerityAdmisssions)) ? [new UniversityAdmission] : $univerityAdmisssions,
+        ]);
     }
 
-    private function setSpatialPoints($model, $location) {        
-        $location = str_replace(['POINT', '(', ')'], '', $location);        
-        $location = explode(',', $location);        
+    private function setSpatialPoints($model, $location) {
+        $location = str_replace(['POINT', '(', ')'], '', $location);
+        $location = explode(',', $location);
         $location[0] = floatval($location[0]);
-        $location[1] = floatval($location[1]);        
+        $location[1] = floatval($location[1]);
         $model->location = new Expression("GeomFromText('POINT($location[0] $location[1])')");
     }
 
@@ -167,7 +172,7 @@ class UniversityController extends Controller
         $deletedIDs = array_diff($oldIDs, array_filter(ArrayHelper::map($deparmtents, 'id', 'id')));        
 
         // validate all models        
-        $valid = Model::validateMultiple($deparmtents,['name']);        
+        $valid = Model::validateMultiple($deparmtents,['name', 'email']);        
 
         if ($valid) {
             $transaction = \Yii::$app->db->beginTransaction();            
@@ -188,11 +193,11 @@ class UniversityController extends Controller
                 }
                 if ($flag) {
                     $transaction->commit();
-                    return $this->redirect(['view', 'id' => $university->id]);
+                    return true;
                 }
             } catch (Exception $e) {
                 $transaction->rollBack();
-                return $this->redirect(['view', 'id' => $university->id]);
+                return false;
             }
         }
     }
@@ -203,7 +208,7 @@ class UniversityController extends Controller
         $result = Model::loadMultiple($courses, Yii::$app->request->post());        
         $deletedIDs = array_diff($oldIDs, array_filter(ArrayHelper::map($courses, 'id', 'id')));        
         // validate all models
-        $valid = Model::validateMultiple($courses, ['name', 'degree_id', 'major_id', 'fees', 'intake', 'duration']);        
+        $valid = Model::validateMultiple($courses, ['name', 'department_id', 'degree_id', 'major_id', 'fees', 'intake', 'duration']);        
         if ($valid) {
             $transaction = \Yii::$app->db->beginTransaction();            
             try {

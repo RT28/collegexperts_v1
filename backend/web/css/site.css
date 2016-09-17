@@ -135,7 +135,9 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6
 {
     margin-top: 50px;
     margin-left: 250px;
-    padding: 20px;
+    background-color: #FEFEFE;
+    padding-left: 0px;
+    padding-right: 0px;
 }
 
 .footer-container
@@ -146,4 +148,23 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6
 .navbar-container .container
 {
     width: 100%;
+}
+
+.tab-content
+{
+    padding: 20px 15px;
+}
+
+.screen-title
+{
+    background-color: #FFF;
+    padding: 10px;
+    font-size: 28px;
+    border-bottom: 1px solid #E0E0E0;
+}
+
+.panel
+{
+    border-color: #e2e2e2;
+    border-radius: 0px;
 }

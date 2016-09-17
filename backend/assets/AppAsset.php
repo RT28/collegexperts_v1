@@ -14,6 +14,7 @@ class AppAsset extends AssetBundle
     public $css = [
         'css/site.css',
         'css/button.css',
+        'css/form.css',
         'css/login.css',
         'css/university.css',
     ];

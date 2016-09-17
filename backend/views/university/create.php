@@ -13,7 +13,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
 <div class="university-create">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <h1 class="screen-title"><?= Html::encode($this->title) ?></h1>
 
     <?= $this->render('_form', [
         'model' => $model,
@@ -22,6 +22,8 @@ $this->params['breadcrumbs'][] = $this->title;
         'departments' => $departments,
         'courses' => $courses,
         'degree' => $degree,
+        'currentTab' => $currentTab,
+        'tabs' => $tabs,
         'majors' => $majors,        
         'univerityAdmisssions' => $univerityAdmisssions,
     ]) ?>

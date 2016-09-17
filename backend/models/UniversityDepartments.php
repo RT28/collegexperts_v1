@@ -4,6 +4,7 @@ namespace backend\models;
 
 use Yii;
 use common\models\University;
+use common\models\UniversityCourseList;
 
 /**
  * This is the model class for table "university_departments".
