@@ -26,7 +26,7 @@ use yii\bootstrap\Tabs;
                         ]),
                         'active' => $currentTab === 'Profile' ? true : false,
                         'options' => ['id' => 'profile'],                     
-                    ],
+                    ]/*,
                     [
                         'label' => 'About',
                         'content' => $this->render('_about', [
@@ -40,7 +40,7 @@ use yii\bootstrap\Tabs;
                         ],
                         'active' => $currentTab === 'About' ? true : false,
                         'options' => ['id' => 'about'],                     
-                    ],
+                    ]*/,
                     [
                         'label' => 'Misc.',
                         'content' => $this->render('_misc', [
