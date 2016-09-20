@@ -16,7 +16,6 @@ $course = ArrayHelper::map($courses, 'id', 'name');
  * var @form is active form.
 */
 ?>
-<?php $form = ActiveForm::begin(['id' => 'university-admission-form']); ?>
     <div class="panel panel-default">
         <div class="panel-heading">
             <h4>Admissions</h4>
@@ -30,7 +29,7 @@ $course = ArrayHelper::map($courses, 'id', 'name');
                 'insertButton' => '.add-item', // css class
                 'deleteButton' => '.remove-item', // css class
                 'model' => $univerityAdmisssions[0],
-                'formId' => 'university-admission-form',
+                'formId' => 'university-active-form',
                 'formFields' => [
                     'start_date',
                     'end_date',
@@ -98,8 +97,3 @@ $course = ArrayHelper::map($courses, 'id', 'name');
             </table>
         <?php DynamicFormWidget::end(); ?>
     </div>
-    <div class="form-group text-center">
-        <?= Html::submitButton('Update', ['class' => 'btn btn-primary']) ?>
-    </div>    
-
-<?php ActiveForm::end(); ?>

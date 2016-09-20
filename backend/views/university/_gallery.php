@@ -19,7 +19,6 @@ use yii\widgets\ActiveForm;
         }
     }
 ?>
-<?php $form = ActiveForm::begin(['id' => 'university-admission-form']); ?>
 <?= $form->field($upload, 'imageFile')->widget(FileInput::classname(), [
         'options' => ['accept' => 'image/*'],
         'pluginOptions' => [
@@ -33,8 +32,12 @@ use yii\widgets\ActiveForm;
         ]
     ]); 
 ?>
-<div class="form-group text-center">
-        <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
-    </div>    
-
-    <?php ActiveForm::end(); ?>
+<div class="col-xs-12 col-sm-6">
+    <div class="panel panel-default">
+        <div class="panel-heading">Misc.</div>
+        <div class="panel-body">                
+            <?= $form->field($model, 'virtual_tour')->textInput() ?>                
+            <?= $form->field($model, 'video')->textInput() ?>                
+        </div>
+    </div>
+</div>

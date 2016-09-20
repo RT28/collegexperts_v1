@@ -85,11 +85,14 @@ class University extends \yii\db\ActiveRecord
             [['fax', 'phone_1', 'phone_2'], 'string', 'max' => 20],
             [['contact_person_designation'], 'string', 'max' => 50],
             [['contact_mobile'], 'string', 'max' => 15],
-            ['email', 'email'],
-            [['video', 'virtual_tour', 'standard_test_list'], 'string', 'max' => 500],
+            [['email', 'contact_email'], 'email'],
+            [['video', 'virtual_tour'], 'string', 'max' => 500],
             [['city_id'], 'exist', 'skipOnError' => true, 'targetClass' => City::className(), 'targetAttribute' => ['city_id' => 'id']],
             [['country_id'], 'exist', 'skipOnError' => true, 'targetClass' => Country::className(), 'targetAttribute' => ['country_id' => 'id']],
             [['state_id'], 'exist', 'skipOnError' => true, 'targetClass' => State::className(), 'targetAttribute' => ['state_id' => 'id']],
+            ['standard_test_list', 'required' , 'whenClient' => "function() {
+                return $('#standard_tests_required').val() == 'true';
+            }"]
         ];
     }
 

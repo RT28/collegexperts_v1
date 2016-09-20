@@ -15,8 +15,8 @@ use wbraganca\dynamicform\DynamicFormWidget;
                 'widgetBody' => '.course-items', // required: css class selector
                 'widgetItem' => '.course-item', // required: css class                
                 'min' => 1, // 0 or 1 (default 1)
-                'insertButton' => '.add-item', // css class
-                'deleteButton' => '.remove-item', // css class
+                'insertButton' => '.add-course', // css class
+                'deleteButton' => '.remove-course', // css class
                 'model' => $courses[0],
                 'formId' => 'university-active-form',
                 'formFields' => [
@@ -32,11 +32,12 @@ use wbraganca\dynamicform\DynamicFormWidget;
             ]); ?>
             
             <table class="course-items table table-bordered"><!-- widgetContainer -->
-                <?php foreach ($courses as $i => $courses): ?>                    
+                <?php foreach ($courses as $i => $courses): ?>
+                <?= $form->field($courses, "[{$i}]department_id")->hiddenInput(['value' => $department])->label(false) ?>                    
                     <tr class="course-item"><!-- widgetBody -->                    
                         <td>
-                            <button type="button" class="add-item btn btn-success btn-xs"><i class="glyphicon glyphicon-plus"></i></button>
-                            <button type="button" class="remove-item btn btn-danger btn-xs"><i class="glyphicon glyphicon-minus"></i></button>
+                            <button type="button" class="add-course btn btn-success btn-xs"><i class="glyphicon glyphicon-plus"></i></button>
+                            <button type="button" class="remove-course btn btn-danger btn-xs"><i class="glyphicon glyphicon-minus"></i></button>
                         </td>
                         <?php
                             // necessary for update action.
@@ -44,9 +45,6 @@ use wbraganca\dynamicform\DynamicFormWidget;
                                 echo Html::activeHiddenInput($courses, "[{$department}][{$i}]id");
                             }
                         ?>
-                        <td>
-                            <?= $form->field($department, "[{$department}][{$courses}]id")->label(false)->textInput(['maxlength' => true]) ?>
-                        </td>
                         <td>
                             <?= $form->field($courses, "[{$i}]name")->textInput(['maxlength' => true]) ?>
                         </td>

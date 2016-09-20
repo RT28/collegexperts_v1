@@ -21,8 +21,12 @@ $this->params['breadcrumbs'][] = 'Update';
         'departments' => $departments,
         'courses' => $courses,
         'degree' => $degree,
-        'majors' => $majors,
+        'currentTab' => $currentTab,
+        'tabs' => $tabs,
+        'majors' => $majors,        
         'univerityAdmisssions' => $univerityAdmisssions,
+        'institutionType' => $institutionType,
+        'establishment' => $establishment
     ]) ?>
 
 </div>
