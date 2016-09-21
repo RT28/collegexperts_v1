@@ -11,6 +11,7 @@ use yii\bootstrap\Tabs;
 <?php $form = ActiveForm::begin(['id' => 'university-active-form', 'options' => ['enctype' => 'multipart/form-data']]); ?>
     <?= Html::hiddenInput('currentTab' , $currentTab); ?>
     <?= Html::hiddenInput('tabs' ,implode(',', $tabs)); ?>
+    <?= Html::hiddenInput('id' ,$id); ?>
     <div class="university-form">   
         <?= Tabs::widget([
             'items' => [
@@ -26,29 +27,29 @@ use yii\bootstrap\Tabs;
                         ]),
                         'active' => $currentTab === 'Profile' ? true : false,
                         'options' => ['id' => 'profile'],                     
-                    ]/*,
+                    ],
                     [
                         'label' => 'About',
-                        'content' => $this->render('_about', [
+                        'content' => array_search('About', $tabs) ? $this->render('_about', [
                             'model' => $model,                        
                             'upload' => $upload,
                             'countries' => $countries,
                             'form' => $form
-                        ]),
+                        ]) : null,
                         'headerOptions' => [                        
                             'class' => array_search('About', $tabs) ? 'enabled-tab' : 'disabled-tab' 
                         ],
                         'active' => $currentTab === 'About' ? true : false,
                         'options' => ['id' => 'about'],                     
-                    ]*/,
+                    ],
                     [
                         'label' => 'Misc.',
-                        'content' => $this->render('_misc', [
+                        'content' => array_search('Misc', $tabs) ? $this->render('_misc', [
                             'model' => $model,                        
                             'upload' => $upload,
                             'countries' => $countries,
                             'form' => $form
-                        ]),
+                        ]) : null,
                         'headerOptions' => [                        
                             'class' => array_search('Misc', $tabs) ? 'enabled-tab' : 'disabled-tab' 
                         ],
@@ -57,14 +58,14 @@ use yii\bootstrap\Tabs;
                     ],
                     [
                         'label' => 'Departments',
-                        'content' => $this->render('_departments', [
-                            'model' => $model,                        
-                            'courses' => $courses,                              
+                        'content' => array_search('Department', $tabs) ? $this->render('_departments', [
+                            'model' => $model,                              
                             'degree' => $degree,
                             'majors' => $majors,
                             'departments' => $departments,
-                            'form' => $form
-                        ]),
+                            'form' => $form,
+                            'courseType' => $courseType
+                        ]) : null,
                         'active' => $currentTab === 'Department' ? true : false,
                         'headerOptions' => [                        
                             'class' => array_search('Department', $tabs) ? 'enabled-tab' : 'disabled-tab' 
@@ -75,11 +76,11 @@ use yii\bootstrap\Tabs;
                     ],                
                     [
                         'label' => 'Gallery',
-                        'content' => $this->render('_gallery', [
+                        'content' => array_search('Gallery', $tabs) ? $this->render('_gallery', [
                             'model'=>$model,                        
                             'upload' => $upload,
                             'form' => $form
-                        ]),
+                        ]) : null,
                         'headerOptions' => [                        
                             'class' => array_search('Gallery', $tabs) ? 'enabled-tab' : 'disabled-tab'
                         ],
@@ -87,7 +88,7 @@ use yii\bootstrap\Tabs;
                     ],
                     [
                         'label' => 'Admissions',
-                        'content' => $this->render('_university_admission_form', [
+                        'content' => array_search('Admissions', $tabs) ? $this->render('_university_admission_form', [
                             'model'=>$model,
                             'univerityAdmisssions' => $univerityAdmisssions,                                
                             'degree' => $degree,
@@ -95,7 +96,7 @@ use yii\bootstrap\Tabs;
                             'departments' => $departments,
                             'courses' => $courses,
                             'form' => $form
-                        ]),
+                        ]) : null,
                         'headerOptions' => [                        
                             'class' => array_search('Admissions', $tabs) ? 'enabled-tab' : 'disabled-tab'
                         ],                

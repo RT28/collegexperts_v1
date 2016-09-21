@@ -7,9 +7,14 @@ use wbraganca\dynamicform\DynamicFormWidget;
 use yii\helpers\ArrayHelper;
 use kartik\depdrop\DepDrop;
 use yii\helpers\Url;
+use yii\web\JsExpression;
 
 $dept = ArrayHelper::map($departments, 'id', 'name');
-$course = ArrayHelper::map($courses, 'id', 'name');
+
+if (count($departments) > 0) {
+    $course = $departments[0]->universityCourseLists;
+    $course = ArrayHelper::map($course, 'id', 'name');
+}
 
 /**
  * var @univerityAdmisssions array of students school details
@@ -56,11 +61,11 @@ $course = ArrayHelper::map($courses, 'id', 'name');
                             }
                         ?>
                         <td>                        
-                            <?= $form->field($univerityAdmisssions, "[{$i}]department_id")->dropDownList($dept, ['id' => 'department_id']) ?>
+                            <?= $form->field($univerityAdmisssions, "[{$i}]department_id")->dropDownList($dept, ['id' => "department_id{$i}"]) ?>
                         </td>
                         <td>
                             <?= $form->field($univerityAdmisssions, "[{$i}]start_date")->widget(DatePicker::classname(),[
-                                'name' => 'date_picker_2',
+                                'name' => "[{$i}]date_picker_2",
                                 'type' => DatePicker::TYPE_INPUT,
                                 'pluginOptions' => [
                                     'autoClose' => true,
@@ -69,7 +74,7 @@ $course = ArrayHelper::map($courses, 'id', 'name');
                         </td>
                         <td>
                             <?= $form->field($univerityAdmisssions, "[{$i}]end_date")->widget(DatePicker::classname(),[
-                                'name' => 'date_picker_2',
+                                'name' => "[{$i}]date_picker_3",
                                 'type' => DatePicker::TYPE_INPUT,
                                 'pluginOptions' => [
                                     'autoClose' => true,
@@ -78,11 +83,17 @@ $course = ArrayHelper::map($courses, 'id', 'name');
                             ]);?>
                         </td>
                         <td>
-                            <?= $form->field($univerityAdmisssions, "[{$i}]course_id")->dropDownList($course, ['id' => 'course_id']) ?>
-                        </td>
-                        <td>
-                            <?= $form->field($univerityAdmisssions, "[{$i}]major_id")->dropDownList($majors, ['id' => 'major_id']) ?>
-                        </td>
+                            <?= $form->field($univerityAdmisssions, "[{$i}]course_id")->widget(DepDrop::classname(), [
+                                'options' => ['id' => "course_id{$i}"],
+                                'data' => $course,                                
+                                'type' => DepDrop::TYPE_SELECT2,
+                                'pluginOptions' => [
+                                    'depends' => ["department_id{$i}"],
+                                    'placeholder' => 'Select Department',
+                                    'url' => Url::to(['/university/dependent-courses'])
+                                ]
+                            ]); ?>                                                        
+                        </td>                        
                         <td>
                             <?= $form->field($univerityAdmisssions, "[{$i}]admission_link")->textInput(['maxlength' => true]) ?>
                         </td>

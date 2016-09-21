@@ -44,10 +44,7 @@ use wbraganca\dynamicform\DynamicFormWidget;
                             if (! $courses->isNewRecord) {
                                 echo Html::activeHiddenInput($courses, "[{$department}][{$i}]id");
                             }
-                        ?>
-                        <td>
-                            <?= $form->field($courses, "[{$i}]name")->textInput(['maxlength' => true]) ?>
-                        </td>
+                        ?>                        
                         <td>
                             <?= $form->field($courses, "[{$i}]degree_id")->dropDownList($degree, ['id' => 'degree_id']) ?>
                         </td>
@@ -64,7 +61,7 @@ use wbraganca\dynamicform\DynamicFormWidget;
                             <?= $form->field($courses, "[{$i}]duration")->textInput(['rows' => 6]) ?>
                         </td>
                         <td>
-                            <?= $form->field($courses, "[{$i}]type")->textInput(['rows' => 6]) ?>
+                            <?= $form->field($courses, "[{$i}]type")->dropDownList($courseType, ['id' => 'course_type']) ?>
                         </td>
                     </tr>
                 <?php endforeach; ?>

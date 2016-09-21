@@ -14,18 +14,11 @@ function initGoogleMap() {
 
     	//add a click listener to map for the use to pick a location.
 		map.addListener('click', function(e){
-			if (map.marker) {
-				map.marker.setMap(null);	
-			}
-			
-			var marker = new google.maps.Marker({
-		    position: e.latLng,
-		    	map: map
-		  	});
-		  	map.panTo(e.latLng);
-		  	map.marker = marker;
+			updateMapMarker(map, e);
+		});
 
-		  	$('#university-location').val(e.latLng);
+		map.addListener('dragend', function(e){
+			updateMapMarker(map, e);
 		});		
 
 		//If co-ordinates are already available, plot them on the map.
@@ -54,22 +47,22 @@ function initGoogleMap() {
 			map.marker = marker;
 			//else use university name address city state and country to geocode lat lng and plot on map
     	}	    
-	    else {
-	    	var geocoder = new google.maps.Geocoder();
-			geocoder.geocode({'address': getAddress()}, function(results, status){		
-				if(status === google.maps.GeocoderStatus.OK) {
-					map.setCenter(results[0].geometry.location);
+	    else {			 
+			$.ajax({ 
+				url:"https://maps.googleapis.com/maps/api/geocode/json?address="+getAddress(), 
+				type: "POST", 
+				success:function(results){ 
+					map.setCenter(results.results[0].geometry.location);
 					var marker = new google.maps.Marker({
 						map: map,
-						position: results[0].geometry.location
+						position: results.results[0].geometry.location
 					});
 
+					var latLng = '(' + results.results[0].geometry.location.lat + ',' + results.results[0].geometry.location.lng + ')';
+					$('#university-location').val(latLng);
 					map.marker = marker;
-
-				} else {
-					console.log('Cannot set marker: ' + status);
-				}
-			});	
+				} 
+			});	    		
 	    }		
 	}	
 }
@@ -90,3 +83,18 @@ function getAddress() {
 	return searchString;
 	//return '450 Serra Mall Stanford, CA 94305';
 }
+
+function updateMapMarker(map, e) {
+	if (map.marker) {
+		map.marker.setMap(null);	
+	}
+	
+	var marker = new google.maps.Marker({
+	position: e.latLng,
+		map: map
+	});
+	map.panTo(e.latLng);
+	map.marker = marker;
+
+	$('#university-location').val(e.latLng);
+} 

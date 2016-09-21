@@ -27,7 +27,9 @@ $this->params['breadcrumbs'][] = $this->title;
         'majors' => $majors,        
         'univerityAdmisssions' => $univerityAdmisssions,
         'institutionType' => $institutionType,
-        'establishment' => $establishment
+        'establishment' => $establishment,
+        'courseType' => $courseType,
+        'id' => $id,
     ]) ?>
 
 </div>

@@ -5,6 +5,7 @@ use yii\widgets\ActiveForm;
 use wbraganca\dynamicform\DynamicFormWidget;
 use yii\helpers\Json;
 use common\models\UniversityCourseList;
+use yii\db\Query;
 
 /* @var $this yii\web\View */
 /* @var $model backend\models\UniversityDepartments */
@@ -64,8 +65,8 @@ use common\models\UniversityCourseList;
                         <tr>
                             <td></td>
                             <td colspan="5">
-                                <?php
-                                    $courses = $departments->universityCourseLists;
+                                <?php                                    
+                                    $courses = $departments->universityCourseLists;                                    
                                     if(empty($courses)) {
                                         $courses = [new UniversityCourseList];
                                     }
@@ -77,7 +78,8 @@ use common\models\UniversityCourseList;
                                         'degree' => $degree,
                                         'form' => $form,
                                         'majors' => $majors,
-                                        'department' => $i
+                                        'department' => $i,
+                                        'courseType' => $courseType
                                     ]);
                                 ?>
                             </td>

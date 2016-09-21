@@ -8,8 +8,7 @@ use backend\models\UniversityDepartments;
 /**
  * This is the model class for table "university_course_list".
  *
- * @property integer $id
- * @property string $name
+ * @property integer $id 
  * @property integer $university_id
  * @property integer $degree_id
  * @property integer $major_id
@@ -44,10 +43,9 @@ class UniversityCourseList extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name', 'university_id', 'degree_id', 'major_id', 'intake', 'fees', 'duration', 'type', 'created_by', 'created_at', 'updated_by', 'updated_at'], 'required'],
+            [['university_id', 'degree_id', 'major_id', 'intake', 'fees', 'duration', 'type', 'created_by', 'created_at', 'updated_by', 'updated_at'], 'required'],
             [['university_id', 'degree_id', 'major_id', 'department_id', 'intake', 'fees', 'type', 'created_by', 'updated_by'], 'integer'],
-            [['created_at', 'updated_at'], 'safe'],
-            [['name'], 'string', 'max' => 255],
+            [['created_at', 'updated_at'], 'safe'],            
             [['duration'], 'number'],
             [['degree_id'], 'exist', 'skipOnError' => true, 'targetClass' => Degree::className(), 'targetAttribute' => ['degree_id' => 'id']],
             [['department_id'], 'exist', 'skipOnError' => true, 'targetClass' => UniversityDepartments::className(), 'targetAttribute' => ['department_id' => 'id']],
@@ -62,8 +60,7 @@ class UniversityCourseList extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
-            'name' => 'Name',
+            'id' => 'ID',            
             'university_id' => 'University ID',
             'degree_id' => 'Degree ID',
             'major_id' => 'Major ID',
