@@ -24,6 +24,16 @@ $this->params['breadcrumbs'][] = $this->title;
         if (count($cover_photo_path) > 0) {
             echo Html::img($cover_photo_path[0], ['alt' => $model->name , 'class' => 'cover-photo']);
         }
+
+        $logo_path = FileHelper::findFiles("./../web/uploads/$model->id/logo", [
+            'caseSensitive' => true,
+            'recursive' => false,
+            'only' => ['logo.*']
+        ]);       
+        
+        if (count($logo_path) > 0) {
+            echo Html::img($logo_path[0], ['alt' => $model->name , 'class' => 'cover-photo']);
+        }
     ?>
     
     <p>

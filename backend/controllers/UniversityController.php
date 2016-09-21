@@ -27,6 +27,7 @@ use common\models\FileUpload;
 use backend\models\UniversityDepartments;
 use common\components\Model;
 use common\models\Others;
+use yii\helpers\FileHelper;
 
 /**
  * UniversityController implements the CRUD actions for University model.
@@ -47,7 +48,7 @@ class UniversityController extends Controller
                 ],
                 'rules' => [
                     [
-                        'actions' => ['index', 'view', 'create', 'update', 'dependent-states', 'dependent-cities', 'dependent-courses'],
+                        'actions' => ['index', 'view', 'create', 'update', 'dependent-states', 'dependent-cities', 'dependent-courses', 'upload-photos', 'delete-photo'],
                         'allow' => true,
                         'roles' => [Roles::ROLE_ADMIN, Roles::ROLE_EDITOR]
                     ],
@@ -197,6 +198,7 @@ class UniversityController extends Controller
                     }                    
                     if ($dependentUpdates && $result['count'] >= 5) {                                                                       
                         $dependentUpdates = $this->saveCoverPhoto($upload, $model);
+                        $dependentUpdates = $this->saveLogo($upload, $model);
                     }
                     if ($dependentUpdates && $result['count'] >= 6) {                        
                         $model = $this->findModel($model->id);                                         
@@ -265,6 +267,7 @@ class UniversityController extends Controller
                     }                    
                     if ($dependentUpdates && $result['count'] >= 5) {                                                                       
                         $dependentUpdates = $this->saveCoverPhoto($upload, $model);
+                        $dependentUpdates = $this->saveLogo($upload, $model);
                     }
                     if ($dependentUpdates && $result['count'] >= 6) {                        
                         $model = $this->findModel($model->id);                                         
@@ -308,6 +311,19 @@ class UniversityController extends Controller
         if (isset($newFile)) {
             $image->imageFile = UploadedFile::getInstance($image, 'imageFile');              
             if ($image->upload($university)) {            
+                return true; 
+            } else {
+                return false;
+            }
+        }                
+        return true;
+    }
+
+    private function saveLogo($image, $university) {
+        $newFile = UploadedFile::getInstance($image, 'logoFile');
+        if (isset($newFile)) {
+            $image->logoFile = UploadedFile::getInstance($image, 'logoFile');              
+            if ($image->uploadLogo($university)) {            
                 return true; 
             } else {
                 return false;
@@ -529,5 +545,32 @@ class UniversityController extends Controller
         } else {
             return [];
         }
+    }
+
+    public function actionUploadPhotos() {
+        $university = Yii::$app->request->post('university_id');
+        $result = is_dir("./../web/uploads/$university/photos");		
+		if (!$result) {			
+			$result = FileHelper::createDirectory("./../web/uploads/$university/photos");			
+		}
+        $sourcePath = $_FILES['photos']['tmp_name'];
+        $ext = pathinfo($_FILES['photos']['name'], PATHINFO_EXTENSION);
+        $targetPath = "./../web/uploads/$university/photos/" . date_timestamp_get(date_create()) . '.' . $ext; // Target path where file is to be stored
+        if (move_uploaded_file($sourcePath,$targetPath)) {
+            echo json_encode([]);
+        }
+        else {
+            echo json_encode(['error' => 'Processing request ' . $sourcePath]);
+        }        
+    }
+
+    public function actionDeletePhoto() {
+        $university = Yii::$app->request->post('university_id');
+        $key = Yii::$app->request->post('key');
+        if (unlink("./../web/uploads/$university/photos/$key")) {
+            echo json_encode([]);
+        } else {
+            echo json_encode(['error' => 'Processing request ']);
+        }        
     }
 }
