@@ -5,15 +5,21 @@ use yii\widgets\DetailView;
 ?>
 
 <h3>English Language Proficiency</h3>
-<?php foreach ($model as $test): ?>
-	<?= DetailView::widget([
-        'model' => $test,
-        'attributes' => [
-        'test_name',
-        'reading_score',
-        'writing_score',
-        'listening_score',
-        'speaking_score',
-    ],
-	]); ?>
-<?php endforeach; ?>
+<table class="table table-bordered">
+    <tr>
+        <th>Name</th>
+        <th>Reading</th>
+        <th>Writing</th>
+        <th>Listening</th>
+        <th>Speaking</th>        
+    </tr>
+    <?php foreach ($model as $test): ?>
+        <tr>
+            <td><?= $test->test_name ?></td>
+            <td><?= $test->reading_score ?></td>            
+            <td><?= $test->writing_score ?></td>
+            <td><?= $test->listening_score ?></td>
+            <td><?= $test->speaking_score ?></td>
+        </tr>
+    <?php endforeach; ?>
+</table>

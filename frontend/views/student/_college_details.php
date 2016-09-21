@@ -5,14 +5,19 @@ use yii\widgets\DetailView;
 ?>
 
 <h3>College Details </h3>
-<?php foreach ($model as $college): ?>
-	<?= DetailView::widget([
-        'model' => $college,
-        'attributes' => [
-        'name',
-        'from_date',
-        'to_date',
-        'curriculum',
-    ],
-	]); ?>
-<?php endforeach; ?>
+<table class="table table-bordered">
+    <tr>
+        <th>Name</th>
+        <th>From Date</th>
+        <th>To Date</th>
+        <th>Major</th>
+    </tr>
+    <?php foreach ($model as $college): ?>
+        <tr>
+            <td><?= $college->name ?></td>
+            <td><?= $college->from_date ?></td>            
+            <td><?= $college->to_date ?></td>
+            <td><?= $college->curriculum ?></td>
+        </tr>
+    <?php endforeach; ?>
+</table>

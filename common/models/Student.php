@@ -11,6 +11,7 @@ use Yii;
  * @property string $first_name
  * @property string $last_name
  * @property string $date_of_birth
+ * @property string $nationality
  * @property string $gender
  * @property string $address
  * @property string $street
@@ -49,7 +50,7 @@ class Student extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['first_name', 'last_name', 'date_of_birth', 'gender', 'address', 'street', 'city', 'state', 'country', 'pincode', 'email', 'parent_email', 'phone', 'parent_phone', 'created_by', 'updated_by', 'created_at', 'updated_at'], 'required'],
+            [['first_name', 'nationality', 'last_name', 'date_of_birth', 'gender', 'address', 'street', 'city', 'state', 'country', 'pincode', 'email', 'parent_email', 'phone', 'parent_phone', 'created_by', 'updated_by', 'created_at', 'updated_at'], 'required'],
             [['date_of_birth', 'created_at', 'updated_at'], 'safe'],
             [['created_by', 'updated_by'], 'integer'],
             [['first_name', 'last_name', 'address', 'street'], 'string', 'max' => 255],

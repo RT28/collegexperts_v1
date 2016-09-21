@@ -125,3 +125,8 @@ a.desc:after {
 {
 	height: 100%;
 }
+
+.border
+{
+    border: 1px solid #CECECE;
+}
