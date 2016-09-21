@@ -109,3 +109,19 @@ a.desc:after {
 .nav > li > form > button:hover {
     text-decoration: none;
 }
+
+.cover-photo
+{
+	max-width: 100%;
+}
+
+.photo-thumbnail
+{
+	height: 100px;
+	max-width: 100%;
+}
+
+.file-zoom-content .photo-thumbnail
+{
+	height: 100%;
+}

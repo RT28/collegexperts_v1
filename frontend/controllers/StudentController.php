@@ -17,6 +17,7 @@ use common\models\StudentEnglishLanguageProficienceyDetails;
 use common\models\StudentStandardTestDetail;
 use common\components\Model;
 
+use yii\helpers\FileHelper;
 /**
  * StudentController implements the CRUD actions for Student model.
  */
@@ -355,5 +356,32 @@ class StudentController extends Controller
                 die();
             }
         }
+    }
+
+    public function actionUploadProfilePhoto() {
+        $student = Yii::$app->request->post('student_id');
+        $result = is_dir("./../web/uploads/$student/profile_photo");		
+		if (!$result) {			
+			$result = FileHelper::createDirectory("./../web/uploads/$student/profile_photo");			
+		}
+        $sourcePath = $_FILES['profile_photo']['tmp_name'];
+        $ext = pathinfo($_FILES['profile_photo']['name'], PATHINFO_EXTENSION);
+        $targetPath = "./../web/uploads/$student/profile_photo/" . date_timestamp_get(date_create()) . '.' . $ext; // Target path where file is to be stored
+        if (move_uploaded_file($sourcePath,$targetPath)) {
+            echo json_encode([]);
+        }
+        else {
+            echo json_encode(['error' => 'Processing request']);
+        }
+    }
+
+    public function actionDeletePhoto() {
+        $student = Yii::$app->request->post('student_id');
+        $key = Yii::$app->request->post('key');
+        if (unlink("./../web/uploads/$student/profile_photo/$key")) {
+            echo json_encode([]);
+        } else {
+            echo json_encode(['error' => 'Processing request ']);
+        }        
     }
 }

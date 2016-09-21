@@ -2,15 +2,53 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use yii\helpers\FileHelper;
+use kartik\file\FileInput;
+use yii\helpers\Url;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\Student */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="student-form">
-
-    <?php $form = ActiveForm::begin(['id' => 'school-active-form']); ?>
+<?php
+    $initialPreview = [];
+    $initialPreviewConfig =[];    
+    if (is_dir("./../web/uploads/$model->id/profile_photo")) {
+        $cover_photo_path = FileHelper::findFiles("./../web/uploads/$model->id/profile_photo", [
+            'caseSensitive' => true,
+            'recursive' => false,
+        ]);       
+    
+        if (count($cover_photo_path) > 0) {
+            $initialPreview = [Html::img($cover_photo_path[0], ['title' => $model->first_name . ' ' . $model->last_name, 'class' => 'photo-thumbnail'])];
+            $initialPreviewConfig = [['caption' => 'Profle' , 'url' => Url::to(['/student/delete-photo']), 'key'=> basename($cover_photo_path[0])]];
+        }
+    }
+?>
+<?php $form = ActiveForm::begin(['id' => 'school-active-form', 'options' => ['enctype' => 'multipart/form-data']]); ?>
+    <div class="student-form">
+        <div class="row">
+            <div class="col-xs-12 col-sm-4">
+                <?= FileInput::widget([
+                    'name' => 'profile_photo',
+                    'pluginOptions' => [
+                        'uploadUrl' => Url::to(['/student/upload-profile-photo']),
+                        'deleteUrl' => Url::to(['/student/delete-photo']),
+                        'intialPreviewAsData' => true,
+                        'uploadExtraData' => [
+                            'student_id' => $model->id
+                        ],
+                        'deleteExtraData' => [
+                            'student_id' => $model->id
+                        ],
+                        'intialPreviewAsData' => true,
+                        'initialPreviewConfig' => $initialPreviewConfig,
+                        'initialPreview' => $initialPreview                       
+                    ]
+                ]);?>
+            </div>
+        </div>   
 
     <?= $form->field($model, 'first_name')->textInput(['maxlength' => true]) ?>
 
