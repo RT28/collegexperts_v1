@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 20, 2016 at 11:31 AM
+-- Generation Time: Sep 21, 2016 at 08:53 AM
 -- Server version: 5.6.24
 -- PHP Version: 5.6.8
 
@@ -37,11 +37,6 @@ CREATE TABLE IF NOT EXISTS `city` (
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 
 --
--- Truncate table before insert `city`
---
-
-TRUNCATE TABLE `city`;
---
 -- Dumping data for table `city`
 --
 
@@ -65,11 +60,6 @@ CREATE TABLE IF NOT EXISTS `country` (
   `name` varchar(255) NOT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
 
---
--- Truncate table before insert `country`
---
-
-TRUNCATE TABLE `country`;
 --
 -- Dumping data for table `country`
 --
@@ -102,11 +92,6 @@ CREATE TABLE IF NOT EXISTS `degree` (
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 --
--- Truncate table before insert `degree`
---
-
-TRUNCATE TABLE `degree`;
---
 -- Dumping data for table `degree`
 --
 
@@ -134,11 +119,6 @@ CREATE TABLE IF NOT EXISTS `employee` (
   `country` int(11) NOT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
---
--- Truncate table before insert `employee`
---
-
-TRUNCATE TABLE `employee`;
 --
 -- Dumping data for table `employee`
 --
@@ -172,11 +152,6 @@ CREATE TABLE IF NOT EXISTS `employee_login` (
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 --
--- Truncate table before insert `employee_login`
---
-
-TRUNCATE TABLE `employee_login`;
---
 -- Dumping data for table `employee_login`
 --
 
@@ -202,11 +177,6 @@ CREATE TABLE IF NOT EXISTS `majors` (
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
 --
--- Truncate table before insert `majors`
---
-
-TRUNCATE TABLE `majors`;
---
 -- Dumping data for table `majors`
 --
 
@@ -229,11 +199,6 @@ CREATE TABLE IF NOT EXISTS `migration` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Truncate table before insert `migration`
---
-
-TRUNCATE TABLE `migration`;
---
 -- Dumping data for table `migration`
 --
 
@@ -254,15 +219,11 @@ CREATE TABLE IF NOT EXISTS `others` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Truncate table before insert `others`
---
-
-TRUNCATE TABLE `others`;
---
 -- Dumping data for table `others`
 --
 
 INSERT INTO `others` (`name`, `value`) VALUES
+('course_type', 'Full Time, Part Time, Offline'),
 ('establishment', 'Public,Private'),
 ('institution_type', 'University,College');
 
@@ -286,11 +247,6 @@ CREATE TABLE IF NOT EXISTS `partner` (
   `country` int(11) NOT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
---
--- Truncate table before insert `partner`
---
-
-TRUNCATE TABLE `partner`;
 --
 -- Dumping data for table `partner`
 --
@@ -323,11 +279,6 @@ CREATE TABLE IF NOT EXISTS `partner_login` (
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 --
--- Truncate table before insert `partner_login`
---
-
-TRUNCATE TABLE `partner_login`;
---
 -- Dumping data for table `partner_login`
 --
 
@@ -348,11 +299,6 @@ CREATE TABLE IF NOT EXISTS `state` (
   `country_id` int(11) NOT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=latin1;
 
---
--- Truncate table before insert `state`
---
-
-TRUNCATE TABLE `state`;
 --
 -- Dumping data for table `state`
 --
@@ -393,6 +339,7 @@ CREATE TABLE IF NOT EXISTS `student` (
   `id` int(11) NOT NULL,
   `first_name` varchar(255) NOT NULL,
   `last_name` varchar(255) NOT NULL,
+  `nationality` varchar(50) NOT NULL,
   `date_of_birth` date NOT NULL,
   `gender` varchar(50) NOT NULL,
   `address` varchar(255) NOT NULL,
@@ -412,16 +359,11 @@ CREATE TABLE IF NOT EXISTS `student` (
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
 --
--- Truncate table before insert `student`
---
-
-TRUNCATE TABLE `student`;
---
 -- Dumping data for table `student`
 --
 
-INSERT INTO `student` (`id`, `first_name`, `last_name`, `date_of_birth`, `gender`, `address`, `street`, `city`, `state`, `country`, `pincode`, `email`, `parent_email`, `phone`, `parent_phone`, `created_by`, `updated_by`, `created_at`, `updated_at`) VALUES
-(1, 'student', 'student', '2016-08-11', 'F', 'address', 'street', 'mumbai', 'maharashtra', 'India', '400089', 'student@gmail.com', 'student_parent@gmail.com', '4565656', '5454646', 0, 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00');
+INSERT INTO `student` (`id`, `first_name`, `last_name`, `nationality`, `date_of_birth`, `gender`, `address`, `street`, `city`, `state`, `country`, `pincode`, `email`, `parent_email`, `phone`, `parent_phone`, `created_by`, `updated_by`, `created_at`, `updated_at`) VALUES
+(1, 'student', 'student', 'Indian', '2016-08-11', 'F', 'address', 'street', 'mumbai', 'maharashtra', 'India', '400089', 'student@gmail.com', 'student_parent@gmail.com', '4565656', '5454646', 0, 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -443,11 +385,6 @@ CREATE TABLE IF NOT EXISTS `student_college_detail` (
   `updated_at` datetime NOT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
---
--- Truncate table before insert `student_college_detail`
---
-
-TRUNCATE TABLE `student_college_detail`;
 --
 -- Dumping data for table `student_college_detail`
 --
@@ -478,11 +415,6 @@ CREATE TABLE IF NOT EXISTS `student_english_language_proficiencey_details` (
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
 --
--- Truncate table before insert `student_english_language_proficiencey_details`
---
-
-TRUNCATE TABLE `student_english_language_proficiencey_details`;
---
 -- Dumping data for table `student_english_language_proficiencey_details`
 --
 
@@ -509,11 +441,6 @@ CREATE TABLE IF NOT EXISTS `student_school_detail` (
   `updated_at` datetime NOT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
---
--- Truncate table before insert `student_school_detail`
---
-
-TRUNCATE TABLE `student_school_detail`;
 --
 -- Dumping data for table `student_school_detail`
 --
@@ -544,11 +471,6 @@ CREATE TABLE IF NOT EXISTS `student_standard_test_detail` (
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
 --
--- Truncate table before insert `student_standard_test_detail`
---
-
-TRUNCATE TABLE `student_standard_test_detail`;
---
 -- Dumping data for table `student_standard_test_detail`
 --
 
@@ -574,11 +496,6 @@ CREATE TABLE IF NOT EXISTS `student_subject_detail` (
   `updated_at` datetime NOT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
---
--- Truncate table before insert `student_subject_detail`
---
-
-TRUNCATE TABLE `student_subject_detail`;
 --
 -- Dumping data for table `student_subject_detail`
 --
@@ -640,21 +557,19 @@ CREATE TABLE IF NOT EXISTS `university` (
   `updated_at` datetime NOT NULL,
   `reviewed_by` int(11) DEFAULT NULL,
   `reviewed_at` datetime DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=44 DEFAULT CHARSET=latin1;
 
---
--- Truncate table before insert `university`
---
-
-TRUNCATE TABLE `university`;
 --
 -- Dumping data for table `university`
 --
 
 INSERT INTO `university` (`id`, `name`, `establishment_date`, `address`, `city_id`, `state_id`, `country_id`, `pincode`, `email`, `website`, `description`, `fax`, `phone_1`, `phone_2`, `contact_person`, `contact_person_designation`, `contact_mobile`, `contact_email`, `location`, `institution_type`, `establishment`, `no_of_students`, `no_of_internation_students`, `no_faculties`, `no_of_international_faculty`, `cost_of_living`, `accomodation_available`, `hostel_strength`, `institution_ranking`, `ranking_sources`, `video`, `virtual_tour`, `avg_rating`, `standard_tests_required`, `standard_test_list`, `achievements`, `comments`, `status`, `created_by`, `created_at`, `updated_by`, `updated_at`, `reviewed_by`, `reviewed_at`) VALUES
-(1, 'Stanford University', '1885-11-11', ' 450 Serra Mall', 1, 1, 1, 94305, 'gradadmissions@stanford.edu', 'https://www.stanford.edu', 'Stanford University, located between San Francisco and San Jose in the heart of California''s Silicon Valley, is one of the world''s leading teaching and research universities. Since its opening in 1891, Stanford has been dedicated to finding solutions to big challenges and to preparing students for leadership in a complex world.', '650-723-8371', '+1-866-432-7472', '', 'Graduate Admissions', 'Graduate Admissions', '+1-866-432-7472', 'gradadmissions@stanford.edu', '\0\0\0\0\0\0\0¼\nC·¶B@ÅÿáåŠ^À', 1, 1, 16112, 6994, 528, NULL, 106502, b'1', 1500, 3, '', '', '', NULL, b'0', NULL, NULL, '', 10, 1, '2016-09-09 09:19:38', 1, '2016-09-11 09:32:03', NULL, NULL),
+(1, 'Stanford University', '1885-11-11', ' 450 Serra Mall', 1, 1, 1, 94305, 'gradadmissions@stanford.edu', 'https://www.stanford.edu', '<p>Stanford University, located between San Francisco and San Jose in the heart of California&#39;s Silicon Valley, is one of the world&#39;s leading teaching and research universities. Since its opening in 1891, Stanford has been dedicated to finding solutions to big challenges and to preparing students for leadership in a complex world.</p>\r\n', '650-723-8371', '+1-866-432-7472', '', 'Graduate Admissions', 'Graduate Admissions', '+1-866-432-7472', 'gradadmissions@stanford.edu', '\0\0\0\0\0\0\0¼\nC·¶B@ÅÿáåŠ^À', 0, 0, 16112, 6994, 528, NULL, 106502, b'1', 1500, 3, '', '', '', NULL, b'1', '0', '', '', 10, 1, '2016-09-09 09:19:38', 1, '2016-09-20 09:43:57', NULL, NULL),
 (5, 'Massachusetts Institute of Technology', '1861-04-10', ' 77 Massachusetts Ave', 3, 4, 1, 2139, 'web-query@mit.edu', 'http://web.mit.edu/', 'The mission of the Massachusetts Institute of Technology is to advance knowledge and educate students in science, technology, and other areas of scholarship that will best serve the nation and the world in the 21st century. We are also driven to bring knowledge to bear on the worldâ€™s great challenges.\r\n\r\nThe Institute is an independent, coeducational, privately endowed university, organized into five Schools (architecture and planning; engineering; humanities, arts, and social sciences; management; and science). It has some 1,000 faculty members, more than 11,000 undergraduate and graduate students, and more than 130,000 living alumni.\r\n\r\nAt its founding in 1861, MIT was an educational innovation, a community of hands-on problem solvers in love with fundamental science and eager to make the world a better place. Today, that spirit still guides how we educate students on campus and how we shape new digital learning technologies to make MIT teaching accessible to millions of learners around the world.\r\n\r\nMITâ€™s spirit of interdisciplinary exploration has fueled many scientific breakthroughs and technological advances. A few examples: the first chemical synthesis of penicillin and vitamin A. The development of radar and creation of inertial guidance systems. The invention of magnetic core memory, which enabled the development of digital computers. Major contributions to the Human Genome Project. The discovery of quarks. The invention of the electronic spreadsheet and of encryption systems that enable e-commerce. The creation of GPS. Pioneering 3D printing. The concept of the expanding universe.\r\n\r\nCurrent research and education areas include digital learning; nanotechnology; sustainable energy, the environment, climate adaptation, and global water and food security; Big Data, cybersecurity, robotics, and artificial intelligence; human health, including cancer, HIV, autism, Alzheimerâ€™s, and dyslexia; biological engineering and CRISPR technology; poverty alleviation; advanced manufacturing; and innovation and entrepreneurship.\r\n\r\nMITâ€™s impact also includes the work of our alumni. One way MIT graduates drive progress is by starting companies that deliver new ideas to the world. A recent study estimates that as of 2014, living MIT alumni have launched more than 30,000 active companies, creating 4.6 million jobs and generating roughly $1.9 trillion in annual revenue. Taken together, this "MIT Nation" is equivalent to the 10th-largest economy in the world!', '617.253.3400', '617.253.3400', '617.253.3400', 'MIT Admin', 'Admin', '617.253.3400', 'web-query@mit.edu', '\0\0\0\0\0\0\0üÜUò®5E@\0\0\0WÄQÀ', 1, 1, 11319, 5400, 500, NULL, 100000, b'1', NULL, NULL, '', '', '', NULL, b'0', NULL, NULL, '', 10, 1, '2016-09-10 06:52:54', 1, '2016-09-10 07:23:50', NULL, NULL),
-(13, 'vfvfbfb', NULL, 'mjmjmjh', 4, 1, 1, 252535, 'cbfb@vcfv.xom', 'vnfvjn/', '<p>cdvdsvdf</p>\r\n', '', '456564', '5254484', 'cvfbgnb', 'vgfbgnn', '15564656', 'bkjgnjbn.jvbfj@vbfjk.com', '\0\0\0\0\0\0\0šÉë¾w«B@îÿÿÿ¬þWÀ', 1, 1, NULL, NULL, NULL, NULL, NULL, b'0', NULL, NULL, '', '', '', NULL, b'0', '', '', NULL, 10, 1, '2016-09-17 09:10:50', 1, '2016-09-17 09:10:50', NULL, NULL);
+(40, 'dscdcd', '2016-09-28', 'vfvf', 2, 3, 4, 1005646, 'cdvfdv@asa.cpm', 'vfvgfbgf.com', '<p>ngnfgn</p>\r\n', '45645645', '654565', '545645', 'vfjbjkfgbj', 'jnvjkfnbjkng', '4545645', 'nbjkgnbng@jvfj.com', '\0\0\0\0\0\0\0q‡òªs3@\ré¦ƒ+8R@', 0, 0, 1000, 100, 100, 25, 250000, b'1', 700, 3, 'Times Ranking', '', '', NULL, b'1', '0', '', NULL, 0, 1, '2016-09-20 13:42:33', 1, '2016-09-20 13:42:33', NULL, NULL),
+(41, 'dscdcd', '2016-09-29', 'vfvf', 2, 3, 4, 1005646, 'cdvfdv@asa.cpm', 'vfvgfbgf.com', '<p>bggfngfnh</p>\r\n', '45645645', '654565', '545645', 'vfjbjkfgbj', 'jnvjkfnbjkng', '4545645', 'nbjkgnbng@jvfj.com', '\0\0\0\0\0\0\0q‡òªs3@\ré¦ƒ+8R@', 0, 0, 1000, 100, 100, 25, 250000, b'1', 700, 3, 'Times Ranking', '', '', NULL, b'1', '0', '', NULL, 0, 1, '2016-09-20 14:52:45', 1, '2016-09-20 14:52:45', NULL, NULL),
+(42, 'gfnbgn', '2016-09-29', 'gnngng', 2, 3, 4, 145252, 'nhnhn@nhjn.con', 'fbfgbgf.vghhj.com', '<p>fbfdgdbg<span style="color:#00FF00">bfbfbgfngfn</span><span style="color:#FF0000">nhgmnghmhm</span></p>\r\n', '3538396', '25235353', '35365365', 'dfcdsvdfv', 'gvfgbdfbgfh', '2553663', 'nhnhn@nhjn.con', '\0\0\0\0\0\0\0q‡òªs3@\ré¦ƒ+8R@', 0, 0, 10000, 1200, 1450, 120, 15000, b'1', 1200, 78, 'vfgbfgnb', '', '', NULL, b'0', '', '', NULL, 0, 1, '2016-09-21 01:27:14', 1, '2016-09-21 03:44:47', NULL, NULL),
+(43, 'gfnbgn', '2016-09-28', 'gnngng', 2, 3, 4, 145252, 'nhnhn@nhjn.con', 'fbfgbgf.vghhj.com', '<p>cvdsvsd</p>\r\n', '3538396', '25235353', '35365365', 'dfcdsvdfv', 'gvfgbdfbgfh', '2553663', 'nhnhn@nhjn.con', '\0\0\0\0\0\0\0q‡òªs3@\ré¦ƒ+8R@', 0, 0, 10000, 1200, 1450, 120, 15000, b'1', 1200, 78, 'vfgbfgnb', '', '', NULL, b'0', '0', '', NULL, 0, 1, '2016-09-21 02:11:58', 1, '2016-09-21 03:21:48', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -670,27 +585,24 @@ CREATE TABLE IF NOT EXISTS `university_admission` (
   `end_date` date NOT NULL,
   `course_id` int(11) NOT NULL,
   `department_id` int(11) NOT NULL,
-  `major_id` int(11) NOT NULL,
-  `admission_link` int(11) NOT NULL,
+  `admission_link` varchar(500) NOT NULL,
   `eligibility_criteria` text NOT NULL,
   `admission_fees` decimal(10,0) NOT NULL,
   `created_by` int(11) NOT NULL,
   `updated_by` int(11) NOT NULL,
   `created_at` datetime NOT NULL,
   `updated_at` datetime NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
---
--- Truncate table before insert `university_admission`
---
-
-TRUNCATE TABLE `university_admission`;
 --
 -- Dumping data for table `university_admission`
 --
 
-INSERT INTO `university_admission` (`id`, `university_id`, `start_date`, `end_date`, `course_id`, `department_id`, `major_id`, `admission_link`, `eligibility_criteria`, `admission_fees`, `created_by`, `updated_by`, `created_at`, `updated_at`) VALUES
-(1, 1, '2016-09-20', '2016-09-26', 1, 2, 1, 1, 'bgbgb', '1000', 1, 1, '2016-09-11 09:32:03', '2016-09-11 09:32:03');
+INSERT INTO `university_admission` (`id`, `university_id`, `start_date`, `end_date`, `course_id`, `department_id`, `admission_link`, `eligibility_criteria`, `admission_fees`, `created_by`, `updated_by`, `created_at`, `updated_at`) VALUES
+(1, 1, '2016-09-20', '2016-09-26', 1, 2, '1', 'bgbgb', '1000', 1, 1, '2016-09-20 09:43:57', '2016-09-20 09:43:57'),
+(2, 1, '2016-09-20', '2016-09-26', 1, 1, '1', 'bgbgb', '1000', 1, 1, '2016-09-20 09:43:57', '2016-09-20 09:43:57'),
+(4, 43, '2016-09-13', '2016-09-13', 128, 62, 'bdbfd', 'vdsvdsvds', '1000', 1, 1, '2016-09-21 03:21:48', '2016-09-21 03:21:48'),
+(5, 42, '2016-09-06', '2016-09-13', 129, 61, 'cdcdsc', 'vdsvs', '1000', 1, 1, '2016-09-21 03:44:48', '2016-09-21 03:44:48');
 
 -- --------------------------------------------------------
 
@@ -701,11 +613,11 @@ INSERT INTO `university_admission` (`id`, `university_id`, `start_date`, `end_da
 DROP TABLE IF EXISTS `university_course_list`;
 CREATE TABLE IF NOT EXISTS `university_course_list` (
   `id` int(11) NOT NULL,
-  `name` varchar(255) NOT NULL,
   `university_id` int(11) NOT NULL,
   `degree_id` int(11) NOT NULL,
   `major_id` int(11) NOT NULL,
   `department_id` int(11) DEFAULT NULL,
+  `name` varchar(100) DEFAULT NULL,
   `intake` int(11) NOT NULL,
   `fees` int(11) NOT NULL,
   `duration` decimal(2,1) NOT NULL,
@@ -714,19 +626,18 @@ CREATE TABLE IF NOT EXISTS `university_course_list` (
   `created_at` datetime NOT NULL,
   `updated_by` int(11) NOT NULL,
   `updated_at` datetime NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=130 DEFAULT CHARSET=latin1;
 
---
--- Truncate table before insert `university_course_list`
---
-
-TRUNCATE TABLE `university_course_list`;
 --
 -- Dumping data for table `university_course_list`
 --
 
-INSERT INTO `university_course_list` (`id`, `name`, `university_id`, `degree_id`, `major_id`, `department_id`, `intake`, `fees`, `duration`, `type`, `created_by`, `created_at`, `updated_by`, `updated_at`) VALUES
-(1, 'Bachelors in Arts Anthrolopogy', 1, 1, 1, 1, 60, 80000, '3.0', 1, 1, '2016-09-11 09:32:03', 1, '2016-09-11 09:32:03');
+INSERT INTO `university_course_list` (`id`, `university_id`, `degree_id`, `major_id`, `department_id`, `name`, `intake`, `fees`, `duration`, `type`, `created_by`, `created_at`, `updated_by`, `updated_at`) VALUES
+(1, 1, 1, 1, 1, 'Bachelor of Arts (B.A.) Anthropology Honors', 60, 80000, '3.0', 1, 1, '2016-09-11 09:32:03', 1, '2016-09-11 09:32:03'),
+(55, 40, 1, 1, 59, 'Bachelor of Arts (B.A.) Anthropology Honors', 60, 80000, '3.0', 0, 1, '2016-09-20 13:42:33', 1, '2016-09-20 13:42:33'),
+(94, 41, 1, 1, 60, 'Bachelor of Arts (B.A.) Anthropology Honors', 60, 80000, '3.0', 0, 1, '2016-09-20 14:52:45', 1, '2016-09-20 14:52:45'),
+(128, 43, 1, 1, 62, 'Bachelor of Arts (B.A.) Anthropology Honors', 100, 15200, '3.0', 0, 1, '2016-09-21 03:21:48', 1, '2016-09-21 03:21:48'),
+(129, 42, 1, 1, 61, 'Bachelor of Arts (B.A.) Anthropology Honors', 100, 15200, '3.0', 0, 1, '2016-09-21 03:44:47', 1, '2016-09-21 03:44:47');
 
 -- --------------------------------------------------------
 
@@ -747,13 +658,8 @@ CREATE TABLE IF NOT EXISTS `university_departments` (
   `created_at` datetime NOT NULL,
   `updated_by` int(11) NOT NULL,
   `updated_at` datetime NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=63 DEFAULT CHARSET=latin1;
 
---
--- Truncate table before insert `university_departments`
---
-
-TRUNCATE TABLE `university_departments`;
 --
 -- Dumping data for table `university_departments`
 --
@@ -761,7 +667,11 @@ TRUNCATE TABLE `university_departments`;
 INSERT INTO `university_departments` (`id`, `university_id`, `name`, `email`, `no_of_faculty`, `website_link`, `description`, `created_by`, `created_at`, `updated_by`, `updated_at`) VALUES
 (1, 1, 'Aeronautics & Astronautics', '', 100, 'https://aa.stanford.edu/', 'Aeronautics & Astronautics', 1, '2016-09-11 09:32:03', 1, '2016-09-11 09:32:03'),
 (2, 1, 'Anthropology', '', 20, 'https://anthropology.stanford.edu/', 'The Department of Anthropology offers a wide range of approaches to the topics and area studies within the field, including archaeology, ecology, environmental anthropology, evolution, linguistics, medical anthropology, political economy, science and technology studies, and sociocultural anthropology. Methodologies for the study of micro- and macro-social processes are taught through the use of qualitative and quantitative approaches. The department provides students with excellent training in theory and methods to enable them to pursue graduate study in any of the above mentioned subfields of Anthropology.', 1, '2016-09-11 09:32:03', 1, '2016-09-11 09:32:03'),
-(5, 5, 'Architecture', '', 50, 'http://architecture.mit.edu/', 'Architecture was one of the four original departments at MIT, and it was the first signal that MIT would not be narrowly defined in science and technology. Through recognition of architecture as a liberal discipline, the Department has long contributed to learning in the arts and humanities at MIT.\r\n\r\nThe Department conceives of architecture as a discipline as well as a profession. It is structured in five semi-autonomous discipline groups: Architectural Design; Building Technology; Computation; History, Theory and Criticism of Architecture and Art; and Art, Culture, and Technology. Each provides an architectural education that is as complex as the field itself, and all five contribute to a mutual enterprise. The department also has specialized graduate programs such as the Aga Khan Program for Islamic Architecture and the SMArchS Program Architecture and Urbanism.\r\n\r\nThe several disciplines of the Department house a substantial body of research activity. Moreover, the Department''s setting within MIT permits greater depth in such technical areas as computation, new modes of design and production, materials, structure, and energy, as well as in the arts and humanities. The Department is committed to a concern for human values and for finding appropriate roles for architecture in society. It is a place where individual creativity is cultivated and nurtured in a framework of values that are humanistically, socially, and environmentally responsible.', 1, '2016-09-10 07:23:50', 1, '2016-09-10 07:23:50');
+(5, 5, 'Architecture', '', 50, 'http://architecture.mit.edu/', 'Architecture was one of the four original departments at MIT, and it was the first signal that MIT would not be narrowly defined in science and technology. Through recognition of architecture as a liberal discipline, the Department has long contributed to learning in the arts and humanities at MIT.\r\n\r\nThe Department conceives of architecture as a discipline as well as a profession. It is structured in five semi-autonomous discipline groups: Architectural Design; Building Technology; Computation; History, Theory and Criticism of Architecture and Art; and Art, Culture, and Technology. Each provides an architectural education that is as complex as the field itself, and all five contribute to a mutual enterprise. The department also has specialized graduate programs such as the Aga Khan Program for Islamic Architecture and the SMArchS Program Architecture and Urbanism.\r\n\r\nThe several disciplines of the Department house a substantial body of research activity. Moreover, the Department''s setting within MIT permits greater depth in such technical areas as computation, new modes of design and production, materials, structure, and energy, as well as in the arts and humanities. The Department is committed to a concern for human values and for finding appropriate roles for architecture in society. It is a place where individual creativity is cultivated and nurtured in a framework of values that are humanistically, socially, and environmentally responsible.', 1, '2016-09-10 07:23:50', 1, '2016-09-10 07:23:50'),
+(59, 40, 'Anthropology', 'aa@bvf.com', 10, '1vfnbjgfbgf', ' bngfngfn', 1, '2016-09-20 13:42:33', 1, '2016-09-20 13:42:33'),
+(60, 41, 'Anthropology', 'aa@bvf.com', 10, '1vfnbjgfbgf', 'ghgfh', 1, '2016-09-20 14:52:45', 1, '2016-09-20 14:52:45'),
+(61, 42, 'bbfgb', 'nhnhn@nhjn.con', 110, 'gnfbnfgnfgnhg', 'vdsvsdvs', 1, '2016-09-21 03:44:47', 1, '2016-09-21 03:44:47'),
+(62, 43, 'bbfgb', 'nhnhn@nhjn.con', 110, 'gnfbnfgnfgnhg', 'sacsac', 1, '2016-09-21 03:21:48', 1, '2016-09-21 03:21:48');
 
 -- --------------------------------------------------------
 
@@ -787,11 +697,6 @@ CREATE TABLE IF NOT EXISTS `user_login` (
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
 --
--- Truncate table before insert `user_login`
---
-
-TRUNCATE TABLE `user_login`;
---
 -- Dumping data for table `user_login`
 --
 
@@ -806,13 +711,13 @@ INSERT INTO `user_login` (`id`, `username`, `auth_key`, `password_hash`, `passwo
 -- Indexes for table `city`
 --
 ALTER TABLE `city`
-  ADD PRIMARY KEY (`id`), ADD KEY `country_id` (`country_id`), ADD KEY `state_id` (`state_id`);
+  ADD PRIMARY KEY (`id`), ADD KEY `country_id` (`country_id`), ADD KEY `state_id` (`state_id`), ADD KEY `id` (`id`), ADD KEY `id_2` (`id`), ADD KEY `id_3` (`id`);
 
 --
 -- Indexes for table `country`
 --
 ALTER TABLE `country`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`), ADD KEY `id` (`id`);
 
 --
 -- Indexes for table `degree`
@@ -866,7 +771,7 @@ ALTER TABLE `partner_login`
 -- Indexes for table `state`
 --
 ALTER TABLE `state`
-  ADD PRIMARY KEY (`id`), ADD KEY `country_id` (`country_id`);
+  ADD PRIMARY KEY (`id`), ADD KEY `country_id` (`country_id`), ADD KEY `id` (`id`);
 
 --
 -- Indexes for table `student`
@@ -908,19 +813,19 @@ ALTER TABLE `student_subject_detail`
 -- Indexes for table `university`
 --
 ALTER TABLE `university`
-  ADD PRIMARY KEY (`id`), ADD KEY `city_id` (`city_id`), ADD KEY `state_id` (`state_id`), ADD KEY `country_id` (`country_id`);
+  ADD PRIMARY KEY (`id`), ADD KEY `city_id` (`city_id`), ADD KEY `state_id` (`state_id`), ADD KEY `country_id` (`country_id`), ADD KEY `city_id_2` (`city_id`), ADD KEY `city_id_3` (`city_id`), ADD KEY `city_id_4` (`city_id`), ADD KEY `state_id_2` (`state_id`), ADD KEY `country_id_2` (`country_id`);
 
 --
 -- Indexes for table `university_admission`
 --
 ALTER TABLE `university_admission`
-  ADD PRIMARY KEY (`id`), ADD KEY `university_id` (`university_id`), ADD KEY `course_id` (`course_id`), ADD KEY `department_id` (`department_id`), ADD KEY `major_id` (`major_id`);
+  ADD PRIMARY KEY (`id`), ADD KEY `university_id` (`university_id`), ADD KEY `course_id` (`course_id`), ADD KEY `department_id` (`department_id`);
 
 --
 -- Indexes for table `university_course_list`
 --
 ALTER TABLE `university_course_list`
-  ADD PRIMARY KEY (`id`), ADD UNIQUE KEY `degree_id` (`degree_id`), ADD UNIQUE KEY `major_id` (`major_id`), ADD KEY `department_id` (`department_id`), ADD KEY `university_id` (`university_id`), ADD KEY `university_id_2` (`university_id`), ADD KEY `degree_id_2` (`degree_id`), ADD KEY `major_id_2` (`major_id`), ADD KEY `major_id_3` (`major_id`), ADD KEY `department_id_2` (`department_id`);
+  ADD PRIMARY KEY (`id`), ADD KEY `university_id_2` (`university_id`), ADD KEY `degree_id_2` (`degree_id`), ADD KEY `major_id_2` (`major_id`), ADD KEY `major_id_3` (`major_id`), ADD KEY `department_id_2` (`department_id`);
 
 --
 -- Indexes for table `university_departments`
@@ -1017,22 +922,22 @@ ALTER TABLE `student_subject_detail`
 -- AUTO_INCREMENT for table `university`
 --
 ALTER TABLE `university`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=44;
 --
 -- AUTO_INCREMENT for table `university_admission`
 --
 ALTER TABLE `university_admission`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT for table `university_course_list`
 --
 ALTER TABLE `university_course_list`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=130;
 --
 -- AUTO_INCREMENT for table `university_departments`
 --
 ALTER TABLE `university_departments`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=63;
 --
 -- AUTO_INCREMENT for table `user_login`
 --
@@ -1095,33 +1000,32 @@ ADD CONSTRAINT `student_foreign_key_3` FOREIGN KEY (`student_id`) REFERENCES `st
 -- Constraints for table `university`
 --
 ALTER TABLE `university`
-ADD CONSTRAINT `city foreign key` FOREIGN KEY (`city_id`) REFERENCES `city` (`id`),
-ADD CONSTRAINT `country foreign key` FOREIGN KEY (`country_id`) REFERENCES `country` (`id`),
-ADD CONSTRAINT `state foreign key` FOREIGN KEY (`state_id`) REFERENCES `state` (`id`);
+ADD CONSTRAINT `city fk` FOREIGN KEY (`city_id`) REFERENCES `city` (`id`),
+ADD CONSTRAINT `country fk` FOREIGN KEY (`country_id`) REFERENCES `country` (`id`),
+ADD CONSTRAINT `state fk` FOREIGN KEY (`state_id`) REFERENCES `state` (`id`);
 
 --
 -- Constraints for table `university_admission`
 --
 ALTER TABLE `university_admission`
-ADD CONSTRAINT `course` FOREIGN KEY (`course_id`) REFERENCES `university_course_list` (`id`),
+ADD CONSTRAINT `course` FOREIGN KEY (`course_id`) REFERENCES `university_course_list` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
 ADD CONSTRAINT `department` FOREIGN KEY (`department_id`) REFERENCES `university_departments` (`id`),
-ADD CONSTRAINT `major` FOREIGN KEY (`major_id`) REFERENCES `majors` (`id`),
 ADD CONSTRAINT `university` FOREIGN KEY (`university_id`) REFERENCES `university` (`id`);
 
 --
 -- Constraints for table `university_course_list`
 --
 ALTER TABLE `university_course_list`
-ADD CONSTRAINT `degree foreign key` FOREIGN KEY (`degree_id`) REFERENCES `degree` (`id`),
-ADD CONSTRAINT `department_foreign_key` FOREIGN KEY (`department_id`) REFERENCES `university_departments` (`id`),
-ADD CONSTRAINT `major foreign key` FOREIGN KEY (`major_id`) REFERENCES `majors` (`id`),
-ADD CONSTRAINT `university foreign key` FOREIGN KEY (`university_id`) REFERENCES `university` (`id`);
+ADD CONSTRAINT `degree foreign key` FOREIGN KEY (`degree_id`) REFERENCES `degree` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+ADD CONSTRAINT `department_foreign_key` FOREIGN KEY (`department_id`) REFERENCES `university_departments` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+ADD CONSTRAINT `major foreign key` FOREIGN KEY (`major_id`) REFERENCES `majors` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+ADD CONSTRAINT `university foreign key` FOREIGN KEY (`university_id`) REFERENCES `university` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Constraints for table `university_departments`
 --
 ALTER TABLE `university_departments`
-ADD CONSTRAINT `university_foreign_key` FOREIGN KEY (`university_id`) REFERENCES `university` (`id`);
+ADD CONSTRAINT `university_foreign_key` FOREIGN KEY (`university_id`) REFERENCES `university` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Constraints for table `user_login`

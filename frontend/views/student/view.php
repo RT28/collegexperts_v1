@@ -154,4 +154,9 @@ $this->params['breadcrumbs'][] = $this->title;
         ]);
     ?>
 
+    <?= $this->render('_documents', [
+            'model' => $model
+        ]);
+    ?>
+
 </div>
