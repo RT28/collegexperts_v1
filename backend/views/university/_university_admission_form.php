@@ -61,11 +61,11 @@ if (count($departments) > 0) {
                             }
                         ?>
                         <td>                        
-                            <?= $form->field($univerityAdmisssions, "[{$i}]department_id")->dropDownList($dept, ['id' => "department_id{$i}"]) ?>
+                            <?= $form->field($univerityAdmisssions, "[{$i}]department_id")->dropDownList($dept, ['id' => "admission_department_id{$i}"]) ?>
                         </td>
                         <td>
                             <?= $form->field($univerityAdmisssions, "[{$i}]start_date")->widget(DatePicker::classname(),[
-                                'name' => "[{$i}]date_picker_2",
+                                'name' => "date_picker_2[{$i}]",
                                 'type' => DatePicker::TYPE_INPUT,
                                 'pluginOptions' => [
                                     'autoClose' => true,
@@ -74,7 +74,7 @@ if (count($departments) > 0) {
                         </td>
                         <td>
                             <?= $form->field($univerityAdmisssions, "[{$i}]end_date")->widget(DatePicker::classname(),[
-                                'name' => "[{$i}]date_picker_3",
+                                'name' => "date_picker_3[{$i}]",
                                 'type' => DatePicker::TYPE_INPUT,
                                 'pluginOptions' => [
                                     'autoClose' => true,
@@ -84,12 +84,12 @@ if (count($departments) > 0) {
                         </td>
                         <td>
                             <?= $form->field($univerityAdmisssions, "[{$i}]course_id")->widget(DepDrop::classname(), [
-                                'options' => ['id' => "course_id{$i}"],
+                                'options' => ['id' => "admission_course_id{$i}"],
                                 'data' => $course,                                
                                 'type' => DepDrop::TYPE_SELECT2,
                                 'pluginOptions' => [
-                                    'depends' => ["department_id{$i}"],
-                                    'placeholder' => 'Select Department',
+                                    'depends' => ["admission_department_id{$i}"],
+                                    'placeholder' => 'Select Course',
                                     'url' => Url::to(['/university/dependent-courses'])
                                 ]
                             ]); ?>                                                        
@@ -108,3 +108,4 @@ if (count($departments) > 0) {
             </table>
         <?php DynamicFormWidget::end(); ?>
     </div>
+</div>

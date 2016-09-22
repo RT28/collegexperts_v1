@@ -36,8 +36,7 @@ class UniversityController extends Controller
 {
     /**
      * @inheritdoc
-     */
-    public $courseIdMap = [];
+     */    
     public function behaviors()
     {
         return [
@@ -48,7 +47,7 @@ class UniversityController extends Controller
                 ],
                 'rules' => [
                     [
-                        'actions' => ['index', 'view', 'create', 'update', 'dependent-states', 'dependent-cities', 'dependent-courses', 'upload-photos', 'delete-photo'],
+                        'actions' => ['index', 'view', 'create', 'update', 'dependent-states', 'dependent-cities', 'dependent-courses', 'upload-photos', 'delete-photo', 'dependent-courses'],
                         'allow' => true,
                         'roles' => [Roles::ROLE_ADMIN, Roles::ROLE_EDITOR]
                     ],
@@ -332,8 +331,7 @@ class UniversityController extends Controller
         return true;
     }
 
-    private function updateDepartments($deparmtents, $university, $courses) {
-        $deparmtentMap = [];                
+    private function updateDepartments($deparmtents, $university, $courses) {                        
         $oldIDs = ArrayHelper::map($deparmtents, 'id', 'id');        
         $deparmtents = Model::createMultiple(UniversityDepartments::classname(), $deparmtents);            
         Model::loadMultiple($deparmtents, Yii::$app->request->post());        
@@ -347,28 +345,30 @@ class UniversityController extends Controller
                 if (!empty($deletedIDs)) {
                     UniversityDepartments::deleteAll(['id' => $deletedIDs]);
                 }
-                foreach ($deparmtents as $deparmtent) {
-                    $deparmtent->university_id = $university->id;
-                    $deparmtent->created_by = Yii::$app->user->identity->id;
-                    $deparmtent->updated_by = Yii::$app->user->identity->id;
-                    $deparmtent->created_at = gmdate('Y-m-d H:i:s');
-                    $deparmtent->updated_at = gmdate('Y-m-d H:i:s');
-                    if (! ($flag = $deparmtent->save())) {
+                $departmentIndex = 0;
+                foreach ($deparmtents as $department) {
+                    $department->university_id = $university->id;
+                    $department->created_by = Yii::$app->user->identity->id;
+                    $department->updated_by = Yii::$app->user->identity->id;
+                    $department->created_at = gmdate('Y-m-d H:i:s');
+                    $department->updated_at = gmdate('Y-m-d H:i:s');
+                    if (! ($flag = $department->save())) {
                         $transaction->rollBack();
                         break;
-                    } else {                        
-                        array_push($deparmtentMap, $deparmtent->id);
+                    } else {
+                        //update courses. 
+                        if (! ($flag = $this->updateCourses($department, $departmentIndex, $university))) {
+                            break;
+                        }
                     }
                 }
-                if ($flag) {
-                    $result = $this->updateCourses($courses, $university,$deparmtentMap);
-                    if ($result) {
-                        $transaction->commit();
-                        return true;
-                    }
-                    $transaction->rollBack();
-                    return false;                
+                if ($flag) {                    
+                    $transaction->commit();
+                    return true;                
                 }
+
+                $transaction->rollBack();
+                return false;
             } catch (Exception $e) {
                 $transaction->rollBack();
                 return false;
@@ -376,8 +376,59 @@ class UniversityController extends Controller
         }
     }
 
-    private function updateCourses($courses, $university, $departments) {
-        $this->courseIdMap = [];       
+    private function updateCourses($department, $departmentIndex, $university) {
+        $courses = $department->universityCourseLists;
+        $courseList = Yii::$app->request->post('UniversityCourseList')[$departmentIndex];
+        $oldIDs = ArrayHelper::map($courses, 'id', 'id');
+        $newCourses = [];
+        $valid;        
+        foreach($courseList as $course) {
+            $data["UniversityCourseList"] = $course;
+            if (!empty($course['id'])) {
+                $course = $this->findCourseModel($course['id']);                
+            } else {
+                $course = new UniversityCourseList();
+                $course->created_by = Yii::$app->user->identity->id;                
+                $course->created_at = gmdate('Y-m-d H:i:s');                
+            }
+            $course->department_id = $department->id;
+            $course->university_id = $university->id;
+            $course->updated_at = gmdate('Y-m-d H:i:s');
+            $course->updated_by = Yii::$app->user->identity->id;                
+            $course->load($data);
+            $course->name = $course->degree->name . ' ' . $course->major->name;
+            if(! $valid = $course->validate()) {
+                return false;
+            }
+            array_push($newCourses, $course);              
+        }    
+
+        $deletedIDs = array_diff($oldIDs, array_filter(ArrayHelper::map($courseList, 'id', 'id')));
+
+        if ($valid) {
+            if(!empty($deletedIDs)) {
+                UniversityCourseList::deleteAll(['id' => $deletedIDs]);
+            }
+
+            foreach($newCourses as $course) {                
+                if (! $course->save()) {
+                    return false;
+                }
+            }                
+        }
+        return true;
+    }
+
+    private function findCourseModel($id)
+    {
+        if (($model = UniversityCourseList::findOne($id)) !== null) {
+            return $model;
+        } else {
+            return null;
+        }
+    }
+
+    private function updateCourses1($courses, $university, $departments) {               
         $oldIDs = ArrayHelper::map($courses, 'id', 'id');
         $courses = Model::createMultiple(UniversityCourseList::classname(), $courses);                
         $result = Model::loadMultiple($courses, Yii::$app->request->post());        
@@ -388,12 +439,8 @@ class UniversityController extends Controller
             try {
                 if (!empty($deletedIDs)) {
                     UniversityCourseList::deleteAll(['id' => $deletedIDs]);
-                }
-                $i = 0;
-                $temp = Yii::$app->request->post('UniversityCourseList');                
-                foreach ($courses as $course) {                   
-                    $index = $temp[$i]['department_id'];
-                    $value = $temp[$i][$index]['id'];                    
+                }                                
+                foreach ($courses as $course) {                                    
                     $course->university_id = $university->id;
                     $course->department_id = $departments[$course->department_id];
                     $course->name = $course->degree->name . ' ' . $course->major->name;
@@ -431,8 +478,7 @@ class UniversityController extends Controller
                     UniversityAdmission::deleteAll(['id' => $deletedIDs]);
                 }
                 foreach ($univerityAdmisssions as $admission) {                                        
-                    $admission->university_id = $university->id;
-                    $admission->course_id = $this->courseIdMap[$admission->course_id];
+                    $admission->university_id = $university->id;                    
                     $admission->created_by = Yii::$app->user->identity->id;
                     $admission->updated_by = Yii::$app->user->identity->id;
                     $admission->created_at = gmdate('Y-m-d H:i:s');
@@ -525,14 +571,13 @@ class UniversityController extends Controller
         }
     }
 
-    public function actionDependentCourses() {        
-        if (isset($_POST['depdrop_parents'])) {            
+    public function actionDependentCourses() {               
+        if (isset($_POST['depdrop_parents'])) {                        
             $parents = $_POST['depdrop_parents'];
             if ($parents != null) {                
-                $university_id = $parents[0];
-                $department_id = $parents[1];                
-                $courses = CCourses::getCoursesForUniversityAndDepartment($university_id, $department_id);                
-                echo Json::encode(['output'=>$cities, 'selected'=>'']);
+                $department_id = $parents[0];                
+                $courses = UniversityCourseList::getCoursesForUniversityAndDepartment($department_id);                
+                echo Json::encode(['output'=>$courses, 'selected'=>'']);
                 return;
             }
         }

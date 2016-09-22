@@ -24,7 +24,7 @@
 <div class="row">
    <div class="col-xs-12 col-sm-6">
       <div class="panel panel-default">
-         <div class="panel-heading">Name & Address</div>
+         <div class="panel-heading">Name &amp; Address</div>
          <div class="panel-body">
             <?= $form->field($model, 'name')->textInput(['maxlength' => true, 'id' => 'university-name']) ?>
             <div class="row">

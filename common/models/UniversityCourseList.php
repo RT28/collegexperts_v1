@@ -4,6 +4,7 @@ namespace common\models;
 
 use Yii;
 use backend\models\UniversityDepartments;
+use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "university_course_list".
@@ -106,5 +107,12 @@ class UniversityCourseList extends \yii\db\ActiveRecord
     public function getUniversity()
     {
         return $this->hasOne(University::className(), ['id' => 'university_id']);
+    }
+
+    public function getCoursesForUniversityAndDepartment($department_id) {
+        if (($model = UniversityCourseList::findBySql("SELECT id, name FROM university_course_list WHERE department_id=$department_id")->all()) !== null) {
+            return $model;
+        } 
+        return [];
     }
 }
