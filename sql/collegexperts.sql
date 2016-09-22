@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 21, 2016 at 08:53 AM
+-- Generation Time: Sep 23, 2016 at 01:14 AM
 -- Server version: 5.6.24
 -- PHP Version: 5.6.8
 
@@ -28,7 +28,6 @@ USE `collegexperts`;
 -- Table structure for table `city`
 --
 
-DROP TABLE IF EXISTS `city`;
 CREATE TABLE IF NOT EXISTS `city` (
   `id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
@@ -36,6 +35,11 @@ CREATE TABLE IF NOT EXISTS `city` (
   `country_id` int(11) NOT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 
+--
+-- Truncate table before insert `city`
+--
+
+TRUNCATE TABLE `city`;
 --
 -- Dumping data for table `city`
 --
@@ -54,12 +58,16 @@ INSERT INTO `city` (`id`, `name`, `state_id`, `country_id`) VALUES
 -- Table structure for table `country`
 --
 
-DROP TABLE IF EXISTS `country`;
 CREATE TABLE IF NOT EXISTS `country` (
   `id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
 
+--
+-- Truncate table before insert `country`
+--
+
+TRUNCATE TABLE `country`;
 --
 -- Dumping data for table `country`
 --
@@ -79,7 +87,6 @@ INSERT INTO `country` (`id`, `name`) VALUES
 -- Table structure for table `degree`
 --
 
-DROP TABLE IF EXISTS `degree`;
 CREATE TABLE IF NOT EXISTS `degree` (
   `id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
@@ -91,6 +98,11 @@ CREATE TABLE IF NOT EXISTS `degree` (
   `updated_at` datetime NOT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
+--
+-- Truncate table before insert `degree`
+--
+
+TRUNCATE TABLE `degree`;
 --
 -- Dumping data for table `degree`
 --
@@ -105,7 +117,6 @@ INSERT INTO `degree` (`id`, `name`, `type`, `duration`, `created_by`, `created_a
 -- Table structure for table `employee`
 --
 
-DROP TABLE IF EXISTS `employee`;
 CREATE TABLE IF NOT EXISTS `employee` (
   `id` int(11) NOT NULL,
   `first_name` varchar(255) NOT NULL,
@@ -119,6 +130,11 @@ CREATE TABLE IF NOT EXISTS `employee` (
   `country` int(11) NOT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
+--
+-- Truncate table before insert `employee`
+--
+
+TRUNCATE TABLE `employee`;
 --
 -- Dumping data for table `employee`
 --
@@ -134,7 +150,6 @@ INSERT INTO `employee` (`id`, `first_name`, `last_name`, `date_of_birth`, `gende
 -- Table structure for table `employee_login`
 --
 
-DROP TABLE IF EXISTS `employee_login`;
 CREATE TABLE IF NOT EXISTS `employee_login` (
   `id` int(11) NOT NULL,
   `username` varchar(255) NOT NULL,
@@ -152,6 +167,11 @@ CREATE TABLE IF NOT EXISTS `employee_login` (
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 --
+-- Truncate table before insert `employee_login`
+--
+
+TRUNCATE TABLE `employee_login`;
+--
 -- Dumping data for table `employee_login`
 --
 
@@ -166,7 +186,6 @@ INSERT INTO `employee_login` (`id`, `username`, `auth_key`, `password_hash`, `pa
 -- Table structure for table `majors`
 --
 
-DROP TABLE IF EXISTS `majors`;
 CREATE TABLE IF NOT EXISTS `majors` (
   `id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
@@ -176,6 +195,11 @@ CREATE TABLE IF NOT EXISTS `majors` (
   `updated_at` datetime NOT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
+--
+-- Truncate table before insert `majors`
+--
+
+TRUNCATE TABLE `majors`;
 --
 -- Dumping data for table `majors`
 --
@@ -192,12 +216,16 @@ INSERT INTO `majors` (`id`, `name`, `created_by`, `created_at`, `updated_by`, `u
 -- Table structure for table `migration`
 --
 
-DROP TABLE IF EXISTS `migration`;
 CREATE TABLE IF NOT EXISTS `migration` (
   `version` varchar(180) NOT NULL,
   `apply_time` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Truncate table before insert `migration`
+--
+
+TRUNCATE TABLE `migration`;
 --
 -- Dumping data for table `migration`
 --
@@ -212,12 +240,16 @@ INSERT INTO `migration` (`version`, `apply_time`) VALUES
 -- Table structure for table `others`
 --
 
-DROP TABLE IF EXISTS `others`;
 CREATE TABLE IF NOT EXISTS `others` (
   `name` varchar(50) NOT NULL,
   `value` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Truncate table before insert `others`
+--
+
+TRUNCATE TABLE `others`;
 --
 -- Dumping data for table `others`
 --
@@ -233,7 +265,6 @@ INSERT INTO `others` (`name`, `value`) VALUES
 -- Table structure for table `partner`
 --
 
-DROP TABLE IF EXISTS `partner`;
 CREATE TABLE IF NOT EXISTS `partner` (
   `id` int(11) NOT NULL,
   `first_name` varchar(255) NOT NULL,
@@ -248,6 +279,11 @@ CREATE TABLE IF NOT EXISTS `partner` (
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 --
+-- Truncate table before insert `partner`
+--
+
+TRUNCATE TABLE `partner`;
+--
 -- Dumping data for table `partner`
 --
 
@@ -261,7 +297,6 @@ INSERT INTO `partner` (`id`, `first_name`, `last_name`, `date_of_birth`, `gender
 -- Table structure for table `partner_login`
 --
 
-DROP TABLE IF EXISTS `partner_login`;
 CREATE TABLE IF NOT EXISTS `partner_login` (
   `id` int(11) NOT NULL,
   `username` varchar(255) NOT NULL,
@@ -279,6 +314,11 @@ CREATE TABLE IF NOT EXISTS `partner_login` (
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 --
+-- Truncate table before insert `partner_login`
+--
+
+TRUNCATE TABLE `partner_login`;
+--
 -- Dumping data for table `partner_login`
 --
 
@@ -292,13 +332,17 @@ INSERT INTO `partner_login` (`id`, `username`, `auth_key`, `password_hash`, `pas
 -- Table structure for table `state`
 --
 
-DROP TABLE IF EXISTS `state`;
 CREATE TABLE IF NOT EXISTS `state` (
   `id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
   `country_id` int(11) NOT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=latin1;
 
+--
+-- Truncate table before insert `state`
+--
+
+TRUNCATE TABLE `state`;
 --
 -- Dumping data for table `state`
 --
@@ -334,7 +378,6 @@ INSERT INTO `state` (`id`, `name`, `country_id`) VALUES
 -- Table structure for table `student`
 --
 
-DROP TABLE IF EXISTS `student`;
 CREATE TABLE IF NOT EXISTS `student` (
   `id` int(11) NOT NULL,
   `first_name` varchar(255) NOT NULL,
@@ -359,6 +402,11 @@ CREATE TABLE IF NOT EXISTS `student` (
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
 --
+-- Truncate table before insert `student`
+--
+
+TRUNCATE TABLE `student`;
+--
 -- Dumping data for table `student`
 --
 
@@ -371,7 +419,6 @@ INSERT INTO `student` (`id`, `first_name`, `last_name`, `nationality`, `date_of_
 -- Table structure for table `student_college_detail`
 --
 
-DROP TABLE IF EXISTS `student_college_detail`;
 CREATE TABLE IF NOT EXISTS `student_college_detail` (
   `id` int(11) NOT NULL,
   `student_id` int(11) NOT NULL,
@@ -386,6 +433,11 @@ CREATE TABLE IF NOT EXISTS `student_college_detail` (
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
 --
+-- Truncate table before insert `student_college_detail`
+--
+
+TRUNCATE TABLE `student_college_detail`;
+--
 -- Dumping data for table `student_college_detail`
 --
 
@@ -399,7 +451,6 @@ INSERT INTO `student_college_detail` (`id`, `student_id`, `name`, `from_date`, `
 -- Table structure for table `student_english_language_proficiencey_details`
 --
 
-DROP TABLE IF EXISTS `student_english_language_proficiencey_details`;
 CREATE TABLE IF NOT EXISTS `student_english_language_proficiencey_details` (
   `id` int(11) NOT NULL,
   `student_id` int(11) NOT NULL,
@@ -415,6 +466,11 @@ CREATE TABLE IF NOT EXISTS `student_english_language_proficiencey_details` (
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
 --
+-- Truncate table before insert `student_english_language_proficiencey_details`
+--
+
+TRUNCATE TABLE `student_english_language_proficiencey_details`;
+--
 -- Dumping data for table `student_english_language_proficiencey_details`
 --
 
@@ -427,7 +483,6 @@ INSERT INTO `student_english_language_proficiencey_details` (`id`, `student_id`,
 -- Table structure for table `student_school_detail`
 --
 
-DROP TABLE IF EXISTS `student_school_detail`;
 CREATE TABLE IF NOT EXISTS `student_school_detail` (
   `id` int(11) NOT NULL,
   `student_id` int(11) NOT NULL,
@@ -442,6 +497,11 @@ CREATE TABLE IF NOT EXISTS `student_school_detail` (
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 --
+-- Truncate table before insert `student_school_detail`
+--
+
+TRUNCATE TABLE `student_school_detail`;
+--
 -- Dumping data for table `student_school_detail`
 --
 
@@ -455,7 +515,6 @@ INSERT INTO `student_school_detail` (`id`, `student_id`, `name`, `from_date`, `t
 -- Table structure for table `student_standard_test_detail`
 --
 
-DROP TABLE IF EXISTS `student_standard_test_detail`;
 CREATE TABLE IF NOT EXISTS `student_standard_test_detail` (
   `id` int(11) NOT NULL,
   `student_id` int(11) NOT NULL,
@@ -471,6 +530,11 @@ CREATE TABLE IF NOT EXISTS `student_standard_test_detail` (
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
 --
+-- Truncate table before insert `student_standard_test_detail`
+--
+
+TRUNCATE TABLE `student_standard_test_detail`;
+--
 -- Dumping data for table `student_standard_test_detail`
 --
 
@@ -483,7 +547,6 @@ INSERT INTO `student_standard_test_detail` (`id`, `student_id`, `test_name`, `ve
 -- Table structure for table `student_subject_detail`
 --
 
-DROP TABLE IF EXISTS `student_subject_detail`;
 CREATE TABLE IF NOT EXISTS `student_subject_detail` (
   `id` int(11) NOT NULL,
   `student_id` int(11) NOT NULL,
@@ -496,6 +559,11 @@ CREATE TABLE IF NOT EXISTS `student_subject_detail` (
   `updated_at` datetime NOT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
+--
+-- Truncate table before insert `student_subject_detail`
+--
+
+TRUNCATE TABLE `student_subject_detail`;
 --
 -- Dumping data for table `student_subject_detail`
 --
@@ -511,7 +579,6 @@ INSERT INTO `student_subject_detail` (`id`, `student_id`, `name`, `maximum_marks
 -- Table structure for table `university`
 --
 
-DROP TABLE IF EXISTS `university`;
 CREATE TABLE IF NOT EXISTS `university` (
   `id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
@@ -560,6 +627,11 @@ CREATE TABLE IF NOT EXISTS `university` (
 ) ENGINE=InnoDB AUTO_INCREMENT=44 DEFAULT CHARSET=latin1;
 
 --
+-- Truncate table before insert `university`
+--
+
+TRUNCATE TABLE `university`;
+--
 -- Dumping data for table `university`
 --
 
@@ -569,7 +641,7 @@ INSERT INTO `university` (`id`, `name`, `establishment_date`, `address`, `city_i
 (40, 'dscdcd', '2016-09-28', 'vfvf', 2, 3, 4, 1005646, 'cdvfdv@asa.cpm', 'vfvgfbgf.com', '<p>ngnfgn</p>\r\n', '45645645', '654565', '545645', 'vfjbjkfgbj', 'jnvjkfnbjkng', '4545645', 'nbjkgnbng@jvfj.com', '\0\0\0\0\0\0\0q‡òªs3@\ré¦ƒ+8R@', 0, 0, 1000, 100, 100, 25, 250000, b'1', 700, 3, 'Times Ranking', '', '', NULL, b'1', '0', '', NULL, 0, 1, '2016-09-20 13:42:33', 1, '2016-09-20 13:42:33', NULL, NULL),
 (41, 'dscdcd', '2016-09-29', 'vfvf', 2, 3, 4, 1005646, 'cdvfdv@asa.cpm', 'vfvgfbgf.com', '<p>bggfngfnh</p>\r\n', '45645645', '654565', '545645', 'vfjbjkfgbj', 'jnvjkfnbjkng', '4545645', 'nbjkgnbng@jvfj.com', '\0\0\0\0\0\0\0q‡òªs3@\ré¦ƒ+8R@', 0, 0, 1000, 100, 100, 25, 250000, b'1', 700, 3, 'Times Ranking', '', '', NULL, b'1', '0', '', NULL, 0, 1, '2016-09-20 14:52:45', 1, '2016-09-20 14:52:45', NULL, NULL),
 (42, 'gfnbgn', '2016-09-29', 'gnngng', 2, 3, 4, 145252, 'nhnhn@nhjn.con', 'fbfgbgf.vghhj.com', '<p>fbfdgdbg<span style="color:#00FF00">bfbfbgfngfn</span><span style="color:#FF0000">nhgmnghmhm</span></p>\r\n', '3538396', '25235353', '35365365', 'dfcdsvdfv', 'gvfgbdfbgfh', '2553663', 'nhnhn@nhjn.con', '\0\0\0\0\0\0\0q‡òªs3@\ré¦ƒ+8R@', 0, 0, 10000, 1200, 1450, 120, 15000, b'1', 1200, 78, 'vfgbfgnb', '', '', NULL, b'0', '', '', NULL, 0, 1, '2016-09-21 01:27:14', 1, '2016-09-21 03:44:47', NULL, NULL),
-(43, 'gfnbgn', '2016-09-28', 'gnngng', 2, 3, 4, 145252, 'nhnhn@nhjn.con', 'fbfgbgf.vghhj.com', '<p>cvdsvsd</p>\r\n', '3538396', '25235353', '35365365', 'dfcdsvdfv', 'gvfgbdfbgfh', '2553663', 'nhnhn@nhjn.con', '\0\0\0\0\0\0\0q‡òªs3@\ré¦ƒ+8R@', 0, 0, 10000, 1200, 1450, 120, 15000, b'1', 1200, 78, 'vfgbfgnb', '', '', NULL, b'0', '0', '', NULL, 0, 1, '2016-09-21 02:11:58', 1, '2016-09-21 03:21:48', NULL, NULL);
+(43, 'gfnbgn', '2016-09-28', 'gnngng', 2, 3, 4, 145252, 'nhnhn@nhjn.con', 'fbfgbgf.vghhj.com', '<p>cvdsvsd</p>\r\n', '3538396', '25235353', '35365365', 'dfcdsvdfv', 'gvfgbdfbgfh', '2553663', 'nhnhn@nhjn.con', '\0\0\0\0\0\0\0q‡òªs3@\ré¦ƒ+8R@', 0, 0, 10000, 1200, 1450, 120, 15000, b'1', 1200, 78, 'vfgbfgnb', '', '', NULL, b'0', '', '', NULL, 0, 1, '2016-09-21 02:11:58', 1, '2016-09-22 23:07:03', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -577,7 +649,6 @@ INSERT INTO `university` (`id`, `name`, `establishment_date`, `address`, `city_i
 -- Table structure for table `university_admission`
 --
 
-DROP TABLE IF EXISTS `university_admission`;
 CREATE TABLE IF NOT EXISTS `university_admission` (
   `id` int(11) NOT NULL,
   `university_id` int(11) NOT NULL,
@@ -592,8 +663,13 @@ CREATE TABLE IF NOT EXISTS `university_admission` (
   `updated_by` int(11) NOT NULL,
   `created_at` datetime NOT NULL,
   `updated_at` datetime NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
 
+--
+-- Truncate table before insert `university_admission`
+--
+
+TRUNCATE TABLE `university_admission`;
 --
 -- Dumping data for table `university_admission`
 --
@@ -601,8 +677,8 @@ CREATE TABLE IF NOT EXISTS `university_admission` (
 INSERT INTO `university_admission` (`id`, `university_id`, `start_date`, `end_date`, `course_id`, `department_id`, `admission_link`, `eligibility_criteria`, `admission_fees`, `created_by`, `updated_by`, `created_at`, `updated_at`) VALUES
 (1, 1, '2016-09-20', '2016-09-26', 1, 2, '1', 'bgbgb', '1000', 1, 1, '2016-09-20 09:43:57', '2016-09-20 09:43:57'),
 (2, 1, '2016-09-20', '2016-09-26', 1, 1, '1', 'bgbgb', '1000', 1, 1, '2016-09-20 09:43:57', '2016-09-20 09:43:57'),
-(4, 43, '2016-09-13', '2016-09-13', 128, 62, 'bdbfd', 'vdsvdsvds', '1000', 1, 1, '2016-09-21 03:21:48', '2016-09-21 03:21:48'),
-(5, 42, '2016-09-06', '2016-09-13', 129, 61, 'cdcdsc', 'vdsvs', '1000', 1, 1, '2016-09-21 03:44:48', '2016-09-21 03:44:48');
+(5, 42, '2016-09-06', '2016-09-13', 129, 61, 'cdcdsc', 'vdsvs', '1000', 1, 1, '2016-09-21 03:44:48', '2016-09-21 03:44:48'),
+(9, 43, '2016-09-13', '2016-09-06', 172, 62, 'bgfngfn', 'ngf', '1000', 1, 1, '2016-09-22 23:07:03', '2016-09-22 23:07:03');
 
 -- --------------------------------------------------------
 
@@ -610,7 +686,6 @@ INSERT INTO `university_admission` (`id`, `university_id`, `start_date`, `end_da
 -- Table structure for table `university_course_list`
 --
 
-DROP TABLE IF EXISTS `university_course_list`;
 CREATE TABLE IF NOT EXISTS `university_course_list` (
   `id` int(11) NOT NULL,
   `university_id` int(11) NOT NULL,
@@ -626,8 +701,13 @@ CREATE TABLE IF NOT EXISTS `university_course_list` (
   `created_at` datetime NOT NULL,
   `updated_by` int(11) NOT NULL,
   `updated_at` datetime NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=130 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=184 DEFAULT CHARSET=latin1;
 
+--
+-- Truncate table before insert `university_course_list`
+--
+
+TRUNCATE TABLE `university_course_list`;
 --
 -- Dumping data for table `university_course_list`
 --
@@ -636,8 +716,11 @@ INSERT INTO `university_course_list` (`id`, `university_id`, `degree_id`, `major
 (1, 1, 1, 1, 1, 'Bachelor of Arts (B.A.) Anthropology Honors', 60, 80000, '3.0', 1, 1, '2016-09-11 09:32:03', 1, '2016-09-11 09:32:03'),
 (55, 40, 1, 1, 59, 'Bachelor of Arts (B.A.) Anthropology Honors', 60, 80000, '3.0', 0, 1, '2016-09-20 13:42:33', 1, '2016-09-20 13:42:33'),
 (94, 41, 1, 1, 60, 'Bachelor of Arts (B.A.) Anthropology Honors', 60, 80000, '3.0', 0, 1, '2016-09-20 14:52:45', 1, '2016-09-20 14:52:45'),
-(128, 43, 1, 1, 62, 'Bachelor of Arts (B.A.) Anthropology Honors', 100, 15200, '3.0', 0, 1, '2016-09-21 03:21:48', 1, '2016-09-21 03:21:48'),
-(129, 42, 1, 1, 61, 'Bachelor of Arts (B.A.) Anthropology Honors', 100, 15200, '3.0', 0, 1, '2016-09-21 03:44:47', 1, '2016-09-21 03:44:47');
+(129, 42, 1, 1, 61, 'Bachelor of Arts (B.A.) Anthropology Honors', 100, 15200, '3.0', 0, 1, '2016-09-21 03:44:47', 1, '2016-09-21 03:44:47'),
+(172, 43, 2, 4, 62, 'Bachelors in Aeronautics Aeronautics and Astronautics', 150, 152000, '5.0', 0, 1, '2016-09-22 23:02:58', 1, '2016-09-22 23:07:03'),
+(181, 43, 1, 3, 62, 'Bachelor of Arts (B.A.) Asian Studies', 150, 152000, '5.0', 0, 1, '2016-09-22 23:05:44', 1, '2016-09-22 23:07:03'),
+(182, 43, 1, 2, 80, 'Bachelor of Arts (B.A.) Art History', 540, 7000, '4.0', 0, 1, '2016-09-22 23:07:03', 1, '2016-09-22 23:07:03'),
+(183, 43, 2, 4, 80, 'Bachelors in Aeronautics Aeronautics and Astronautics', 150, 152000, '5.0', 0, 1, '2016-09-22 23:07:03', 1, '2016-09-22 23:07:03');
 
 -- --------------------------------------------------------
 
@@ -645,7 +728,6 @@ INSERT INTO `university_course_list` (`id`, `university_id`, `degree_id`, `major
 -- Table structure for table `university_departments`
 --
 
-DROP TABLE IF EXISTS `university_departments`;
 CREATE TABLE IF NOT EXISTS `university_departments` (
   `id` int(11) NOT NULL,
   `university_id` int(11) NOT NULL,
@@ -658,8 +740,13 @@ CREATE TABLE IF NOT EXISTS `university_departments` (
   `created_at` datetime NOT NULL,
   `updated_by` int(11) NOT NULL,
   `updated_at` datetime NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=63 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=81 DEFAULT CHARSET=latin1;
 
+--
+-- Truncate table before insert `university_departments`
+--
+
+TRUNCATE TABLE `university_departments`;
 --
 -- Dumping data for table `university_departments`
 --
@@ -671,7 +758,8 @@ INSERT INTO `university_departments` (`id`, `university_id`, `name`, `email`, `n
 (59, 40, 'Anthropology', 'aa@bvf.com', 10, '1vfnbjgfbgf', ' bngfngfn', 1, '2016-09-20 13:42:33', 1, '2016-09-20 13:42:33'),
 (60, 41, 'Anthropology', 'aa@bvf.com', 10, '1vfnbjgfbgf', 'ghgfh', 1, '2016-09-20 14:52:45', 1, '2016-09-20 14:52:45'),
 (61, 42, 'bbfgb', 'nhnhn@nhjn.con', 110, 'gnfbnfgnfgnhg', 'vdsvsdvs', 1, '2016-09-21 03:44:47', 1, '2016-09-21 03:44:47'),
-(62, 43, 'bbfgb', 'nhnhn@nhjn.con', 110, 'gnfbnfgnfgnhg', 'sacsac', 1, '2016-09-21 03:21:48', 1, '2016-09-21 03:21:48');
+(62, 43, 'bbfgb', 'nhnhn@nhjn.con', 110, 'gnfbnfgnfgnhg', 'sacsac', 1, '2016-09-22 23:07:03', 1, '2016-09-22 23:07:03'),
+(80, 43, 'test', 'nhnhn@nhjn.con', 110, 'gnfbnfgnfgnhg', 'vbvb', 1, '2016-09-22 23:07:03', 1, '2016-09-22 23:07:03');
 
 -- --------------------------------------------------------
 
@@ -679,7 +767,6 @@ INSERT INTO `university_departments` (`id`, `university_id`, `name`, `email`, `n
 -- Table structure for table `user_login`
 --
 
-DROP TABLE IF EXISTS `user_login`;
 CREATE TABLE IF NOT EXISTS `user_login` (
   `id` int(11) NOT NULL,
   `username` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
@@ -696,6 +783,11 @@ CREATE TABLE IF NOT EXISTS `user_login` (
   `role_id` int(11) NOT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
+--
+-- Truncate table before insert `user_login`
+--
+
+TRUNCATE TABLE `user_login`;
 --
 -- Dumping data for table `user_login`
 --
@@ -927,17 +1019,17 @@ ALTER TABLE `university`
 -- AUTO_INCREMENT for table `university_admission`
 --
 ALTER TABLE `university_admission`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=10;
 --
 -- AUTO_INCREMENT for table `university_course_list`
 --
 ALTER TABLE `university_course_list`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=130;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=184;
 --
 -- AUTO_INCREMENT for table `university_departments`
 --
 ALTER TABLE `university_departments`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=63;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=81;
 --
 -- AUTO_INCREMENT for table `user_login`
 --
