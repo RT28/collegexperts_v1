@@ -25,14 +25,17 @@ $this->params['breadcrumbs'][] = $this->title;
     <div class="row">
         <div class="col-xs-12 col-sm-4">
             <?php
-                $cover_photo_path = FileHelper::findFiles("./../web/uploads/$model->id/profile_photo", [
-                    'caseSensitive' => true,
-                    'recursive' => false,
-                ]);       
-                
+                $cover_photo_path = [];
+                if(is_dir("./../web/uploads/$model->id/profile_photo")) {
+                    $cover_photo_path = FileHelper::findFiles("./../web/uploads/$model->id/profile_photo", [
+                        'caseSensitive' => true,
+                        'recursive' => false,
+                    ]);
+                }
                 if (count($cover_photo_path) > 0) {
                     echo Html::img($cover_photo_path[0], ['alt' => $model->first_name , 'class' => 'cover-photo']);
-                } else {
+                }
+                else {
                     echo Html::img("./../web/noprofile.gif", ['alt' => $model->first_name , 'class' => 'cover-photo']);
                 }
             ?>
