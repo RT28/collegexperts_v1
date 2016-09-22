@@ -12,9 +12,9 @@
 <div class="row">
     <div class="col-xs-12 col-sm-6">
         <div class="panel panel-default">
-            <div class="panel-heading">Standard Tests &amp; Requirements</div>
+            <div class="panel-heading">Standard Tests & Requirements</div>
             <div class="panel-body">
-                <?= $form->field($model, 'standard_tests_required')->checkbox(); ?>
+                <?= $form->field($model, 'standard_tests_required')->checkbox() ?>
                 <?= $form->field($model, 'standard_test_list')->widget(Select2::classname(), [
                     'name' => 'color_2',                    
                     'data' => [
@@ -50,7 +50,7 @@
 
     <div class="col-xs-12 col-sm-6">
         <div class="panel panel-default">
-            <div class="panel-heading">Student &amp; Faculty</div>
+            <div class="panel-heading">Student & Faculty</div>
             <div class="panel-body">
                 <div class="row">
                     <div class="col-xs-12 col-sm-6">
@@ -70,7 +70,7 @@
         </div>
 
         <div class="panel panel-default">
-            <div class="panel-heading">Cost of Living &amp; Accomodation</div>
+            <div class="panel-heading">Cost of Living & Accomodation</div>
             <div class="panel-body">
                 <?= $form->field($model, 'accomodation_available')->checkbox(['options' => ['id' => 'university-accomodation']]) ?>
                 <div class="row">                

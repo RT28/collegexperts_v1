@@ -361,6 +361,7 @@ class UniversityController extends Controller
                             break;
                         }
                     }
+                    $departmentIndex++;
                 }
                 if ($flag) {                    
                     $transaction->commit();
@@ -376,7 +377,7 @@ class UniversityController extends Controller
         }
     }
 
-    private function updateCourses($department, $departmentIndex, $university) {
+    private function updateCourses($department, $departmentIndex, $university) {        
         $courses = $department->universityCourseLists;
         $courseList = Yii::$app->request->post('UniversityCourseList')[$departmentIndex];
         $oldIDs = ArrayHelper::map($courses, 'id', 'id');
@@ -409,12 +410,14 @@ class UniversityController extends Controller
             if(!empty($deletedIDs)) {
                 UniversityCourseList::deleteAll(['id' => $deletedIDs]);
             }
-
-            foreach($newCourses as $course) {                
-                if (! $course->save()) {
+            //var_dump($newCourses[1]);
+            //var_dump($newCourses[1]->save());
+            //die();
+            foreach($newCourses as $course) {               
+                if (! $course->save(false)) {                   
                     return false;
                 }
-            }                
+            }               
         }
         return true;
     }

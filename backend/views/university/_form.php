@@ -113,4 +113,3 @@ use yii\bootstrap\Tabs;
 </div>
 
 <?php ActiveForm::end(); ?>
-</div>

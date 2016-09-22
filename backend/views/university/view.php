@@ -15,25 +15,29 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <h1><?= Html::encode($this->title) ?></h1>
     <?php
-        $cover_photo_path = FileHelper::findFiles("./../web/uploads/$model->id/cover_photo", [
-            'caseSensitive' => true,
-            'recursive' => false,
-            'only' => ['cover.*']
-        ]);       
-        
-        if (count($cover_photo_path) > 0) {
-            echo Html::img($cover_photo_path[0], ['alt' => $model->name , 'class' => 'cover-photo']);
+        if(is_dir("./../web/uploads/$model->id/cover_photo")) {
+            $cover_photo_path = FileHelper::findFiles("./../web/uploads/$model->id/cover_photo", [
+                'caseSensitive' => true,
+                'recursive' => false,
+                'only' => ['cover.*']
+            ]);       
+            
+            if (count($cover_photo_path) > 0) {
+                echo Html::img($cover_photo_path[0], ['alt' => $model->name , 'class' => 'cover-photo']);
+            }
         }
-
-        $logo_path = FileHelper::findFiles("./../web/uploads/$model->id/logo", [
-            'caseSensitive' => true,
-            'recursive' => false,
-            'only' => ['logo.*']
-        ]);       
         
-        if (count($logo_path) > 0) {
-            echo Html::img($logo_path[0], ['alt' => $model->name , 'class' => 'cover-photo']);
-        }
+        if(is_dir("./../web/uploads/$model->id/logo")) {
+            $logo_path = FileHelper::findFiles("./../web/uploads/$model->id/logo", [
+                'caseSensitive' => true,
+                'recursive' => false,
+                'only' => ['logo.*']
+            ]);       
+            
+            if (count($logo_path) > 0) {
+                echo Html::img($logo_path[0], ['alt' => $model->name , 'class' => 'cover-photo']);
+            }
+        }        
     ?>
     
     <p>
