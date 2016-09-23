@@ -7,6 +7,8 @@ use yii\bootstrap\Tabs;
 /* @var $this yii\web\View */
 /* @var $model common\models\University */
 /* @var $form yii\widgets\ActiveForm */
+$this->registerJsFile('https://maps.googleapis.com/maps/api/js?key=AIzaSyAv4wp5sZdpP31AWEAZuyLMyRKDhhOtWLw');
+$this->registerJsFile('@web/js/google_map.js');  
 ?>
 <?php $form = ActiveForm::begin(['id' => 'university-active-form', 'options' => ['enctype' => 'multipart/form-data']]); ?>
     <?= Html::hiddenInput('currentTab' , $currentTab); ?>
@@ -51,10 +53,11 @@ use yii\bootstrap\Tabs;
                             'form' => $form
                         ]) : null,
                         'headerOptions' => [                        
-                            'class' => array_search('Misc', $tabs) ? 'enabled-tab' : 'disabled-tab' 
+                            'class' => array_search('Misc', $tabs) ? 'enabled-tab' : 'disabled-tab',
+                            'onclick'=>'initGoogleMap()'  
                         ],
                         'active' => $currentTab === 'Misc' ? true : false,
-                        'options' => ['id' => 'misc'],                     
+                        'options' => ['id' => 'misc'],                                           
                     ],
                     [
                         'label' => 'Departments',

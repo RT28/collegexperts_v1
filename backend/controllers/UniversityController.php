@@ -174,8 +174,9 @@ class UniversityController extends Controller
         $currentTab = 'Profile';
         $tabs = ['Profile'];
         $countries = ArrayHelper::map(Country::getAllCountries(), 'id', 'name');
-
-        if ($model->load(Yii::$app->request->post())) {                                          
+        $model->standard_test_list = explode(',', $model->standard_test_list);        
+        if ($model->load(Yii::$app->request->post())) {
+            $model->standard_test_list = implode(',', $model->standard_test_list);                                          
             $currentTab = Yii::$app->request->post('currentTab');                                    
             $tabs = explode(',', Yii::$app->request->post('tabs'));                        
             $result = $this->validateForm($tabs, $model);                                            
@@ -247,8 +248,9 @@ class UniversityController extends Controller
         $currentTab = 'Profile';
         $tabs = ['Profile', 'About', 'Misc', 'Department', 'Gallery', 'Admissions'];
         $countries = ArrayHelper::map(Country::getAllCountries(), 'id', 'name');
-        
-        if ($model->load(Yii::$app->request->post())) {                                    
+        $model->standard_test_list = explode(',', $model->standard_test_list);        
+        if ($model->load(Yii::$app->request->post())) {
+            $model->standard_test_list = implode(',', $model->standard_test_list);                                    
             $result = $this->validateForm($tabs, $model);                                            
             if ($result['action'] === 'next') {                                                               
                 $isModelSaved = false;                

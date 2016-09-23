@@ -1,4 +1,4 @@
-window.onload = function() {}
+$(document).ready(function(){});
 
 function initGoogleMap() {
 
@@ -7,19 +7,10 @@ function initGoogleMap() {
 	if (mapContainer) {
 
 		//create a default map.
-		var map = new google.maps.Map(mapContainer, {
-        	center: {lat: 37.0902, lng: 95.7129},
-        	zoom: 8
-    	});
-
     	//add a click listener to map for the use to pick a location.
-		map.addListener('click', function(e){
+		/*map.addListener('click', function(e){
 			updateMapMarker(map, e);
-		});
-
-		map.addListener('dragend', function(e){
-			updateMapMarker(map, e);
-		});		
+		});*/	
 
 		//If co-ordinates are already available, plot them on the map.
 		var coords = $('#university-location').val();
@@ -27,40 +18,46 @@ function initGoogleMap() {
 			coords = coords.replace(/\(|\)/g, '');
 			coords = coords.split(',');
 			var lat = Number(coords[0]);
-			var lng = Number(coords[1]); 		
-			map.setCenter({
-				lat: lat,
-				lng: lng
-			});
+			var lng = Number(coords[1]);
+			var map = new google.maps.Map(mapContainer, {
+        		center: {lat: lat, lng: lng},
+        		zoom: 15
+    		}); 		
 			var marker = new google.maps.Marker({
 				map: map,
+				draggable: true, 
 				position: {
 					lat: lat,
 					lng: lng
 				}
 			});
 
-			if (map.marker) {
-				map.marker.setMap(null);
-			}
+			google.maps.event.addListener(marker, 'dragend', function(e){   
+				updateMapMarker(map, e);
+		    }); 
 
-			map.marker = marker;
-			//else use university name address city state and country to geocode lat lng and plot on map
-    	}	    
+		}	    
 	    else {			 
 			$.ajax({ 
 				url:"https://maps.googleapis.com/maps/api/geocode/json?address="+getAddress(), 
 				type: "POST", 
 				success:function(results){ 
-					map.setCenter(results.results[0].geometry.location);
+					//map.setCenter(results.results[0].geometry.location);
+					var map = new google.maps.Map(mapContainer, {
+		        		center: results.results[0].geometry.location,
+		        		zoom: 8
+		    		}); 					
 					var marker = new google.maps.Marker({
 						map: map,
+						draggable: true, 
 						position: results.results[0].geometry.location
 					});
 
 					var latLng = '(' + results.results[0].geometry.location.lat + ',' + results.results[0].geometry.location.lng + ')';
 					$('#university-location').val(latLng);
-					map.marker = marker;
+					google.maps.event.addListener(marker, 'dragend', function(e){   
+						updateMapMarker(map, e);
+		    		}); 			
 				} 
 			});	    		
 	    }		
@@ -85,16 +82,5 @@ function getAddress() {
 }
 
 function updateMapMarker(map, e) {
-	if (map.marker) {
-		map.marker.setMap(null);	
-	}
-	
-	var marker = new google.maps.Marker({
-	position: e.latLng,
-		map: map
-	});
-	map.panTo(e.latLng);
-	map.marker = marker;
-
 	$('#university-location').val(e.latLng);
 } 

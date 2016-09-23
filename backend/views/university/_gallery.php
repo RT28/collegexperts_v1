@@ -106,7 +106,7 @@ use yii\helpers\Url;
             <div class="panel-heading">Photos</div>
             <div class="panel-body" id="gallery">                
                 <?= FileInput::widget([
-                    'name' => 'photos',
+                    'name' => 'photos_[]',                    
                     'options'=>[
                         'multiple'=>true
                     ],
