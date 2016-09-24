@@ -91,7 +91,7 @@ class University extends \yii\db\ActiveRecord
             [['contact_person_designation'], 'string', 'max' => 50],
             [['contact_mobile'], 'string', 'max' => 15],
             [['email', 'contact_email'], 'email'],
-            [['video', 'virtual_tour', 'standard_test_list'], 'string', 'max' => 500],
+            [['video', 'virtual_tour'], 'string', 'max' => 500],
             [['city_id'], 'exist', 'skipOnError' => true, 'targetClass' => City::className(), 'targetAttribute' => ['city_id' => 'id']],
             [['country_id'], 'exist', 'skipOnError' => true, 'targetClass' => Country::className(), 'targetAttribute' => ['country_id' => 'id']],
             [['state_id'], 'exist', 'skipOnError' => true, 'targetClass' => State::className(), 'targetAttribute' => ['state_id' => 'id']],

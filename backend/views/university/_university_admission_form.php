@@ -9,13 +9,6 @@ use kartik\depdrop\DepDrop;
 use yii\helpers\Url;
 use yii\web\JsExpression;
 
-$dept = ArrayHelper::map($departments, 'id', 'name');
-
-if (count($departments) > 0) {
-    $course = $departments[0]->universityCourseLists;
-    $course = ArrayHelper::map($course, 'id', 'name');
-}
-
 /**
  * var @univerityAdmisssions array of students school details
  * var @form is active form.
@@ -30,7 +23,7 @@ if (count($departments) > 0) {
                 'widgetContainer' => 'dynamicform_university_admissions', // required: only alphanumeric characters plus "_" [A-Za-z0-9_]
                 'widgetBody' => '.university_admission-container-items', // required: css class selector
                 'widgetItem' => '.admission-item', // required: css class            
-                'min' => 0, // 0 or 1 (default 1)
+                'min' => 1, // 0 or 1 (default 1)
                 'insertButton' => '.add-item', // css class
                 'deleteButton' => '.remove-item', // css class
                 'model' => $univerityAdmisssions[0],
@@ -61,7 +54,7 @@ if (count($departments) > 0) {
                             }
                         ?>
                         <td>                        
-                            <?= $form->field($univerityAdmisssions, "[{$i}]department_id")->dropDownList($dept, ['id' => "admission_department_id{$i}"]) ?>
+                            <?= $form->field($univerityAdmisssions, "[{$i}]degree_level_id")->dropDownList($degreeLevels, ['id' => "degree_level_id{$i}"]) ?>
                         </td>
                         <td>
                             <?= $form->field($univerityAdmisssions, "[{$i}]start_date")->widget(DatePicker::classname(),[
@@ -81,19 +74,7 @@ if (count($departments) > 0) {
                                     'format' => 'yyyy-mm-dd'
                                     ]
                             ]);?>
-                        </td>
-                        <td>
-                            <?= $form->field($univerityAdmisssions, "[{$i}]course_id")->widget(DepDrop::classname(), [
-                                'options' => ['id' => "admission_course_id{$i}"],
-                                'data' => $course,                                
-                                'type' => DepDrop::TYPE_SELECT2,
-                                'pluginOptions' => [
-                                    'depends' => ["admission_department_id{$i}"],
-                                    'placeholder' => 'Select Course',
-                                    'url' => Url::to(['/university/dependent-courses'])
-                                ]
-                            ]); ?>                                                        
-                        </td>                        
+                        </td>                                                
                         <td>
                             <?= $form->field($univerityAdmisssions, "[{$i}]admission_link")->textInput(['maxlength' => true]) ?>
                         </td>

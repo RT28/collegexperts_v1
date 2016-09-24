@@ -98,7 +98,8 @@ $this->registerJsFile('@web/js/google_map.js');
                             'majors' => $majors,
                             'departments' => $departments,
                             'courses' => $courses,
-                            'form' => $form
+                            'form' => $form,
+                            'degreeLevels' => $degreeLevels
                         ]) : null,
                         'headerOptions' => [                        
                             'class' => array_search('Admissions', $tabs) ? 'enabled-tab' : 'disabled-tab'

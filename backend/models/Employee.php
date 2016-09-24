@@ -3,6 +3,8 @@
 namespace backend\models;
 
 use Yii;
+use common\models\Country;
+use common\models\State;
 
 /**
  * This is the model class for table "employee".
@@ -14,9 +16,17 @@ use Yii;
  * @property string $gender
  * @property string $address
  * @property string $street
- * @property integer $city
+ * @property string  $city
  * @property integer $state
  * @property integer $country
+ * @property integer $created_by 
+ * @property string $created_at 
+ * @property integer $updated_by 
+ * @property string $updated_at 
+ * 
+ * @property Country $country0 
+ * @property State $state0 
+ * @property EmployeeLogin[] $employeeLogins
  */
 class Employee extends \yii\db\ActiveRecord
 {
@@ -36,9 +46,11 @@ class Employee extends \yii\db\ActiveRecord
         return [
             [['first_name', 'last_name', 'date_of_birth', 'gender', 'address', 'street', 'city', 'state', 'country'], 'required'],
             [['date_of_birth'], 'safe'],
-            [['city', 'state', 'country'], 'integer'],
+            [['state', 'country'], 'integer'],
             [['first_name', 'last_name', 'address', 'street'], 'string', 'max' => 255],
-            [['gender'], 'string', 'max' => 50],
+            [['city', 'gender'], 'string', 'max' => 50],
+            [['country'], 'exist', 'skipOnError' => true, 'targetClass' => Country::className(), 'targetAttribute' => ['country' => 'id']],
+            [['state'], 'exist', 'skipOnError' => true, 'targetClass' => State::className(), 'targetAttribute' => ['state' => 'id']],
         ];
     }
 
@@ -58,10 +70,34 @@ class Employee extends \yii\db\ActiveRecord
             'city' => 'City',
             'state' => 'State',
             'country' => 'Country',
+            'created_by' => 'Created By', 
+            'created_at' => 'Created At', 
+            'updated_by' => 'Updated By', 
+            'updated_at' => 'Updated At',
         ];
     }
 
-    public function addEmployee($employee) {
-
+    /** 
+    * @return \yii\db\ActiveQuery 
+    */ 
+    public function getCountry0() 
+    { 
+           return $this->hasOne(Country::className(), ['id' => 'country']); 
+    } 
+ 
+    /** 
+    * @return \yii\db\ActiveQuery 
+    */ 
+    public function getState0() 
+    { 
+           return $this->hasOne(State::className(), ['id' => 'state']); 
+    } 
+ 
+    /** 
+    * @return \yii\db\ActiveQuery 
+    */ 
+    public function getEmployeeLogins() 
+    { 
+           return $this->hasMany(EmployeeLogin::className(), ['employee_id' => 'id']); 
     }
 }

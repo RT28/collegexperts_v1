@@ -6,7 +6,7 @@ use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use backend\models\EmployeeForm;
-use backend\models\EmployeeLoginForm;
+use backend\models\EmployeeLogin;
 use backend\models\University;
 use yii\web\Response;
 use yii\data\ActiveDataProvider;
@@ -34,17 +34,10 @@ class SiteController extends Controller
                         'allow' => true,
                     ],
                     [
-                        'actions' => ['logout', 'index', 'add-university', 'list-universities', 'delete-university'],
+                        'actions' => ['logout', 'index'],
                         'allow' => true,
                         'roles' => ['@'],
-                    ],
-                    [
-                        'actions' => ['employee-form'],
-                        'allow' => true,                        
-                        'denyCallback' => function ($rule, $action) {
-                            return Yii::$app->user->identity->id != 1;
-                        }
-                    ],
+                    ]
                 ],
             ],
             'verbs' => [
@@ -89,7 +82,7 @@ class SiteController extends Controller
             return $this->goHome();
         }
 
-        $model = new EmployeeLoginForm();
+        $model = new EmployeeLogin();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
             return $this->goBack();
         } else {
@@ -109,76 +102,5 @@ class SiteController extends Controller
         Yii::$app->user->logout();
 
         return $this->goHome();
-    }
-
-    public function actionEmployeeForm()
-    {
-        $model = new EmployeeForm();
-
-        if ($model->load(Yii::$app->request->post())) {            
-            if ($model->validate()) {                
-                // form inputs are valid, do something here
-                $result = $model->addEmployee();                                              
-                var_dump($result);
-            }
-        }
-
-        return $this->render('employeeForm', [
-            'model' => $model,
-        ]);
-    }
-
-    public function actionAddUniversity($id = null)
-    {
-        $model = new University();
-        //For view action from university list
-        if (isset($id)) {
-            $model = University::findOne(['id' => $id]);
-        }
-        
-        elseif (Yii::$app->request->post('chosen') === 'Update') {
-            $model = University::findOne(['id' => $id]);
-        }
-        else {
-            if ($model->load(Yii::$app->request->post())) {
-                if ($model->validate()) {                
-                    $model->status = 0;
-                    $result = $model->save() ? true : false;
-                    return $result ? 'Success' : 'Failure';
-                }
-            }  
-        }
-        return $this->render('addUniversity', [
-            'model' => $model
-        ]);
-    }
-
-    public function actionListUniversities() {
-        $query = University::find();
-        $provider = new ActiveDataProvider([
-            'query' => $query,
-        ]);
-        return $this->render('listUniversities', [
-            'provider' => $provider
-        ]);
-    }
-
-    public function actionDeleteUniversity($id = null) {
-        if(isset($id)) {
-            $university = University::findOne($id);
-            $result = $university->delete();    
-
-            return $result === 1 ? $this->redirect('?r=site/list-universities') : NULL;
-        }        
-    }
-
-    public function actionUpdateUniversity($id = null) {
-        if (isset($id)) {
-            $university = University::findOne($id);
-            if(isset($university)) {
-                $result = $university->delete();
-                return $result === 1 ? $this->redirect('?r=site/list-universities') : NULL;
-            }            
-        }
     }
 }

@@ -40,8 +40,11 @@ AppAsset::register($this);
                 'label' => 'Home',
             ],
             [
-                'url' => ['/site/employee-form'],
                 'label' => 'Employee',
+                'items' => [
+                    ['label' => 'View', 'url' => ['/employee/index']],
+                    ['label' => 'Create', 'url' => ['/employee/create']],
+                ]
             ],
             [                
                 'label' => 'University',
@@ -76,6 +79,13 @@ AppAsset::register($this);
                 'items' => [
                     ['label' => 'View', 'url' => ['/degree/index']],
                     ['label' => 'Create', 'url' => ['/degree/create']],
+                ]
+            ],
+            [                
+                'label' => 'Degree Level',
+                'items' => [
+                    ['label' => 'View', 'url' => ['/degree-level/index']],
+                    ['label' => 'Create', 'url' => ['/degree-level/create']],
                 ]
             ],
             [                

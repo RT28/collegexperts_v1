@@ -18,7 +18,6 @@ use common\models\Majors;
 use common\models\UniversityAdmission;
 use common\components\Roles;
 use common\components\AccessRule;
-use backend\models\EmployeeLogin;
 use common\models\UniversityCourseList;
 use yii\db\Expression;
 use yii\helpers\Json;
@@ -27,6 +26,7 @@ use common\models\FileUpload;
 use backend\models\UniversityDepartments;
 use common\components\Model;
 use common\models\Others;
+use common\models\DegreeLevel;
 use yii\helpers\FileHelper;
 
 /**
@@ -54,7 +54,7 @@ class UniversityController extends Controller
                     [
                         'actions' => ['delete'],
                         'allow' => true,
-                        'roles' => [EmployeeLogin::ROLE_ADMIN]
+                        'roles' => [Roles::ROLE_ADMIN]
                     ]
                 ]
             ],
@@ -229,6 +229,7 @@ class UniversityController extends Controller
             'departments' => (empty($departments)) ? [new UniversityDepartments] : $departments,
             'courses' => (empty($courses)) ? [new UniversityCourseList] : $courses,
             'univerityAdmisssions' => (empty($univerityAdmisssions)) ? [new UniversityAdmission] : $univerityAdmisssions,
+            'degreeLevels' => DegreeLevel::getAllDegreeLevels(),
         ]);
     }
 
@@ -296,6 +297,7 @@ class UniversityController extends Controller
             'departments' => (empty($departments)) ? [new UniversityDepartments] : $departments,
             'courses' => (empty($courses)) ? [new UniversityCourseList] : $courses,
             'univerityAdmisssions' => (empty($univerityAdmisssions)) ? [new UniversityAdmission] : $univerityAdmisssions,
+            'degreeLevels' => DegreeLevel::getAllDegreeLevels(),
         ]);
     }
 
@@ -475,7 +477,7 @@ class UniversityController extends Controller
         $result = Model::loadMultiple($univerityAdmisssions, Yii::$app->request->post());               
         $deletedIDs = array_diff($oldIDs, array_filter(ArrayHelper::map($univerityAdmisssions, 'id', 'id')));                        
         // validate all models
-        $valid = Model::validateMultiple($univerityAdmisssions, ['start_date', 'end_date', 'admission_link', 'admission_fees']);                                               
+        $valid = Model::validateMultiple($univerityAdmisssions, ['degree_level_id', 'start_date', 'end_date', 'admission_link', 'admission_fees']);                                               
         if ($valid) {
             $transaction = \Yii::$app->db->beginTransaction();            
             try {
