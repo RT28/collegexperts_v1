@@ -18,7 +18,7 @@ use yii\db\Query;
                 'widgetContainer' => 'dynamicform_wrapper', // required: only alphanumeric characters plus "_" [A-Za-z0-9_]
                 'widgetBody' => '.department-items', // required: css class selector
                 'widgetItem' => '.department-item', // required: css class                
-                'min' => 0, // 0 or 1 (default 1)
+                'min' => 1, // 0 or 1 (default 1)
                 'insertButton' => '.add-department', // css class
                 'deleteButton' => '.remove-department', // css class
                 'model' => $departments[0],

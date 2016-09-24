@@ -59,7 +59,7 @@ use yii\widgets\ActiveForm;
 
     <?php // echo $form->field($model, 'no_of_students') ?>
 
-    <?php // echo $form->field($model, 'no_of_internation_students') ?>
+    <?php // echo $form->field($model, 'no_of_international_students') ?>
 
     <?php // echo $form->field($model, 'no_faculties') ?>
 
@@ -67,11 +67,9 @@ use yii\widgets\ActiveForm;
 
     <?php // echo $form->field($model, 'accomodation_available')->checkbox() ?>
 
-    <?php // echo $form->field($model, 'hostel_strength') ?>    
+    <?php // echo $form->field($model, 'hostel_strength') ?>
 
     <?php // echo $form->field($model, 'institution_ranking') ?>
-
-    <?php // echo $form->field($model, 'ranking_sources') ?>
 
     <?php // echo $form->field($model, 'vide') ?>
 

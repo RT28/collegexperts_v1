@@ -14,7 +14,7 @@ use wbraganca\dynamicform\DynamicFormWidget;
                 'widgetContainer' => 'dynamicform_courses', // required: only alphanumeric characters plus "_" [A-Za-z0-9_]
                 'widgetBody' => '.course-items', // required: css class selector
                 'widgetItem' => '.course-item', // required: css class                
-                'min' => 0, // 0 or 1 (default 1)
+                'min' => 1, // 0 or 1 (default 1)
                 'insertButton' => '.add-course', // css class
                 'deleteButton' => '.remove-course', // css class
                 'model' => $courses[0],

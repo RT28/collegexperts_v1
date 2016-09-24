@@ -18,8 +18,8 @@ class UniversitySearch extends University
     public function rules()
     {
         return [
-            [['id', 'city_id', 'state_id', 'country_id', 'pincode', 'institution_type', 'establishment', 'no_of_students', 'no_of_internation_students', 'no_faculties', 'cost_of_living', 'hostel_strength', 'institution_ranking', 'avg_rating', 'status', 'created_by', 'updated_by', 'reviewed_by'], 'integer'],
-            [['name', 'establishment_date', 'address', 'email', 'website', 'description', 'fax', 'phone_1', 'phone_2', 'contact_person', 'contact_person_designation', 'contact_mobile', 'contact_email', 'location', 'ranking_sources', 'video', 'virtual_tour', 'comments', 'created_at', 'updated_at', 'reviewed_at'], 'safe'],
+            [['id', 'city_id', 'state_id', 'country_id', 'pincode', 'institution_type', 'establishment', 'no_of_students', 'no_of_international_students', 'no_faculties', 'cost_of_living', 'hostel_strength', 'institution_ranking', 'avg_rating', 'status', 'created_by', 'updated_by', 'reviewed_by'], 'integer'],
+            [['name', 'establishment_date', 'address', 'email', 'website', 'description', 'fax', 'phone_1', 'phone_2', 'contact_person', 'contact_person_designation', 'contact_mobile', 'contact_email', 'location', 'video', 'virtual_tour', 'comments', 'created_at', 'updated_at', 'reviewed_at'], 'safe'],
             [['accomodation_available'], 'boolean'],
         ];
     }
@@ -69,7 +69,7 @@ class UniversitySearch extends University
             'institution_type' => $this->institution_type,
             'establishment' => $this->establishment,
             'no_of_students' => $this->no_of_students,
-            'no_of_internation_students' => $this->no_of_internation_students,
+            'no_of_international_students' => $this->no_of_international_students,
             'no_faculties' => $this->no_faculties,
             'cost_of_living' => $this->cost_of_living,
             'accomodation_available' => $this->accomodation_available,
@@ -98,7 +98,6 @@ class UniversitySearch extends University
             ->andFilterWhere(['like', 'contact_mobile', $this->contact_mobile])
             ->andFilterWhere(['like', 'contact_email', $this->contact_email])
             ->andFilterWhere(['like', 'location', $this->location])
-            ->andFilterWhere(['like', 'ranking_sources', $this->ranking_sources])
             ->andFilterWhere(['like', 'video', $this->video])
             ->andFilterWhere(['like', 'virtual_tour', $this->virtual_tour])
             ->andFilterWhere(['like', 'comments', $this->comments]);

@@ -32,16 +32,26 @@
                 ]) ?>
             </div>
         </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">University Rankings</div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-6">                    
+                        <?= $form->field($model, 'institution_ranking')->textInput() ?>                
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
     <div class="col-xs-12 col-sm-6">
         <div class="panel panel-default">
             <div class="panel-heading">Location</div>
             <div class="panel-body">
-                <?= $form->field($model, 'location')->textInput([
+                <?= $form->field($model, 'location')->hiddenInput([
                         'id' => 'university-location',
                         'value' => $location
-                    ]);
+                    ])->label(false);
                 ?>    
                 <div id="google-map-container"></div>
             </div>
@@ -57,7 +67,13 @@
                         <?= $form->field($model, 'no_of_students')->textInput() ?>
                     </div>
                     <div class="col-xs-12 col-sm-6">
-                        <?= $form->field($model, 'no_of_internation_students')->textInput() ?>
+                        <?= $form->field($model, 'no_of_international_students')->textInput() ?>
+                    </div>
+                    <div class="col-xs-12 col-sm-6">
+                        <?= $form->field($model, 'no_of_undergraduate_students')->textInput() ?>
+                    </div>
+                    <div class="col-xs-12 col-sm-6">
+                        <?= $form->field($model, 'no_of_post_graduate_students')->textInput() ?>
                     </div>
                     <div class="col-xs-12 col-sm-6">
                         <?= $form->field($model, 'no_faculties')->textInput() ?>
@@ -67,8 +83,9 @@
                     </div>
                 </div>
             </div>
-        </div>
-
+        </div>               
+    </div>
+    <div class="col-xs-12 col-sm-6">
         <div class="panel panel-default">
             <div class="panel-heading">Cost of Living & Accomodation</div>
             <div class="panel-body">
@@ -80,19 +97,17 @@
                     <div class="col-xs-12 col-sm-6">
                         <?= $form->field($model, 'cost_of_living')->textInput() ?>
                     </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="panel panel-default">
-            <div class="panel-heading">University Rankings</div>
-            <div class="panel-body">
-                <div class="row">
-                    <div class="col-xs-12 col-sm-6">                    
-                        <?= $form->field($model, 'institution_ranking')->textInput() ?>                
+                    <div class="col-xs-12 col-sm-6">
+                        <?= $form->field($model, 'undergarduate_fees')->textInput() ?>
                     </div>
-                    <div class="col-xs-12 col-sm-6">                    
-                        <?= $form->field($model, 'ranking_sources')->textInput() ?>                    
+                    <div class="col-xs-12 col-sm-6">
+                        <?= $form->field($model, 'undergraduate_fees_international_students')->textInput() ?>
+                    </div>
+                    <div class="col-xs-12 col-sm-6">
+                        <?= $form->field($model, 'post_graduate_fees')->textInput() ?>
+                    </div>
+                    <div class="col-xs-12 col-sm-6">
+                        <?= $form->field($model, 'post_graduate_fees_international_students')->textInput() ?>
                     </div>
                 </div>
             </div>

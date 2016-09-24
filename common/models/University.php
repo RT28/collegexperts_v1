@@ -30,14 +30,19 @@ use backend\models\UniversityDepartments;
  * @property integer $institution_type
  * @property integer $establishment
  * @property integer $no_of_students
- * @property integer $no_of_internation_students
+ * @property integer $no_of_undergraduate_students 
+ * @property integer $no_of_post_graduate_students
+ * @property integer $no_of_international_students
  * @property integer $no_faculties
  * @property integer $no_of_international_faculty
  * @property integer $cost_of_living
+ * @property integer $undergarduate_fees 
+ * @property integer $undergraduate_fees_international_students 
+ * @property integer $post_graduate_fees 
+ * @property integer $post_graduate_fees_international_students 
  * @property boolean $accomodation_available
  * @property integer $hostel_strength
- * @property integer $institution_ranking
- * @property string $ranking_sources
+ * @property integer $institution_ranking 
  * @property string $video
  * @property string $virtual_tour
  * @property integer $avg_rating
@@ -78,15 +83,15 @@ class University extends \yii\db\ActiveRecord
         return [
             [['name', 'address', 'city_id', 'state_id', 'country_id', 'pincode', 'email', 'website', 'description', 'phone_1', 'contact_person', 'contact_person_designation', 'contact_mobile', 'contact_email', 'created_by', 'created_at', 'updated_by', 'updated_at'], 'required'],
             [['establishment_date', 'created_at', 'updated_at', 'reviewed_at'], 'safe'],
-            [['city_id', 'state_id', 'country_id', 'pincode', 'institution_type', 'establishment', 'no_of_students', 'no_of_internation_students', 'no_faculties', 'no_of_international_faculty', 'cost_of_living', 'hostel_strength', 'institution_ranking', 'avg_rating', 'status', 'created_by', 'updated_by', 'reviewed_by'], 'integer'],
-            [['description', 'ranking_sources', 'achievements', 'comments'], 'string'],
+            [['city_id', 'state_id', 'country_id', 'pincode', 'institution_type', 'establishment', 'no_of_students', 'no_of_undergraduate_students', 'no_of_post_graduate_students', 'no_of_international_students', 'no_faculties', 'no_of_international_faculty', 'cost_of_living', 'undergarduate_fees', 'undergraduate_fees_international_students', 'post_graduate_fees', 'post_graduate_fees_international_students', 'hostel_strength', 'institution_ranking', 'avg_rating', 'status', 'created_by', 'updated_by', 'reviewed_by'], 'integer'],
+            [['description', 'achievements', 'comments'], 'string'],
             [['accomodation_available', 'standard_tests_required'], 'boolean'],
             [['name', 'address', 'email', 'website', 'contact_person', 'contact_email'], 'string', 'max' => 255],
             [['fax', 'phone_1', 'phone_2'], 'string', 'max' => 20],
             [['contact_person_designation'], 'string', 'max' => 50],
             [['contact_mobile'], 'string', 'max' => 15],
             [['email', 'contact_email'], 'email'],
-            [['video', 'virtual_tour'], 'string', 'max' => 500],
+            [['video', 'virtual_tour', 'standard_test_list'], 'string', 'max' => 500],
             [['city_id'], 'exist', 'skipOnError' => true, 'targetClass' => City::className(), 'targetAttribute' => ['city_id' => 'id']],
             [['country_id'], 'exist', 'skipOnError' => true, 'targetClass' => Country::className(), 'targetAttribute' => ['country_id' => 'id']],
             [['state_id'], 'exist', 'skipOnError' => true, 'targetClass' => State::className(), 'targetAttribute' => ['state_id' => 'id']],
@@ -124,14 +129,19 @@ class University extends \yii\db\ActiveRecord
             'institution_type' => 'Institution Type',
             'establishment' => 'Establishment',
             'no_of_students' => 'No Of Students',
-            'no_of_internation_students' => 'No Of Internation Students',
+            'no_of_undergraduate_students' => 'No Of Undergraduate Students', 
+            'no_of_post_graduate_students' => 'No Of Post Graduate Students',
+            'no_of_international_students' => 'No Of International Students',
             'no_faculties' => 'No Faculties',
             'no_of_international_faculty' => 'No Of International Faculty',
             'cost_of_living' => 'Cost Of Living',
+            'undergarduate_fees' => 'Undergarduate Fees', 
+            'undergraduate_fees_international_students' => 'Undergraduate Fees International Students', 
+            'post_graduate_fees' => 'Post Graduate Fees', 
+            'post_graduate_fees_international_students' => 'Post Graduate Fees International Students', 
             'accomodation_available' => 'Accomodation Available',
             'hostel_strength' => 'Hostel Strength',
             'institution_ranking' => 'Institution Ranking',
-            'ranking_sources' => 'Ranking Sources',
             'video' => 'Video',
             'virtual_tour' => 'Virtual Tour',
             'avg_rating' => 'Avg Rating',
