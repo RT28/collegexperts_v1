@@ -384,4 +384,156 @@ class StudentController extends Controller
             echo json_encode(['error' => 'Processing request ']);
         }        
     }
+
+    public function actionDownloadPassport() {
+        $id = Yii::$app->request->get('id');
+        if (is_dir("./../web/uploads/$id/documents/passport")) {
+            $passport_path = FileHelper::findFiles("./../web/uploads/$id/documents/passport", [
+                'caseSensitive' => false,
+                'recursive' => false,
+                'only' => ['passport.*']
+            ]);
+            if (count($passport_path) > 0) {
+                Yii::$app->response->sendFile($passport_path[0]);
+            }                        
+        } else {
+            echo json_encode(['error']);
+            return;
+        }        
+    }
+
+    public function actionUploadPassport() {
+        $student = Yii::$app->request->post('student_id');
+        $result = is_dir("./../web/uploads/$student/documents/passport");		
+		if (!$result) {			
+			FileHelper::createDirectory("./../web/uploads/$student/documents/passport");			
+		} else {
+            FileHelper::removeDirectory("./../web/uploads/$student/documents/passport");
+            FileHelper::createDirectory("./../web/uploads/$student/documents/passport");
+        }
+        $sourcePath = $_FILES['upload_passport']['tmp_name'];
+        $ext = pathinfo($_FILES['upload_passport']['name'], PATHINFO_EXTENSION);
+        $targetPath = "./../web/uploads/$student/documents/passport/passport." . $ext; // Target path where file is to be stored
+        if (move_uploaded_file($sourcePath,$targetPath)) {
+            echo json_encode([]);            
+        }
+        else {
+            echo json_encode(['error' => 'Processing request ' . $sourcePath]);
+        }
+        return;
+    }
+
+    public function actionDownloadVisaDetails() {
+        $id = Yii::$app->request->get('id');
+        if (is_dir("./../web/uploads/$id/documents/visa")) {
+            $passport_path = FileHelper::findFiles("./../web/uploads/$id/document/visa", [
+                'caseSensitive' => false,
+                'recursive' => false,
+                'only' => ['visa.*']
+            ]);
+            if (count($passport_path) > 0) {
+                Yii::$app->response->sendFile($passport_path[0]);
+            }                        
+        } else {
+            echo json_encode(['error']);
+            return;
+        }        
+    }
+
+    public function actionUploadVisaDetails() {
+        $student = Yii::$app->request->post('student_id');
+        $result = is_dir("./../web/uploads/$student/documents/visa");		
+		if (!$result) {			
+			FileHelper::createDirectory("./../web/uploads/$student/documents/visa");			
+		} else {
+            FileHelper::removeDirectory("./../web/uploads/$student/documents/visa");
+            FileHelper::createDirectory("./../web/uploads/$student/documents/visa");
+        }
+        $sourcePath = $_FILES['upload_visa']['tmp_name'];
+        $ext = pathinfo($_FILES['upload_visa']['name'], PATHINFO_EXTENSION);
+        $targetPath = "./../web/uploads/$student/documents/visa/visa." . $ext; // Target path where file is to be stored
+        if (move_uploaded_file($sourcePath,$targetPath)) {
+            echo json_encode([]);            
+        }
+        else {
+            echo json_encode(['error' => 'Processing request ' . $sourcePath]);
+        }
+        return;
+    }
+
+    public function actionDownloadReferenceLetter() {
+        $id = Yii::$app->request->get('id');
+        if (is_dir("./../web/uploads/$id/documents/reference_letter")) {
+            $passport_path = FileHelper::findFiles("./../web/uploads/$id/documents/reference_letter", [
+                'caseSensitive' => false,
+                'recursive' => false,
+                'only' => ['reference_letter.*']
+            ]);
+            if (count($passport_path) > 0) {
+                Yii::$app->response->sendFile($passport_path[0]);
+            }                        
+        } else {
+            echo json_encode(['error']);
+            return;
+        }        
+    }
+
+    public function actionUploadReferenceLetter() {
+        $student = Yii::$app->request->post('student_id');
+        $result = is_dir("./../web/uploads/$student/documents/reference_letter");		
+		if (!$result) {			
+			FileHelper::createDirectory("./../web/uploads/$student/documents/reference_letter");			
+		} else {
+            FileHelper::removeDirectory("./../web/uploads/$student/documents/reference_letter");
+            FileHelper::createDirectory("./../web/uploads/$student/documents/reference_letter");
+        }
+        $sourcePath = $_FILES['reference_letter']['tmp_name'];
+        $ext = pathinfo($_FILES['reference_letter']['name'], PATHINFO_EXTENSION);
+        $targetPath = "./../web/uploads/$student/documents/reference_letter/reference_letter." . $ext; // Target path where file is to be stored
+        if (move_uploaded_file($sourcePath,$targetPath)) {
+            echo json_encode([]);            
+        }
+        else {
+            echo json_encode(['error' => 'Processing request ' . $sourcePath]);
+        }
+        return;
+    }
+
+    public function actionDownloadResume() {
+        $id = Yii::$app->request->get('id');
+        if (is_dir("./../web/uploads/$id/documents")) {
+            $passport_path = FileHelper::findFiles("./../web/uploads/$id/documents/resume", [
+                'caseSensitive' => false,
+                'recursive' => false,
+                'only' => ['reference_letter.*']
+            ]);
+            if (count($passport_path) > 0) {
+                Yii::$app->response->sendFile($passport_path[0]);
+            }                        
+        } else {
+            echo json_encode(['error']);
+            return;
+        }        
+    }
+
+    public function actionUploadResume() {
+        $student = Yii::$app->request->post('student_id');
+        $result = is_dir("./../web/uploads/$student/documents/resume");		
+		if (!$result) {			
+			FileHelper::createDirectory("./../web/uploads/$student/documents/resume");			
+		} else {
+            FileHelper::removeDirectory("./../web/uploads/$student/documents/resume");
+            FileHelper::createDirectory("./../web/uploads/$student/documents/resume");
+        }
+        $sourcePath = $_FILES['resume']['tmp_name'];
+        $ext = pathinfo($_FILES['resume']['name'], PATHINFO_EXTENSION);
+        $targetPath = "./../web/uploads/$student/documents/resume/resume." . $ext; // Target path where file is to be stored
+        if (move_uploaded_file($sourcePath,$targetPath)) {
+            echo json_encode([]);            
+        }
+        else {
+            echo json_encode(['error' => 'Processing request ' . $sourcePath]);
+        }
+        return;
+    }
 }
