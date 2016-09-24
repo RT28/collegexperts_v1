@@ -46,7 +46,35 @@ use kartik\file\FileInput;
     </tr>
     <tr>
         <td>ACT/SAT/GRE/GMAT</td>
-        <td><span class="glyphicon glyphicon-download"></span><span class="glyphicon glyphicon-upload"></span></td>
+        <td>
+            <?php
+                echo Html::a('<span class="glyphicon glyphicon-download"></span>', ['student/download-standard-tests', 'id' => $model->id], ['class' => 'btn btn-link']);
+                $standard_tests_path = [];                
+                if (is_dir("./../web/uploads/$model->id/documents/standard_tests")) {
+                    $resume_path = FileHelper::findFiles("./../web/uploads/$model->id/documents/standard_tests", [
+                        'caseSensitive' => false,
+                        'recursive' => false,
+                        'only' => ['resume.*']
+                    ]);
+                }
+                
+                if (count($standard_tests_path) > 0) {
+                   echo Html::a('<span class="glyphicon glyphicon-download"></span>', ['student/download-standard-tests', 'id' => $model->id], ['class' => 'btn btn-link']);
+                }
+
+                echo FileInput::widget([
+                    'name' => 'standard_tests',
+                    'pluginOptions' => [
+                        'uploadUrl' => Url::to(['/student/upload-standard-tests']),
+                        'showPreview'=> true,
+                        'showCaption' => false,
+                        'uploadExtraData' => [
+                            'student_id' => $model->id,
+                        ]
+                    ]
+                ]);
+            ?>
+        </td>
     </tr>
     <tr>
         <td>Resume</td>

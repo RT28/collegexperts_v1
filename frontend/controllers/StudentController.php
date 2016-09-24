@@ -501,7 +501,7 @@ class StudentController extends Controller
 
     public function actionDownloadResume() {
         $id = Yii::$app->request->get('id');
-        if (is_dir("./../web/uploads/$id/documents")) {
+        if (is_dir("./../web/uploads/$id/documents/resume")) {
             $passport_path = FileHelper::findFiles("./../web/uploads/$id/documents/resume", [
                 'caseSensitive' => false,
                 'recursive' => false,
@@ -535,5 +535,29 @@ class StudentController extends Controller
             echo json_encode(['error' => 'Processing request ' . $sourcePath]);
         }
         return;
+    }
+
+    public function actionDownloadStandardTests() {
+        $id = Yii::$app->request->get('id');
+        if (is_dir("./../web/uploads/$id/documents/standard_tests")) {
+            $passport_path = FileHelper::findFiles("./../web/uploads/$id/documents/standard_tests", [
+                'caseSensitive' => false,
+                'recursive' => false,
+            ]);
+            if (count($passport_path) > 0) {
+                $files = $passport_path;
+                $zipname = 'standrad_tests.zip';
+                $zip = new \ZipArchive();
+                $zip->open("./../web/uploads/$id/documents/standard_tests/".$zipname, \ZipArchive::CREATE);
+                foreach ($files as $file) {
+                    $zip->addFile($file);
+                }
+                $zip->close();
+                Yii::$app->response->sendFile($zipname);
+            }                        
+        } else {
+            echo json_encode(['error']);
+            return;
+        }
     }
 }
