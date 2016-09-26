@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 26, 2016 at 08:04 AM
+-- Generation Time: Sep 26, 2016 at 11:19 AM
 -- Server version: 5.6.24
 -- PHP Version: 5.6.8
 
@@ -21,6 +21,21 @@ SET time_zone = "+00:00";
 --
 CREATE DATABASE IF NOT EXISTS `collegexperts` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
 USE `collegexperts`;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `chat`
+--
+
+CREATE TABLE IF NOT EXISTS `chat` (
+  `id` int(11) NOT NULL,
+  `form_id` int(11) NOT NULL,
+  `from_type` varchar(20) NOT NULL,
+  `to_ids` varchar(100) NOT NULL,
+  `message` text NOT NULL,
+  `time_stamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -723,6 +738,12 @@ INSERT INTO `user_login` (`id`, `username`, `auth_key`, `password_hash`, `passwo
 --
 
 --
+-- Indexes for table `chat`
+--
+ALTER TABLE `chat`
+  ADD PRIMARY KEY (`id`), ADD KEY `student` (`form_id`);
+
+--
 -- Indexes for table `city`
 --
 ALTER TABLE `city`
@@ -864,6 +885,11 @@ ALTER TABLE `user_login`
 -- AUTO_INCREMENT for dumped tables
 --
 
+--
+-- AUTO_INCREMENT for table `chat`
+--
+ALTER TABLE `chat`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `city`
 --
