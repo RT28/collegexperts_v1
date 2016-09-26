@@ -1,6 +1,7 @@
 <?php
     use yii\helpers\Html;
-    use kartik\select2\Select2;   
+    use kartik\select2\Select2;
+    use yii\helpers\Json;
 ?>
 
 <?php
@@ -36,8 +37,27 @@
             <div class="panel-heading">University Rankings</div>
             <div class="panel-body">
                 <div class="row">
-                    <div class="col-xs-12 col-sm-6">                    
-                        <?= $form->field($model, 'institution_ranking')->textInput() ?>                
+                    <div class="col-xs-12 col-sm-6">
+                        <?= Html::hiddenInput('university-rankings', $model->institution_ranking, ['id' => 'university-rankings']); ?>
+                        <?php        
+                            $rankings = Json::decode($model->institution_ranking);
+                            $i = 0;       
+                        ?>
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#update_rankings">
+                            Update
+                        </button>             
+                        <table class="table table-bordered" id="institution-rankings">
+                            <tr>
+                                <th>Rank</th>
+                                <th>Source</th>
+                            </tr>
+                            <?php foreach ($rankings as $rank): ?>
+                                <tr data-index="<?= $i++; ?>">
+                                    <td><?= $rank['rank'] ?></td>
+                                    <td><?= $rank['source'] ?></td>
+                                </tr>
+                            <?php endforeach; ?>
+                        </table>    
                     </div>
                 </div>
             </div>
@@ -113,4 +133,42 @@
             </div>
         </div>
     </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="update_rankings" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Rankings</h4>
+      </div>
+      <div class="modal-body">
+            <table class="table table-bordered" id="institution-rankings-form">
+                <tbody>
+                    <tr>
+                        <th>Rank</th>
+                        <th>Source</th>
+                        <th></th>
+                    </tr>
+                    <?php
+                        $i = 0;
+                    ?>
+                    <?php foreach ($rankings as $rank): ?>
+                        <tr data-index="<?= $i; ?>">
+                            <td><input id="rank-<?= $i; ?>" value="<?= $rank['rank'] ?>"/></td>
+                            <td><input id="source-<?= $i; ?>" value="<?= $rank['source'] ?>"/></td>
+                            <td><button data-index="<?= $i++; ?>" class="btn btn-danger" onclick="onDeleteRankingButtonClick(this)"><span class="glyphicon glyphicon-minus"></span></button></td>
+                        </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+            <button class="btn btn-success" onclick="onAddRankingButtonClick(this)"><span class="glyphicon glyphicon-plus"></button>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" id="modal-close">Close</button>
+        <button type="button" class="btn btn-primary" onclick="onSaveChangesClick(this)">Save changes</button>
+      </div>
+    </div>
+  </div>
 </div>

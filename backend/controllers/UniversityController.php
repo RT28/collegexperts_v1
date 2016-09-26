@@ -188,6 +188,7 @@ class UniversityController extends Controller
                     $model->updated_by = Yii::$app->user->identity->id;
                     $model->created_at = gmdate('Y-m-d H:i:s');
                     $model->updated_at = gmdate('Y-m-d H:i:s');                    
+                    $model->institution_ranking = $_POST['university-rankings'];                    
                     $isModelSaved = $model->save();                    
                 }                              
                 if ($isModelSaved) {                        
@@ -259,6 +260,7 @@ class UniversityController extends Controller
                     $this->setSpatialPoints($model, Yii::$app->request->post()['University']['location']);                  
                     $model->updated_by = Yii::$app->user->identity->id;                    
                     $model->updated_at = gmdate('Y-m-d H:i:s');
+                    $model->institution_ranking = $_POST['university-rankings'];
                     $isModelSaved = $model->save(false);                    
                 }                              
                 if ($isModelSaved) {                        

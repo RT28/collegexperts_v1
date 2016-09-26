@@ -12,6 +12,7 @@ use yii\helpers\Url;
 ?>
 
 <?php
+    $state_data = []; 
     if (isset($model->state)) {
         $state_data = [$model->state => $model->state0->name];
     }

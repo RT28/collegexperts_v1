@@ -7,8 +7,10 @@ use yii\bootstrap\Tabs;
 /* @var $this yii\web\View */
 /* @var $model common\models\University */
 /* @var $form yii\widgets\ActiveForm */
+$this->registerJsFile('https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js');
 $this->registerJsFile('https://maps.googleapis.com/maps/api/js?key=AIzaSyAv4wp5sZdpP31AWEAZuyLMyRKDhhOtWLw');
-$this->registerJsFile('@web/js/google_map.js');  
+$this->registerJsFile('@web/js/google_map.js');
+$this->registerJsFile('@web/js/university.js');
 ?>
 <?php $form = ActiveForm::begin(['id' => 'university-active-form', 'options' => ['enctype' => 'multipart/form-data']]); ?>
     <?= Html::hiddenInput('currentTab' , $currentTab); ?>

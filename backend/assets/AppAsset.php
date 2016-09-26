@@ -18,7 +18,7 @@ class AppAsset extends AssetBundle
         'css/login.css',
         'css/university.css',
     ];
-    public $js = [        
+    public $js = [               
         'js/departments.js',
         'js/courses.js',
     ];

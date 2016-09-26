@@ -3,6 +3,7 @@
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 use yii\helpers\FileHelper;
+use yii\helpers\Json;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\University */
@@ -14,7 +15,11 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="university-view">
 
     <h1><?= Html::encode($this->title) ?></h1>
-    <?php
+    <?php        
+        $rankings = Json::decode($model->institution_ranking);
+        $i = 0;       
+    ?>    
+    <?php    
         if(is_dir("./../web/uploads/$model->id/cover_photo")) {
             $cover_photo_path = FileHelper::findFiles("./../web/uploads/$model->id/cover_photo", [
                 'caseSensitive' => true,
@@ -51,7 +56,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
         ]) ?>
     </p>
-
+    
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [            
@@ -89,8 +94,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'no_faculties',
             'cost_of_living',
             'accomodation_available:boolean',
-            'hostel_strength',
-            'institution_ranking',
+            'hostel_strength',            
             'video:ntext',
             'virtual_tour:ntext',
             'avg_rating',
@@ -98,5 +102,18 @@ $this->params['breadcrumbs'][] = $this->title;
             'status',
         ],
     ]) ?>
+
+    <table class="table table-bordered" id="institution-rankings">
+        <tr>
+            <th>Rank</th>
+            <th>Source</th>
+        </tr>
+        <?php foreach ($rankings as $rank): ?>
+            <tr data-index="<?= $i++; ?>">
+                <td><?= $rank['rank'] ?></td>
+                <td><?= $rank['source'] ?></td>
+            </tr>
+        <?php endforeach; ?>
+    </table>
 
 </div>
