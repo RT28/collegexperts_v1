@@ -62,17 +62,7 @@ use kartik\file\FileInput;
                    echo Html::a('<span class="glyphicon glyphicon-download"></span>', ['student/download-standard-tests', 'id' => $model->id], ['class' => 'btn btn-link']);
                 }
 
-                echo FileInput::widget([
-                    'name' => 'standard_tests',
-                    'pluginOptions' => [
-                        'uploadUrl' => Url::to(['/student/upload-standard-tests']),
-                        'showPreview'=> true,
-                        'showCaption' => false,
-                        'uploadExtraData' => [
-                            'student_id' => $model->id,
-                        ]
-                    ]
-                ]);
+                echo '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#documents">Update</button>';                
             ?>
         </td>
     </tr>
@@ -174,3 +164,50 @@ use kartik\file\FileInput;
         <td><span class="glyphicon glyphicon-download"></span><span class="glyphicon glyphicon-upload"></span></td>
     </tr>    
 </table>
+
+<!-- Modal -->
+<div class="modal fade" id="documents" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Standard Tests</h4>
+      </div>
+      <div class="modal-body">
+            <form method="post" enctype="multipart/form-data" id="docs">
+                <input type="hidden" name="student_id" value="<?= $model->id ?>" />
+                <table class="table table-bordered" id="documents-form">
+                    <tbody>
+                        <tr>
+                            <th>Test Name</th>
+                            <th>Document</th>
+                        </tr>
+                        <?php                            
+                            if (is_dir("./../web/uploads/$model->id/documents/standard_tests")) {
+                                $standard_test_details = FileHelper::findFiles("./../web/uploads/$model->id/documents/standard_tests", [
+                                    'caseSensitive' => false,
+                                    'recursive' => false,
+                                ]);
+                                if(count($standard_test_details) > 0) {
+                                    $i = 0;
+                                    foreach($standard_test_details as $tests) {
+                                        echo '<tr data-index="' . $i . '">';
+                                            echo '<td><input name="test-' . $i . '" value="' . pathinfo($tests, PATHINFO_FILENAME) . '"/></td>';
+                                            echo '<td><input name="document-' . $i++ . '" value="' . $tests . '" type="file"/></td>';
+                                        echo '</tr>';
+                                    }
+                                }                            
+                            }
+                        ?>                    
+                    </tbody>
+                </table>
+                <button type="button" class="btn btn-success" onclick="onAddDocumentClick(this)"><span class="glyphicon glyphicon-plus"></button>
+            </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" id="modal-close">Close</button>
+        <button type="button" class="btn btn-primary" onclick="onUploadClick(this)">Upload</button>
+      </div>
+    </div>
+  </div>
+</div>

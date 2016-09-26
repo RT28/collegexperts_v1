@@ -560,4 +560,30 @@ class StudentController extends Controller
             return;
         }
     }
+
+    public function actionUploadStandardTests() {
+        $student = Yii::$app->request->post('student_id');
+        $i = 0;
+        $result = is_dir("./../web/uploads/$student/documents/standard_tests");		
+		if (!$result) {			
+			FileHelper::createDirectory("./../web/uploads/$student/documents/standard_tests");			
+		}        
+        
+        while(isset($_FILES["document-".$i])) {
+            if($_FILES["document-".$i]['error'] === 0) {
+                $sourcePath = $_FILES["document-".$i]['tmp_name'];
+                $ext = pathinfo($_FILES["document-".$i]['name'], PATHINFO_EXTENSION);
+                $targetPath = "./../web/uploads/$student/documents/standard_tests/" . $_POST["test-" . $i] .'.'. $ext; // Target path where file is to be stored
+                if (move_uploaded_file($sourcePath,$targetPath)) {                                
+                }
+                else {
+                    echo json_encode(['status' => 'failure' ,'error' => 'Processing request ' . $sourcePath]);
+                    return;
+                }
+            }
+            $i++;
+        }
+        echo json_encode(['status' => 'success']);
+        return;       
+    }
 }

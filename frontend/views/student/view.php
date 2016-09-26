@@ -10,6 +10,8 @@ use yii\helpers\FileHelper;
 $this->title = 'Profile';
 $this->params['breadcrumbs'][] = ['label' => 'Students', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
+$this->registerJsFile('https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js');
+$this->registerJsFile('@web/js/student.js');
 ?>
 <div class="student-view">
     <p>
