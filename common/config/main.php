@@ -1,5 +1,5 @@
 <?php
-return [
+return [    
     'vendorPath' => dirname(dirname(__DIR__)) . '/vendor',
     'components' => [
         'cache' => [
