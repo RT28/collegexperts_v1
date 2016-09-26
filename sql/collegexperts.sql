@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 24, 2016 at 01:08 PM
+-- Generation Time: Sep 26, 2016 at 08:04 AM
 -- Server version: 5.6.24
 -- PHP Version: 5.6.8
 
@@ -558,7 +558,7 @@ CREATE TABLE IF NOT EXISTS `university` (
   `post_graduate_fees_international_students` int(11) DEFAULT NULL,
   `accomodation_available` bit(1) NOT NULL DEFAULT b'0',
   `hostel_strength` int(11) DEFAULT NULL,
-  `institution_ranking` int(11) DEFAULT NULL,
+  `institution_ranking` text,
   `video` varchar(500) DEFAULT NULL,
   `virtual_tour` varchar(500) DEFAULT NULL,
   `avg_rating` int(11) DEFAULT NULL,
@@ -580,12 +580,12 @@ CREATE TABLE IF NOT EXISTS `university` (
 --
 
 INSERT INTO `university` (`id`, `name`, `establishment_date`, `address`, `city_id`, `state_id`, `country_id`, `pincode`, `email`, `website`, `description`, `fax`, `phone_1`, `phone_2`, `contact_person`, `contact_person_designation`, `contact_mobile`, `contact_email`, `location`, `institution_type`, `establishment`, `no_of_students`, `no_of_undergraduate_students`, `no_of_post_graduate_students`, `no_of_international_students`, `no_faculties`, `no_of_international_faculty`, `cost_of_living`, `undergarduate_fees`, `undergraduate_fees_international_students`, `post_graduate_fees`, `post_graduate_fees_international_students`, `accomodation_available`, `hostel_strength`, `institution_ranking`, `video`, `virtual_tour`, `avg_rating`, `standard_tests_required`, `standard_test_list`, `achievements`, `comments`, `status`, `created_by`, `created_at`, `updated_by`, `updated_at`, `reviewed_by`, `reviewed_at`) VALUES
-(1, 'Stanford University', '1885-11-11', ' 450 Serra Mall', 1, 1, 1, 94305, 'gradadmissions@stanford.edu', 'https://www.stanford.edu', '<p>Stanford University, located between San Francisco and San Jose in the heart of California&#39;s Silicon Valley, is one of the world&#39;s leading teaching and research universities. Since its opening in 1891, Stanford has been dedicated to finding solutions to big challenges and to preparing students for leadership in a complex world.</p>\r\n', '650-723-8371', '+1-866-432-7472', '', 'Graduate Admissions', 'Graduate Admissions', '+1-866-432-7472', 'gradadmissions@stanford.edu', '\0\0\0\0\0\0\0¼\nC·¶B@ÅÿáåŠ^À', 0, 0, 16112, NULL, NULL, 6994, 528, NULL, 106502, NULL, NULL, NULL, NULL, b'1', 1500, 3, '', '', NULL, b'1', '0', '', '', 10, 1, '2016-09-09 09:19:38', 1, '2016-09-20 09:43:57', NULL, NULL),
+(1, 'Stanford University', '1885-11-11', ' 450 Serra Mall', 1, 1, 1, 94305, 'gradadmissions@stanford.edu', 'https://www.stanford.edu', '<p>Stanford University, located between San Francisco and San Jose in the heart of California&#39;s Silicon Valley, is one of the world&#39;s leading teaching and research universities. Since its opening in 1891, Stanford has been dedicated to finding solutions to big challenges and to preparing students for leadership in a complex world.</p>\r\n', '650-723-8371', '+1-866-432-7472', '', 'Graduate Admissions', 'Graduate Admissions', '+1-866-432-7472', 'gradadmissions@stanford.edu', '\0\0\0\0\0\0\0¼\nC·¶B@ÅÿáåŠ^À', 0, 0, 16112, NULL, NULL, 6994, 528, NULL, 106502, NULL, NULL, NULL, NULL, b'1', 1500, '[{"rank":"3","source":"www.webometrics.info/en/world"},{"rank":"2","source":"http://www.topuniversities.com/universities/stanford-university"}]', '', '', NULL, b'1', '0', '', '', 10, 1, '2016-09-09 09:19:38', 1, '2016-09-26 06:01:21', NULL, NULL),
 (5, 'Massachusetts Institute of Technology', '1861-04-10', ' 77 Massachusetts Ave', 3, 4, 1, 2139, 'web-query@mit.edu', 'http://web.mit.edu/', 'The mission of the Massachusetts Institute of Technology is to advance knowledge and educate students in science, technology, and other areas of scholarship that will best serve the nation and the world in the 21st century. We are also driven to bring knowledge to bear on the worldâ€™s great challenges.\r\n\r\nThe Institute is an independent, coeducational, privately endowed university, organized into five Schools (architecture and planning; engineering; humanities, arts, and social sciences; management; and science). It has some 1,000 faculty members, more than 11,000 undergraduate and graduate students, and more than 130,000 living alumni.\r\n\r\nAt its founding in 1861, MIT was an educational innovation, a community of hands-on problem solvers in love with fundamental science and eager to make the world a better place. Today, that spirit still guides how we educate students on campus and how we shape new digital learning technologies to make MIT teaching accessible to millions of learners around the world.\r\n\r\nMITâ€™s spirit of interdisciplinary exploration has fueled many scientific breakthroughs and technological advances. A few examples: the first chemical synthesis of penicillin and vitamin A. The development of radar and creation of inertial guidance systems. The invention of magnetic core memory, which enabled the development of digital computers. Major contributions to the Human Genome Project. The discovery of quarks. The invention of the electronic spreadsheet and of encryption systems that enable e-commerce. The creation of GPS. Pioneering 3D printing. The concept of the expanding universe.\r\n\r\nCurrent research and education areas include digital learning; nanotechnology; sustainable energy, the environment, climate adaptation, and global water and food security; Big Data, cybersecurity, robotics, and artificial intelligence; human health, including cancer, HIV, autism, Alzheimerâ€™s, and dyslexia; biological engineering and CRISPR technology; poverty alleviation; advanced manufacturing; and innovation and entrepreneurship.\r\n\r\nMITâ€™s impact also includes the work of our alumni. One way MIT graduates drive progress is by starting companies that deliver new ideas to the world. A recent study estimates that as of 2014, living MIT alumni have launched more than 30,000 active companies, creating 4.6 million jobs and generating roughly $1.9 trillion in annual revenue. Taken together, this "MIT Nation" is equivalent to the 10th-largest economy in the world!', '617.253.3400', '617.253.3400', '617.253.3400', 'MIT Admin', 'Admin', '617.253.3400', 'web-query@mit.edu', '\0\0\0\0\0\0\0üÜUò®5E@\0\0\0WÄQÀ', 1, 1, 11319, NULL, NULL, 5400, 500, NULL, 100000, NULL, NULL, NULL, NULL, b'1', NULL, NULL, '', '', NULL, b'0', NULL, NULL, '', 10, 1, '2016-09-10 06:52:54', 1, '2016-09-10 07:23:50', NULL, NULL),
-(40, 'dscdcd', '2016-09-28', 'vfvf', 2, 3, 4, 1005646, 'cdvfdv@asa.cpm', 'vfvgfbgf.com', '<p>ngnfgn</p>\r\n', '45645645', '654565', '545645', 'vfjbjkfgbj', 'jnvjkfnbjkng', '4545645', 'nbjkgnbng@jvfj.com', '\0\0\0\0\0\0\0q‡òªs3@\ré¦ƒ+8R@', 0, 0, 1000, NULL, NULL, 100, 100, 25, 250000, NULL, NULL, NULL, NULL, b'1', 700, 3, '', '', NULL, b'1', '0', '', NULL, 0, 1, '2016-09-20 13:42:33', 1, '2016-09-20 13:42:33', NULL, NULL),
-(41, 'dscdcd', '2016-09-29', 'vfvf', 2, 3, 4, 1005646, 'cdvfdv@asa.cpm', 'vfvgfbgf.com', '<p>bggfngfnh</p>\r\n', '45645645', '654565', '545645', 'vfjbjkfgbj', 'jnvjkfnbjkng', '4545645', 'nbjkgnbng@jvfj.com', '\0\0\0\0\0\0\0q‡òªs3@\ré¦ƒ+8R@', 0, 0, 1000, NULL, NULL, 100, 100, 25, 250000, NULL, NULL, NULL, NULL, b'1', 700, 3, '', '', NULL, b'1', '0', '', NULL, 0, 1, '2016-09-20 14:52:45', 1, '2016-09-20 14:52:45', NULL, NULL),
-(42, 'gfnbgn', '2016-09-29', 'gnngng', 2, 3, 4, 145252, 'nhnhn@nhjn.con', 'fbfgbgf.vghhj.com', '<p>fbfdgdbg<span style="color:#00FF00">bfbfbgfngfn</span><span style="color:#FF0000">nhgmnghmhm</span></p>\r\n', '3538396', '25235353', '35365365', 'dfcdsvdfv', 'gvfgbdfbgfh', '2553663', 'nhnhn@nhjn.con', '\0\0\0\0\0\0\0q‡òªs3@\ré¦ƒ+8R@', 0, 0, 10000, NULL, NULL, 1200, 1450, 120, 15000, NULL, NULL, NULL, NULL, b'1', 1200, 78, '', '', NULL, b'0', '0,1,2,3,4', '', NULL, 0, 1, '2016-09-21 01:27:14', 1, '2016-09-24 06:48:52', NULL, NULL),
-(43, 'gfnbgn', '2016-09-28', 'gnngng', 2, 3, 4, 145252, 'nhnhn@nhjn.con', 'fbfgbgf.vghhj.com', '<p>cvdsvsd</p>\r\n', '3538396', '25235353', '35365365', 'dfcdsvdfv', 'gvfgbdfbgfh', '2553663', 'nhnhn@nhjn.con', '\0\0\0\0\0\0\0q‡òªs3@\ré¦ƒ+8R@', 0, 0, 10000, NULL, NULL, 1200, 1450, 120, 15000, NULL, NULL, NULL, NULL, b'1', 1200, 78, '', '', NULL, b'0', '0,1,2,3,4', '', NULL, 0, 1, '2016-09-21 02:11:58', 1, '2016-09-23 18:41:45', NULL, NULL);
+(40, 'dscdcd', '2016-09-28', 'vfvf', 2, 3, 4, 1005646, 'cdvfdv@asa.cpm', 'vfvgfbgf.com', '<p>ngnfgn</p>\r\n', '45645645', '654565', '545645', 'vfjbjkfgbj', 'jnvjkfnbjkng', '4545645', 'nbjkgnbng@jvfj.com', '\0\0\0\0\0\0\0q‡òªs3@\ré¦ƒ+8R@', 0, 0, 1000, NULL, NULL, 100, 100, 25, 250000, NULL, NULL, NULL, NULL, b'1', 700, '3', '', '', NULL, b'1', '0', '', NULL, 0, 1, '2016-09-20 13:42:33', 1, '2016-09-20 13:42:33', NULL, NULL),
+(41, 'dscdcd', '2016-09-29', 'vfvf', 2, 3, 4, 1005646, 'cdvfdv@asa.cpm', 'vfvgfbgf.com', '<p>bggfngfnh</p>\r\n', '45645645', '654565', '545645', 'vfjbjkfgbj', 'jnvjkfnbjkng', '4545645', 'nbjkgnbng@jvfj.com', '\0\0\0\0\0\0\0q‡òªs3@\ré¦ƒ+8R@', 0, 0, 1000, NULL, NULL, 100, 100, 25, 250000, NULL, NULL, NULL, NULL, b'1', 700, '3', '', '', NULL, b'1', '0', '', NULL, 0, 1, '2016-09-20 14:52:45', 1, '2016-09-20 14:52:45', NULL, NULL),
+(42, 'gfnbgn', '2016-09-29', 'gnngng', 2, 3, 4, 145252, 'nhnhn@nhjn.con', 'fbfgbgf.vghhj.com', '<p>fbfdgdbg<span style="color:#00FF00">bfbfbgfngfn</span><span style="color:#FF0000">nhgmnghmhm</span></p>\r\n', '3538396', '25235353', '35365365', 'dfcdsvdfv', 'gvfgbdfbgfh', '2553663', 'nhnhn@nhjn.con', '\0\0\0\0\0\0\0q‡òªs3@\ré¦ƒ+8R@', 0, 0, 10000, NULL, NULL, 1200, 1450, 120, 15000, NULL, NULL, NULL, NULL, b'1', 1200, '78', '', '', NULL, b'0', '0,1,2,3,4', '', NULL, 0, 1, '2016-09-21 01:27:14', 1, '2016-09-24 06:48:52', NULL, NULL),
+(43, 'gfnbgn', '2016-09-28', 'gnngng', 2, 3, 4, 145252, 'nhnhn@nhjn.con', 'fbfgbgf.vghhj.com', '<p>cvdsvsd</p>\r\n', '3538396', '25235353', '35365365', 'dfcdsvdfv', 'gvfgbdfbgfh', '2553663', 'nhnhn@nhjn.con', '\0\0\0\0\0\0\0q‡òªs3@\ré¦ƒ+8R@', 0, 0, 10000, NULL, NULL, 1200, 1450, 120, 15000, NULL, NULL, NULL, NULL, b'1', 1200, '78', '', '', NULL, b'0', '0,1,2,3,4', '', NULL, 0, 1, '2016-09-21 02:11:58', 1, '2016-09-23 18:41:45', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -606,7 +606,7 @@ CREATE TABLE IF NOT EXISTS `university_admission` (
   `created_at` datetime NOT NULL,
   `updated_by` int(11) NOT NULL,
   `updated_at` datetime NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `university_admission`
@@ -614,7 +614,8 @@ CREATE TABLE IF NOT EXISTS `university_admission` (
 
 INSERT INTO `university_admission` (`id`, `university_id`, `degree_level_id`, `start_date`, `end_date`, `admission_link`, `eligibility_criteria`, `admission_fees`, `created_by`, `created_at`, `updated_by`, `updated_at`) VALUES
 (1, 42, 1, '2016-08-31', '2016-10-29', 'bgfngfn', 'gvbngf', 1000, 1, '2016-09-24 06:48:52', 1, '2016-09-24 06:48:52'),
-(2, 42, 2, '2016-09-09', '2016-09-30', 'hkjhkjhy', 'cxscdc', 1500, 1, '2016-09-24 06:48:52', 1, '2016-09-24 06:48:52');
+(2, 42, 2, '2016-09-09', '2016-09-30', 'hkjhkjhy', 'cxscdc', 1500, 1, '2016-09-24 06:48:52', 1, '2016-09-24 06:48:52'),
+(3, 1, 1, '2016-09-07', '2016-09-11', 'bvbv', 'vvsd', 1000, 1, '2016-09-26 06:01:21', 1, '2016-09-26 06:01:21');
 
 -- --------------------------------------------------------
 
@@ -637,21 +638,22 @@ CREATE TABLE IF NOT EXISTS `university_course_list` (
   `created_at` datetime NOT NULL,
   `updated_by` int(11) NOT NULL,
   `updated_at` datetime NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=184 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=185 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `university_course_list`
 --
 
 INSERT INTO `university_course_list` (`id`, `university_id`, `degree_id`, `major_id`, `department_id`, `name`, `intake`, `fees`, `duration`, `type`, `created_by`, `created_at`, `updated_by`, `updated_at`) VALUES
-(1, 1, 1, 1, 1, 'Bachelor of Arts (B.A.) Anthropology Honors', 60, 80000, '3.0', 1, 1, '2016-09-11 09:32:03', 1, '2016-09-11 09:32:03'),
+(1, 1, 1, 1, 1, 'Bachelor of Arts (B.A.) Anthropology Honors', 60, 80000, '3.0', 1, 1, '2016-09-11 09:32:03', 1, '2016-09-26 06:01:21'),
 (55, 40, 1, 1, 59, 'Bachelor of Arts (B.A.) Anthropology Honors', 60, 80000, '3.0', 0, 1, '2016-09-20 13:42:33', 1, '2016-09-20 13:42:33'),
 (94, 41, 1, 1, 60, 'Bachelor of Arts (B.A.) Anthropology Honors', 60, 80000, '3.0', 0, 1, '2016-09-20 14:52:45', 1, '2016-09-20 14:52:45'),
 (129, 42, 1, 1, 61, 'Bachelor of Arts (B.A.) Anthropology Honors', 100, 15200, '3.0', 0, 1, '2016-09-21 03:44:47', 1, '2016-09-24 06:48:52'),
 (172, 43, 2, 4, 62, 'Bachelors in Aeronautics Aeronautics and Astronautics', 150, 152000, '5.0', 0, 1, '2016-09-22 23:02:58', 1, '2016-09-23 18:41:45'),
 (181, 43, 1, 3, 62, 'Bachelor of Arts (B.A.) Asian Studies', 150, 152000, '5.0', 0, 1, '2016-09-22 23:05:44', 1, '2016-09-23 18:41:45'),
 (182, 43, 1, 2, 80, 'Bachelor of Arts (B.A.) Art History', 540, 7000, '4.0', 0, 1, '2016-09-22 23:07:03', 1, '2016-09-23 18:41:45'),
-(183, 43, 2, 4, 80, 'Bachelors in Aeronautics Aeronautics and Astronautics', 150, 152000, '5.0', 0, 1, '2016-09-22 23:07:03', 1, '2016-09-23 18:41:45');
+(183, 43, 2, 4, 80, 'Bachelors in Aeronautics Aeronautics and Astronautics', 150, 152000, '5.0', 0, 1, '2016-09-22 23:07:03', 1, '2016-09-23 18:41:45'),
+(184, 1, 1, 1, 2, 'Bachelor of Arts (B.A.) Anthropology Honors', 100, 1000, '3.0', 0, 1, '2016-09-26 06:01:21', 1, '2016-09-26 06:01:21');
 
 -- --------------------------------------------------------
 
@@ -678,8 +680,8 @@ CREATE TABLE IF NOT EXISTS `university_departments` (
 --
 
 INSERT INTO `university_departments` (`id`, `university_id`, `name`, `email`, `no_of_faculty`, `website_link`, `description`, `created_by`, `created_at`, `updated_by`, `updated_at`) VALUES
-(1, 1, 'Aeronautics & Astronautics', '', 100, 'https://aa.stanford.edu/', 'Aeronautics & Astronautics', 1, '2016-09-11 09:32:03', 1, '2016-09-11 09:32:03'),
-(2, 1, 'Anthropology', '', 20, 'https://anthropology.stanford.edu/', 'The Department of Anthropology offers a wide range of approaches to the topics and area studies within the field, including archaeology, ecology, environmental anthropology, evolution, linguistics, medical anthropology, political economy, science and technology studies, and sociocultural anthropology. Methodologies for the study of micro- and macro-social processes are taught through the use of qualitative and quantitative approaches. The department provides students with excellent training in theory and methods to enable them to pursue graduate study in any of the above mentioned subfields of Anthropology.', 1, '2016-09-11 09:32:03', 1, '2016-09-11 09:32:03'),
+(1, 1, 'Aeronautics & Astronautics', 'aa@stanford.com', 100, 'https://aa.stanford.edu/', 'Aeronautics & Astronautics', 1, '2016-09-26 06:01:21', 1, '2016-09-26 06:01:21'),
+(2, 1, 'Anthropology', 'aa@stanford.com', 20, 'https://anthropology.stanford.edu/', 'The Department of Anthropology offers a wide range of approaches to the topics and area studies within the field, including archaeology, ecology, environmental anthropology, evolution, linguistics, medical anthropology, political economy, science and technology studies, and sociocultural anthropology. Methodologies for the study of micro- and macro-social processes are taught through the use of qualitative and quantitative approaches. The department provides students with excellent training in theory and methods to enable them to pursue graduate study in any of the above mentioned subfields of Anthropology.', 1, '2016-09-26 06:01:21', 1, '2016-09-26 06:01:21'),
 (5, 5, 'Architecture', '', 50, 'http://architecture.mit.edu/', 'Architecture was one of the four original departments at MIT, and it was the first signal that MIT would not be narrowly defined in science and technology. Through recognition of architecture as a liberal discipline, the Department has long contributed to learning in the arts and humanities at MIT.\r\n\r\nThe Department conceives of architecture as a discipline as well as a profession. It is structured in five semi-autonomous discipline groups: Architectural Design; Building Technology; Computation; History, Theory and Criticism of Architecture and Art; and Art, Culture, and Technology. Each provides an architectural education that is as complex as the field itself, and all five contribute to a mutual enterprise. The department also has specialized graduate programs such as the Aga Khan Program for Islamic Architecture and the SMArchS Program Architecture and Urbanism.\r\n\r\nThe several disciplines of the Department house a substantial body of research activity. Moreover, the Department''s setting within MIT permits greater depth in such technical areas as computation, new modes of design and production, materials, structure, and energy, as well as in the arts and humanities. The Department is committed to a concern for human values and for finding appropriate roles for architecture in society. It is a place where individual creativity is cultivated and nurtured in a framework of values that are humanistically, socially, and environmentally responsible.', 1, '2016-09-10 07:23:50', 1, '2016-09-10 07:23:50'),
 (59, 40, 'Anthropology', 'aa@bvf.com', 10, '1vfnbjgfbgf', ' bngfngfn', 1, '2016-09-20 13:42:33', 1, '2016-09-20 13:42:33'),
 (60, 41, 'Anthropology', 'aa@bvf.com', 10, '1vfnbjgfbgf', 'ghgfh', 1, '2016-09-20 14:52:45', 1, '2016-09-20 14:52:45'),
@@ -951,12 +953,12 @@ ALTER TABLE `university`
 -- AUTO_INCREMENT for table `university_admission`
 --
 ALTER TABLE `university_admission`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `university_course_list`
 --
 ALTER TABLE `university_course_list`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=184;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=185;
 --
 -- AUTO_INCREMENT for table `university_departments`
 --
