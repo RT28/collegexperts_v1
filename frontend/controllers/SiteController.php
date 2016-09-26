@@ -34,7 +34,7 @@ class SiteController extends Controller
                         'roles' => ['?'],
                     ],
                     [
-                        'actions' => ['logout'],
+                        'actions' => ['logout', 'send-chat'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -209,5 +209,11 @@ class SiteController extends Controller
         return $this->render('resetPassword', [
             'model' => $model,
         ]);
+    }
+
+    public function actionSendChat() {
+        $message = $_POST['message'];
+        echo json_encode(['HI from sever']);
+        return;
     }
 }

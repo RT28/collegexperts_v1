@@ -26,7 +26,8 @@
         "kartik-v/yii2-widget-fileinput": "@dev",
         "wbraganca/yii2-dynamicform": "*",
         "2amigos/yii2-ckeditor-widget" : "~1.0",
-        "kartik-v/yii2-widget-sidenav": "*"
+        "kartik-v/yii2-widget-sidenav": "*",
+        "sintret/yii2-chat-adminlte": "dev-master"
     },
     "require-dev": {
         "yiisoft/yii2-codeception": "*",

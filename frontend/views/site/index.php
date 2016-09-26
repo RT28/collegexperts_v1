@@ -1,4 +1,7 @@
 <?php
+use sintret\chat\ChatRoom;
+use common\models\Chat;
+use yii\helpers\Url;
 
 /* @var $this yii\web\View */
 $this->title = 'My Yii Application';
@@ -14,6 +17,13 @@ $this->title = 'My Yii Application';
     </div>
 
     <div class="body-content">
+    <?php
+        echo ChatRoom::widget([
+            'url' => Url::to(['site/send-chat']),
+            'userModel'=>  Chat::className(),
+            'userField'=>'message'
+        ]);
+    ?>
     <?= isset(Yii::$app->user->identity) ? '<h1>Welcome! <span style="color: #00bcd4;">' . Yii::$app->user->identity->username . '</span></h1>': '' ?>
         <div class="row">
             <div class="col-lg-4">
