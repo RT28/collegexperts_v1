@@ -586,4 +586,54 @@ class StudentController extends Controller
         echo json_encode(['status' => 'success']);
         return;       
     }
+
+    public function actionDownloadTranscripts() {
+        $id = Yii::$app->request->get('id');
+        if (is_dir("./../web/uploads/$id/transcripts")) {
+            $passport_path = FileHelper::findFiles("./../web/uploads/$id/transcripts", [
+                'caseSensitive' => false,
+                'recursive' => false,
+            ]);
+            if (count($passport_path) > 0) {
+                $files = $passport_path;
+                $zipname = 'transcripts.zip';
+                $zip = new \ZipArchive();
+                $zip->open($zipname, \ZipArchive::CREATE);
+                foreach ($files as $file) {
+                    $zip->addFile($file);
+                }
+                $zip->close();
+                Yii::$app->response->sendFile($zipname);
+            }                        
+        } else {
+            echo json_encode(['error']);
+            return;
+        }
+    }
+
+    public function actionUploadTranscripts() {
+        $student = Yii::$app->request->post('student_id');
+        $i = 0;
+        $result = is_dir("./../web/uploads/$student/transcripts");		
+		if (!$result) {			
+			FileHelper::createDirectory("./../web/uploads/$student/transcripts");			
+		}        
+        
+        while(isset($_FILES["document-".$i])) {
+            if($_FILES["document-".$i]['error'] === 0) {
+                $sourcePath = $_FILES["document-".$i]['tmp_name'];
+                $ext = pathinfo($_FILES["document-".$i]['name'], PATHINFO_EXTENSION);
+                $targetPath = "./../web/uploads/$student/transcripts/" . $_POST["test-" . $i] .'.'. $ext; // Target path where file is to be stored
+                if (move_uploaded_file($sourcePath,$targetPath)) {                                
+                }
+                else {
+                    echo json_encode(['status' => 'failure' ,'error' => 'Processing request ' . $sourcePath]);
+                    return;
+                }
+            }
+            $i++;
+        }
+        echo json_encode(['status' => 'success']);
+        return;       
+    }
 }

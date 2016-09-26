@@ -42,27 +42,39 @@ use kartik\file\FileInput;
     </tr>
     <tr>
         <td>Transcripts</td>
-        <td><span class="glyphicon glyphicon-download"></span><span class="glyphicon glyphicon-upload"></span></td>
+        <td>
+            <?php                
+                $transcripts_path = [];                
+                if (is_dir("./../web/uploads/$model->id/transcripts")) {
+                    $transcripts_path = FileHelper::findFiles("./../web/uploads/$model->id/transcripts", [
+                        'caseSensitive' => false,
+                        'recursive' => false,
+                    ]);
+                }                
+                if (count($transcripts_path) > 0) {
+                   echo Html::a('<span class="glyphicon glyphicon-download"></span>', ['student/download-transcripts', 'id' => $model->id], ['class' => 'btn btn-link']);
+                }
+
+                echo '<button type="button" class="btn btn-link" data-toggle="modal" data-target="#transcripts"><span class="glyphicon glyphicon-upload"></span></button>';                
+            ?>
+        </td>
     </tr>
     <tr>
         <td>ACT/SAT/GRE/GMAT</td>
         <td>
-            <?php
-                echo Html::a('<span class="glyphicon glyphicon-download"></span>', ['student/download-standard-tests', 'id' => $model->id], ['class' => 'btn btn-link']);
-                $standard_tests_path = [];                
+            <?php                
+                $standard_tests_path = [];            
                 if (is_dir("./../web/uploads/$model->id/documents/standard_tests")) {
-                    $resume_path = FileHelper::findFiles("./../web/uploads/$model->id/documents/standard_tests", [
+                    $standard_tests_path = FileHelper::findFiles("./../web/uploads/$model->id/documents/standard_tests", [
                         'caseSensitive' => false,
                         'recursive' => false,
-                        'only' => ['resume.*']
                     ]);
                 }
-                
                 if (count($standard_tests_path) > 0) {
                    echo Html::a('<span class="glyphicon glyphicon-download"></span>', ['student/download-standard-tests', 'id' => $model->id], ['class' => 'btn btn-link']);
                 }
 
-                echo '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#documents">Update</button>';                
+                echo '<button type="button" class="btn btn-link" data-toggle="modal" data-target="#documents"><span class="glyphicon glyphicon-upload"></span></button>';                
             ?>
         </td>
     </tr>
@@ -158,10 +170,6 @@ use kartik\file\FileInput;
                 ]);
             ?>
         </td>
-    </tr>
-    <tr>
-        <td>XYZ</td>        
-        <td><span class="glyphicon glyphicon-download"></span><span class="glyphicon glyphicon-upload"></span></td>
     </tr>    
 </table>
 
@@ -207,6 +215,53 @@ use kartik\file\FileInput;
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal" id="modal-close">Close</button>
         <button type="button" class="btn btn-primary" onclick="onUploadClick(this)">Upload</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="transcripts" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Transcripts</h4>
+      </div>
+      <div class="modal-body">
+            <form method="post" enctype="multipart/form-data" id="trnscrpts">
+                <input type="hidden" name="student_id" value="<?= $model->id ?>" />
+                <table class="table table-bordered" id="transcripts-form">
+                    <tbody>
+                        <tr>
+                            <th>Name</th>
+                            <th>Document</th>
+                        </tr>
+                        <?php                            
+                            if (is_dir("./../web/uploads/$model->id/documents/transcripts")) {
+                                $standard_test_details = FileHelper::findFiles("./../web/uploads/$model->id/documents/transcripts", [
+                                    'caseSensitive' => false,
+                                    'recursive' => false,
+                                ]);
+                                if(count($standard_test_details) > 0) {
+                                    $i = 0;
+                                    foreach($standard_test_details as $tests) {
+                                        echo '<tr data-index="' . $i . '">';
+                                            echo '<td><input name="test-' . $i . '" value="' . pathinfo($tests, PATHINFO_FILENAME) . '"/></td>';
+                                            echo '<td><input name="document-' . $i++ . '" value="' . $tests . '" type="file"/></td>';
+                                        echo '</tr>';
+                                    }
+                                }                            
+                            }
+                        ?>                    
+                    </tbody>
+                </table>
+                <button type="button" class="btn btn-success" onclick="onAddTranscriptClick(this)"><span class="glyphicon glyphicon-plus"></button>
+            </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" id="modal-transcripts-close">Close</button>
+        <button type="button" class="btn btn-primary" onclick="onUploadTranscriptsClick(this)">Upload</button>
       </div>
     </div>
   </div>

@@ -130,3 +130,8 @@ a.desc:after {
 {
     border: 1px solid #CECECE;
 }
+
+.student-view .glyphicon
+{
+    font-size: 1.5em;
+}
