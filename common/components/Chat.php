@@ -77,10 +77,10 @@ while (true) {
 socket_close($socket);
 
 function send_message($msg)
-{
-	global $clients;
+{	
+	global $clients;	
 	foreach($clients as $changed_socket)
-	{
+	{		
 		@socket_write($changed_socket,$msg,strlen($msg));
 	}
 	return true;

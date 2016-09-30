@@ -10,6 +10,9 @@ $(document).ready(function(){
     $('#send-btn').click(function(){ //use clicks message send button   
         var mymessage = $('#message').val(); //get message text
         var myname = $('#name').val(); //get user name
+        var myname = $('#from_id').val(); //get user name
+        var myname = $('#to_id').val(); //get user name
+        var myname = $('#role').val(); //get user name
         
         if(myname == ""){ //empty name?
             alert("Enter your Name please!");
